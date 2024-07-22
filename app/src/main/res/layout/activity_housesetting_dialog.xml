@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparency_black"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintHorizontal_bias="0.5"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent=".9">
+
+        <ImageView
+            android:id="@+id/housename_01_tv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+
+            android:src="@drawable/house_1"
+
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent=".1"
+            app:layout_constraintHorizontal_bias="0.44"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05"
+
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent=".1"
+            tools:ignore="SpeakableTextPresentCheck"
+
+            />
+
+        <ImageView
+            android:id="@+id/housename_02_tv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+
+            android:src="@drawable/house_2"
+
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent=".1"
+            app:layout_constraintHorizontal_bias="0.56"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05"
+
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent=".1"
+            tools:ignore="SpeakableTextPresentCheck"
+
+            />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent=".55"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.45"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="1"
+
+
+
+            >
+
+
+
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="1"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".2"
+                >
+
+
+                <ImageButton
+                    android:id="@+id/AirCompressor_RunningTime_up_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:src="@drawable/chevron_up"
+                    android:background="@drawable/layout_bg_corner"
+
+                    android:scaleType="fitCenter"
+                    
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".2"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    />
+
+
+                <TextView
+                    android:id="@+id/AirCompressor_RunningTime_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".3"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias=".69"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    tools:ignore="SpeakableTextPresentCheck"
+
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="콤프동작시간"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".25"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.285"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    tools:ignore="SpeakableTextPresentCheck"
+
+                    />
+
+                <ImageButton
+                    android:id="@+id/AirCompressor_RunningTime_down_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:src="@drawable/chevron_down"
+                    android:background="@drawable/layout_bg_corner"
+
+                    android:scaleType="fitCenter"
+                    
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".2"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="1"
+                app:layout_constraintHorizontal_bias="0.35"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".2"
+                >
+
+                <ImageButton
+                    android:id="@+id/Pump_RunningTime_up_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:src="@drawable/chevron_up"
+                    android:background="@drawable/layout_bg_corner"
+
+                    android:scaleType="fitCenter"
+                    
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".2"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    />
+
+
+                <TextView
+                    android:id="@+id/Pump_RunningTime_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".3"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias=".69"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    tools:ignore="SpeakableTextPresentCheck"
+
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="펌프동작시간"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".25"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.285"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    tools:ignore="SpeakableTextPresentCheck"
+
+                    />
+
+                <ImageButton
+                    android:id="@+id/Pump_RunningTime_down_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:src="@drawable/chevron_down"
+                    android:background="@drawable/layout_bg_corner"
+
+                    android:scaleType="fitCenter"
+                    
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".2"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="1"
+                app:layout_constraintHorizontal_bias="0.65"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".2"
+                >
+
+                <ImageButton
+                    android:id="@+id/House_Cleaning01_Time_up_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:src="@drawable/chevron_up"
+                    android:background="@drawable/layout_bg_corner"
+
+                    android:scaleType="fitCenter"
+                    
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".2"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    />
+
+                <TextView
+                    android:id="@+id/House_Cleaning01_Time_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".3"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias=".69"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    tools:ignore="SpeakableTextPresentCheck"
+
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="에어청소"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".25"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.285"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    tools:ignore="SpeakableTextPresentCheck"
+
+                    />
+
+
+                <ImageButton
+                    android:id="@+id/House_Cleaning01_Time_down_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:src="@drawable/chevron_down"
+                    android:background="@drawable/layout_bg_corner"
+
+                    android:scaleType="fitCenter"
+                    
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".2"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="1"
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".2"
+                >
+
+                <ImageButton
+                    android:id="@+id/House_Cleaning02_Time_up_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:src="@drawable/chevron_up"
+                    android:background="@drawable/layout_bg_corner"
+
+                    android:scaleType="fitCenter"
+                    
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".2"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    />
+
+
+
+                <TextView
+                    android:id="@+id/House_Cleaning02_Time_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".3"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias=".69"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    tools:ignore="SpeakableTextPresentCheck"
+
+
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="물청소"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".25"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.285"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    tools:ignore="SpeakableTextPresentCheck"
+
+                    />
+
+
+                <ImageButton
+                    android:id="@+id/House_Cleaning02_Time_down_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:src="@drawable/chevron_down"
+                    android:background="@drawable/layout_bg_corner"
+
+                    android:scaleType="fitCenter"
+                    
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".2"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent=".25"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1"
+
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="1"
+            tools:ignore="SpeakableTextPresentCheck"
+
+            >
+
+            <Button
+                android:id="@+id/negative_botton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="취소"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/progress_end"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".55"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.2"
+                tools:ignore="SmallSp"
+                />
+
+            <Button
+                android:id="@+id/positive_botton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="확인"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                android:backgroundTint="@color/progress_end"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".55"
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.2"
+                tools:ignore="SmallSp"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

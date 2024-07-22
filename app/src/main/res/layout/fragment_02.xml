@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.Fragment_02">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent="0.95"
+            app:layout_constraintHorizontal_bias="0.5"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent=".95"
+            tools:ignore="MissingConstraints">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="0.55"
+                app:layout_constraintHorizontal_bias="0.5"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.25"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".95"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/Repeat_number"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".3"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.45"
+                    tools:ignore="SpeakableTextPresentCheck"
+
+
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="반복횟수"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/layout_bg_corner"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".23"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.15"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.45"
+                    tools:ignore="SpeakableTextPresentCheck"
+
+                    />
+
+                <ImageButton
+                    android:id="@+id/Repeat_number_up_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:src="@drawable/chevron_up"
+                    android:background="@drawable/layout_bg_corner"
+
+                    android:scaleType="fitCenter"
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".25"
+                    app:layout_constraintHorizontal_bias=".01"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias=".9"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent=".2"
+                    />
+
+                <ImageButton
+                    android:id="@+id/Repeat_number_down_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+
+                    android:src="@drawable/chevron_down"
+                    android:background="@drawable/layout_bg_corner"
+
+                    android:scaleType="fitCenter"
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".25"
+                    app:layout_constraintHorizontal_bias=".31"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias=".9"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent=".2"
+                    />
+
+
+                <TextView
+                    android:id="@+id/Pause_Time"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".3"
+                    app:layout_constraintHorizontal_bias="1"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.45"
+                    tools:ignore="SpeakableTextPresentCheck"
+
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="반복휴지시간"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/layout_bg_corner"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".23"
+                    app:layout_constraintHorizontal_bias="1"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.15"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.45"
+                    tools:ignore="SpeakableTextPresentCheck"
+
+                    />
+
+                <ImageButton
+                    android:id="@+id/Pause_Time_up_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+
+                    android:src="@drawable/chevron_up"
+                    android:background="@drawable/layout_bg_corner"
+
+                    android:scaleType="fitCenter"
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".25"
+                    app:layout_constraintHorizontal_bias=".69"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias=".9"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent=".2"
+                    />
+
+
+
+                <ImageButton
+                    android:id="@+id/Pause_Time_down_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+
+                    android:src="@drawable/chevron_down"
+                    android:background="@drawable/layout_bg_corner"
+
+                    android:scaleType="fitCenter"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".25"
+                    app:layout_constraintHorizontal_bias=".999"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias=".9"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent=".2"
+                    />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".25"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="1"
+                tools:ignore="SpeakableTextPresentCheck"
+
+                >
+
+                <Button
+                    android:id="@+id/negative_botton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="취소"
+                    android:textSize="20sp"
+
+                    android:textStyle="bold"
+
+                    android:backgroundTint="@color/progress_end"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".5"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.4"
+                    tools:ignore="SmallSp" />
+
+                <Button
+                    android:id="@+id/positive_botton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="시작"
+                    android:textSize="20sp"
+
+                    android:textStyle="bold"
+
+                    android:backgroundTint="@color/progress_end"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".5"
+                    app:layout_constraintHorizontal_bias="0.95"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.4"
+                    tools:ignore="SmallSp"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

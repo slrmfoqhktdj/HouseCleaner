@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">HouseCleaner02</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Tempvalue">%.2f °C</string>
+    <string name="Humivalue">%.2f
+        &#37;&#37;</string>
+</resources>

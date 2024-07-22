@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparency">#00ff0000</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="transparency_black">#B3000000</color>
+    <color name="progress_end">#48CAE1</color>
+    <color name="accent">#489CFF</color>
+    <color name="main_txt">#6CC0FF</color>
+    <color name="main_txt_shadow">#001EC9</color>
+    <color name="auto">#89FF82</color>
+    <color name="auto_shadow">#008100</color>
+    <color name="manual">#FFCA6C</color>
+    <color name="manual_shadow">#FF5E00</color>
+    <color name="water_shartage">#CFCFCF</color>
+    <color name="water_shartage_shadow">#878787</color>
+    <color name="water_shartage_alarm">#FF3636</color>
+    <color name="water_shartage_alarm_shadow">#DB0000</color>
+</resources>
