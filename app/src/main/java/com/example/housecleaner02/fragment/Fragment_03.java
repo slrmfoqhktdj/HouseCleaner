@@ -79,8 +79,7 @@ public class Fragment_03 extends Fragment {
         pause_botton.setOnClickListener(v -> {
             viewModel.getIsRunning().postValue(false);
 
-            Intent intent = new Intent("Page");
-            intent.putExtra("index",0);
+            Intent intent = new Intent("End");
             LocalBroadcastManager.getInstance(requireActivity()).sendBroadcast(intent);
         });
 

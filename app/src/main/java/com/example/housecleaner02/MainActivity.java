@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity{
     
     private Boolean first_info = true; // 처음 시작될때 정보물어보기, 아닐경우 시작
 
+    private Boolean Pause_End = false; // 처음 시작될때 정보물어보기, 아닐경우 시작
+
     private int TH_Step = 0;
 
     LoadingDialog loadingDialog ;
@@ -158,6 +160,37 @@ public class MainActivity extends AppCompatActivity{
 
                     mViewPager.setCurrentItem(index);
                     
+                    break;
+
+                case "End":
+
+//
+                    Pause_End = true;
+
+                    DeviceModel s_1 = viewModel.getCleanning_Running_Situation_1().getValue();
+                    int s_2 = viewModel.getCleanning_Running_Situation_2().getValue();
+
+                    if(s_1.equals(DeviceModel.House_01_02) && s_2 == 0){
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Air_Stop,null);
+                    }else if(s_1.equals(DeviceModel.House_01_02) && s_2 == 1){
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Air_Stop,null);
+                    }else if(s_1.equals(DeviceModel.House_01_02) && s_2 == 2){
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner02_Stop,null);
+                    }else if(s_1.equals(DeviceModel.House_03_04) && s_2 == 0){
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Air_Stop,null);
+                    }else if(s_1.equals(DeviceModel.House_03_04) && s_2 == 1){
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Air_Stop,null);
+                    }else if(s_1.equals(DeviceModel.House_03_04) && s_2 == 2){
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Stop,null);
+                    }else{
+                        Pause_End = false;
+
+                        Intent intent2 = new Intent("Page");
+                        intent2.putExtra("index",0);
+                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
+
+                    }
+
                     break;
             }
         }
@@ -966,7 +999,15 @@ public class MainActivity extends AppCompatActivity{
                             if(CRC16Util.receiveData(data,crc)){
                                 if(bytes[3]==0x00 && bytes[4]== 0x00){      // 중지
 
-                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Air_Pump_Start,null);
+                                    if(!Pause_End){
+                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Air_Pump_Start,null);
+                                    }else{
+                                        Pause_End = false;
+                                        Intent intent2 = new Intent("Page");
+                                        intent2.putExtra("index",0);
+                                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
+                                    }
+
 
                                 }else if(bytes[3]==0x01 && bytes[4]== 0x01){    // 시작
                                     viewModel.getCleanning_Running_Situation_2().postValue(0);
@@ -997,9 +1038,17 @@ public class MainActivity extends AppCompatActivity{
 
                             if(CRC16Util.receiveData(data,crc)){
                                 if(bytes[3]==0x00 && bytes[4]== 0x00){      // 중지
-                                    // 현재 상태가 Houst_Stop의 식을 실행 - air comp만 실행
-                                    viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_Stop);
-                                    viewModel.getCleanning_Running_Situation_2().postValue(3);
+
+                                    if(!Pause_End){
+                                        // 현재 상태가 Houst_Stop의 식을 실행 - air comp만 실행
+                                        viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_Stop);
+                                        viewModel.getCleanning_Running_Situation_2().postValue(3);
+                                    }else{
+                                        Pause_End = false;
+                                        Intent intent2 = new Intent("Page");
+                                        intent2.putExtra("index",0);
+                                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
+                                    }
 
                                     try {
                                         Thread.sleep(1000);
@@ -1049,7 +1098,16 @@ public class MainActivity extends AppCompatActivity{
 
                             if(CRC16Util.receiveData(data,crc)){
                                 if(bytes[3]==0x00){      // 중지
-                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Start,null);
+
+                                    if(!Pause_End){
+                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Start,null);
+                                    }else{
+                                        Pause_End = false;
+                                        Intent intent2 = new Intent("Page");
+                                        intent2.putExtra("index",0);
+                                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
+                                    }
+
                                 }else if(bytes[3]==0x01){    // 시작
                                     viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
                                     viewModel.getCleanning_Running_Situation_2().postValue(1);
@@ -1077,10 +1135,17 @@ public class MainActivity extends AppCompatActivity{
 
                             if(CRC16Util.receiveData(data,crc)){
                                 if(bytes[3]==0x00){      // 중지
-                                    Log.d(TAG, "종류：" + "SerialModel.House03and04_Cleanner01_Receive case 1");
-                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner02_Start,null);
+
+                                    if(!Pause_End){
+                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner02_Start,null);
+                                    }else{
+                                        Pause_End = false;
+                                        Intent intent2 = new Intent("Page");
+                                        intent2.putExtra("index",0);
+                                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
+                                    }
                                 }else if(bytes[3]==0x01){    // 시작
-                                    Log.d(TAG, "종류：" + "SerialModel.House03and04_Cleanner01_Receive case 2");
+
                                     viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
                                     viewModel.getCleanning_Running_Situation_2().postValue(1);
 
@@ -1122,7 +1187,16 @@ public class MainActivity extends AppCompatActivity{
                                         Start_Cleanner_time();
                                     }
                                 }else{  // 정지시
-                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Start,null);
+
+                                    if(!Pause_End){
+                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Start,null);
+                                    }else{
+                                        Pause_End = false;
+                                        Intent intent2 = new Intent("Page");
+                                        intent2.putExtra("index",0);
+                                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
+                                    }
+
                                 }
                             }
                         }catch (Exception e){
@@ -1156,6 +1230,11 @@ public class MainActivity extends AppCompatActivity{
                                         Start_Cleanner_time();
                                     }
                                 }else{  // 정지시
+
+                                    if(Pause_End){
+                                        Pause_End = false;
+                                    }
+
                                     viewModel.getCleanning_Running_Situation_2().postValue(0);
                                     Intent intent = new Intent("Page");
                                     intent.putExtra("index",0);
@@ -1179,9 +1258,10 @@ public class MainActivity extends AppCompatActivity{
                                 AlarmDialogShow("물부족","진행 도중 물이 부족하여 상태가 초기화됩니다.");
 
                                 Log.d(TAG,"물부족");
-                                Intent intent2 = new Intent("Page");
-                                intent2.putExtra("index",0);
-                                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
+
+
+                                Intent intent = new Intent("End");
+                                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                             }
                         }catch (Exception e){
                             e.printStackTrace();
