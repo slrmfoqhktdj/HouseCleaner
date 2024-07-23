@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -60,6 +61,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Timer;
@@ -170,6 +172,8 @@ public class MainActivity extends AppCompatActivity{
                     DeviceModel s_1 = viewModel.getCleanning_Running_Situation_1().getValue();
                     int s_2 = viewModel.getCleanning_Running_Situation_2().getValue();
 
+                    Log.d(TAG,"End : "+ s_1 + ", "+ s_2);
+
                     if(s_1.equals(DeviceModel.House_01_02) && s_2 == 0){
                         SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Air_Stop,null);
                     }else if(s_1.equals(DeviceModel.House_01_02) && s_2 == 1){
@@ -207,6 +211,8 @@ public class MainActivity extends AppCompatActivity{
         //SharedPreferences 등록
         PrefsHelper.init(this);
 
+        checkPermissions();
+
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         loadingDialog = new LoadingDialog(this);
@@ -239,6 +245,7 @@ public class MainActivity extends AppCompatActivity{
 
         IntentFilter sfilter01 = new IntentFilter();
         sfilter01.addAction("Page");
+        sfilter01.addAction("End");
         LocalBroadcastManager.getInstance(this).registerReceiver(MainReceiver,sfilter01);
 
 
@@ -1529,7 +1536,70 @@ public class MainActivity extends AppCompatActivity{
 
 
     }
+    public static final int MULTIPLE_PERMISSIONS = 1801;
+    private String[] permissions = {Manifest.permission.SYSTEM_ALERT_WINDOW};
 
+
+    private boolean checkPermissions() {
+        int result;
+        List<String> permissionList = new ArrayList<>();
+        for (String pm : permissions) {
+            result = ContextCompat.checkSelfPermission(this, pm);
+
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                permissionList.add(pm);
+            }
+        }
+
+        if (!permissionList.isEmpty()) {
+
+
+
+//            ActivityCompat.requestPermissions(this, permissionList.toArray(new String[permissionList.size()]), MULTIPLE_PERMISSIONS);
+
+            ActivityCompat.requestPermissions(this, permissionList.toArray(new String[permissionList.size()]), MULTIPLE_PERMISSIONS);
+            return false;
+
+        }
+        return true;
+    }
+
+    /**
+     * checkPermission 메소드를 실행한 후 콜백 메소드
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case MULTIPLE_PERMISSIONS: {
+                boolean isDeny = false;
+                if (grantResults.length > 0) {
+                    Log.d(TAG,"grantResults = "+ grantResults.length);
+                    for (int i = 0; i < permissions.length; i++) {
+                        Log.d(TAG,"permissions = "+ permissions.length);
+                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                            //permission denyed
+                            isDeny = true;
+                            Log.d(TAG,"permissions is deny");
+                        }
+                    }
+                }
+
+                if (isDeny) {
+                    showNoPermissionToastAndFinish();
+                }
+            }
+        }
+    }
+
+    /**
+     * 권한 거부 시 실행 메소드
+     */
+    private void showNoPermissionToastAndFinish() {
+
+        Toast toast = Toast.makeText(this, "권한 요청에 동의 해주셔야 이용 가능합니다. 설정에서 권한 허용 하시기 바랍니다.", Toast.LENGTH_SHORT);
+        toast.show();
+    }
 
     @Override
     protected void onDestroy() {
