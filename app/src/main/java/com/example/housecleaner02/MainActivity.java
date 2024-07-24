@@ -1,6 +1,6 @@
 package com.example.housecleaner02;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -12,7 +12,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -21,12 +20,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.Settings;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,7 +57,6 @@ import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -87,8 +82,11 @@ public class MainActivity extends AppCompatActivity{
     
     private Boolean CleannerType = false;   // 하우스 청소동작 1,2 여부 false = 1 , true = 2
 
-    private Timer temphumi_timer = null;   // 온습도 타이머
+    private Timer temphumi_timer = null;   // 온습도 타이머s
+
     private final int temp_humi_timer = 60;   // 온습도 요청시간단위(초)
+
+    private final int temp_humi_logging_cnt = 30;   // 온습도 요청의 몇번 중 한번 로그로 기록을 하는가 (번)
 
     private int temp_humi_cnt = -1;
     
@@ -141,6 +139,8 @@ public class MainActivity extends AppCompatActivity{
 
                         SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Air_Pump_Start,null);
 
+
+                        Logger.i("Running Start");
 //                        Logger.i("Start Cleanner Plan");
                     }
 
@@ -152,6 +152,8 @@ public class MainActivity extends AppCompatActivity{
                         Stop_Cleanner_time();
 
                         EndCleaning();
+
+                        Logger.i("Running End");
                     }
 
                     if(index ==1){
@@ -433,6 +435,8 @@ public class MainActivity extends AppCompatActivity{
             thSettingDialog.setTHSettingDialogListener((TH_Min,TH_Max) -> {
                 KeyControl.setTH_Auto_Min(TH_Min);
                 KeyControl.setTH_Auto_Max(TH_Max);
+
+                Logger.i("Auto Nozzle Setting Changed : TH_Min = "+KeyControl.getTH_Auto_Min()+", TH_Max = "+KeyControl.getTH_Auto_Max());
             });
             thSettingDialog.show();
         });
@@ -443,15 +447,45 @@ public class MainActivity extends AppCompatActivity{
                 Log.d(TAG,"House01_02");
                 HouseSettingDialog houseSettingDialog = new HouseSettingDialog(this,DeviceModel.House_01_02,viewModel.getAirCompressor01and02_RunningTime().getValue(),viewModel.getPump01and02_RunningTime().getValue(),viewModel.getHouse01and02_Cleaning01_Time().getValue(),viewModel.getHouse01and02_Cleaning02_Time().getValue());
                 houseSettingDialog.setHouseSettingDialogListener((AirCompressor_RunningTime, Pump_RunningTime, House_Cleaning01_Time, House_Cleaning02_Time) -> {
-                    viewModel.getAirCompressor01and02_RunningTime().postValue(AirCompressor_RunningTime);
-                    viewModel.getPump01and02_RunningTime().postValue(Pump_RunningTime);
-                    viewModel.getHouse01and02_Cleaning01_Time().postValue(House_Cleaning01_Time);
-                    viewModel.getHouse01and02_Cleaning02_Time().postValue(House_Cleaning02_Time);
+                    boolean change_setting = false;
 
-                    KeyControl.setAirCompressor01and02_RunningTime(AirCompressor_RunningTime);
-                    KeyControl.setPump01and02_RunningTime(Pump_RunningTime);
-                    KeyControl.setHouse01and02_Cleaning01(House_Cleaning01_Time);
-                    KeyControl.setHouse01and02_Cleaning02(House_Cleaning02_Time);
+                    if(!viewModel.getAirCompressor01and02_RunningTime().getValue().equals(AirCompressor_RunningTime)){
+                        viewModel.getAirCompressor01and02_RunningTime().postValue(AirCompressor_RunningTime);
+                        KeyControl.setAirCompressor01and02_RunningTime(AirCompressor_RunningTime);
+                        change_setting = true;
+                    }
+
+                    if(!viewModel.getPump01and02_RunningTime().getValue().equals(Pump_RunningTime)){
+                        viewModel.getPump01and02_RunningTime().postValue(Pump_RunningTime);
+                        KeyControl.setPump01and02_RunningTime(Pump_RunningTime);
+                        change_setting = true;
+                    }
+
+                    if(!viewModel.getHouse01and02_Cleaning01_Time().getValue().equals(House_Cleaning01_Time)){
+                        viewModel.getHouse01and02_Cleaning01_Time().postValue(House_Cleaning01_Time);
+                        KeyControl.setHouse01and02_Cleaning01(House_Cleaning01_Time);
+                        change_setting = true;
+                    }
+
+                    if(!viewModel.getHouse01and02_Cleaning02_Time().getValue().equals(House_Cleaning02_Time)){
+                        viewModel.getHouse01and02_Cleaning02_Time().postValue(House_Cleaning02_Time);
+                        KeyControl.setHouse01and02_Cleaning02(House_Cleaning02_Time);
+                        change_setting = true;
+                    }
+
+                    if(change_setting){
+                        StringBuilder insertSetting = new StringBuilder();
+                        insertSetting.append("House_01_02 Time Settings Changed : AirComp = ")
+                                .append(AirCompressor_RunningTime)
+                                .append("Pump = ")
+                                .append(Pump_RunningTime)
+                                .append("Cleaning01 = ")
+                                .append(House_Cleaning01_Time)
+                                .append("Cleaning02 = ")
+                                .append(House_Cleaning02_Time);
+                        Logger.i(String.valueOf(change_setting));
+                    }
+
                 });
                 houseSettingDialog.show();
             }else{
@@ -466,17 +500,44 @@ public class MainActivity extends AppCompatActivity{
                 Log.d(TAG,"House03_04");
                 HouseSettingDialog houseSettingDialog = new HouseSettingDialog(this,DeviceModel.House_03_04,viewModel.getAirCompressor03and04_RunningTime().getValue(),viewModel.getPump03and04_RunningTime().getValue(),viewModel.getHouse03and04_Cleaning01_Time().getValue(),viewModel.getHouse03and04_Cleaning02_Time().getValue());
                 houseSettingDialog.setHouseSettingDialogListener((AirCompressor_RunningTime, Pump_RunningTime, House_Cleaning01_Time, House_Cleaning02_Time) -> {
+                    boolean change_setting = false;
 
+                    if(!viewModel.getAirCompressor03and04_RunningTime().getValue().equals(AirCompressor_RunningTime)){
+                        viewModel.getAirCompressor03and04_RunningTime().postValue(AirCompressor_RunningTime);
+                        KeyControl.setAirCompressor03and04_RunningTime(AirCompressor_RunningTime);
+                        change_setting = true;
+                    }
 
-                    viewModel.getAirCompressor03and04_RunningTime().postValue(AirCompressor_RunningTime);
-                    viewModel.getPump03and04_RunningTime().postValue(Pump_RunningTime);
-                    viewModel.getHouse03and04_Cleaning01_Time().postValue(House_Cleaning01_Time);
-                    viewModel.getHouse03and04_Cleaning02_Time().postValue(House_Cleaning02_Time);
+                    if(!viewModel.getPump03and04_RunningTime().getValue().equals(Pump_RunningTime)){
+                        viewModel.getPump03and04_RunningTime().postValue(Pump_RunningTime);
+                        KeyControl.setPump03and04_RunningTime(Pump_RunningTime);
+                        change_setting = true;
+                    }
 
-                    KeyControl.setAirCompressor03and04_RunningTime(AirCompressor_RunningTime);
-                    KeyControl.setPump03and04_RunningTime(Pump_RunningTime);
-                    KeyControl.setHouse03and04_Cleaning01(House_Cleaning01_Time);
-                    KeyControl.setHouse03and04_Cleaning02(House_Cleaning02_Time);
+                    if(!viewModel.getHouse03and04_Cleaning01_Time().getValue().equals(House_Cleaning01_Time)){
+                        viewModel.getHouse03and04_Cleaning01_Time().postValue(House_Cleaning01_Time);
+                        KeyControl.setHouse03and04_Cleaning01(House_Cleaning01_Time);
+                        change_setting = true;
+                    }
+
+                    if(!viewModel.getHouse03and04_Cleaning02_Time().getValue().equals(House_Cleaning02_Time)){
+                        viewModel.getHouse03and04_Cleaning02_Time().postValue(House_Cleaning02_Time);
+                        KeyControl.setHouse03and04_Cleaning02(House_Cleaning02_Time);
+                        change_setting = true;
+                    }
+
+                    if(change_setting){
+                        StringBuilder insertSetting = new StringBuilder();
+                        insertSetting.append("House_03_04 Time Settings Changed : AirComp = ")
+                                .append(AirCompressor_RunningTime)
+                                .append("Pump = ")
+                                .append(Pump_RunningTime)
+                                .append("Cleaning01 = ")
+                                .append(House_Cleaning01_Time)
+                                .append("Cleaning02 = ")
+                                .append(House_Cleaning02_Time);
+                        Logger.i(String.valueOf(change_setting));
+                    }
                 });
                 houseSettingDialog.show();
             }else{
@@ -697,6 +758,7 @@ public class MainActivity extends AppCompatActivity{
                                 }else{                  // 시작 버튼을 누를때
                                     if(bytes[19] != 0x00){      // 물이 부족할때
                                         AlarmDialogShow("물부족","물이 부족합니다. 적정량의 물이 존재하는지 확인해주세요.");
+                                        Logger.i("Warnning : Water Shartage");
                                         Intent intent = new Intent("Page");
                                         intent.putExtra("index",0);
                                         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
@@ -785,7 +847,7 @@ public class MainActivity extends AppCompatActivity{
                                     }
 
 
-                                    if(temp_humi_cnt == -1 || temp_humi_cnt == 60){
+                                    if(temp_humi_cnt == -1 || temp_humi_cnt == temp_humi_logging_cnt){
                                         Logger.i("House01 = 1("+(0xff & bytes[3])+"/"+(0xff & bytes[4])+","+KeyControl.getHouse01_Nozzle01()+
                                                 ")  2("+(0xff & bytes[7])+"/"+(0xff & bytes[8])+","+KeyControl.getHouse01_Nozzle02()+
                                                 ")  3("+(0xff & bytes[11])+"/"+(0xff & bytes[12])+","+KeyControl.getHouse01_Nozzle03()+
@@ -852,7 +914,7 @@ public class MainActivity extends AppCompatActivity{
                                         }
                                     }
 
-                                    if(temp_humi_cnt == -1 || temp_humi_cnt == 60){
+                                    if(temp_humi_cnt == -1 || temp_humi_cnt == temp_humi_logging_cnt){
                                         Logger.i("House02 = 1("+(0xff & bytes[3])+"/"+(0xff & bytes[4])+","+KeyControl.getHouse02_Nozzle01()+
                                                 ")  2("+(0xff & bytes[7])+"/"+(0xff & bytes[8])+","+KeyControl.getHouse02_Nozzle02()+
                                                 ")  3("+(0xff & bytes[11])+"/"+(0xff & bytes[12])+","+KeyControl.getHouse02_Nozzle03()+
@@ -918,7 +980,7 @@ public class MainActivity extends AppCompatActivity{
                                         }
                                     }
 
-                                    if(temp_humi_cnt == -1 || temp_humi_cnt == 60){
+                                    if(temp_humi_cnt == -1 || temp_humi_cnt == temp_humi_logging_cnt){
                                         Logger.i("House03 = 1("+(0xff & bytes[3])+"/"+(0xff & bytes[4])+","+KeyControl.getHouse03_Nozzle01()+
                                                 ")  2("+(0xff & bytes[7])+"/"+(0xff & bytes[8])+","+KeyControl.getHouse03_Nozzle02()+
                                                 ")  3("+(0xff & bytes[11])+"/"+(0xff & bytes[12])+","+KeyControl.getHouse03_Nozzle03()+
@@ -982,7 +1044,7 @@ public class MainActivity extends AppCompatActivity{
                                         }
                                     }
 
-                                    if(temp_humi_cnt == -1 || temp_humi_cnt == 60){
+                                    if(temp_humi_cnt == -1 || temp_humi_cnt == temp_humi_logging_cnt){
                                         Logger.i("House04 = 1("+(0xff & bytes[3])+"/"+(0xff & bytes[4])+","+KeyControl.getHouse04_Nozzle01()+
                                                 ")  2("+(0xff & bytes[7])+"/"+(0xff & bytes[8])+","+KeyControl.getHouse04_Nozzle02()+
                                                 ")  3("+(0xff & bytes[11])+"/"+(0xff & bytes[12])+","+KeyControl.getHouse04_Nozzle03()+
@@ -991,7 +1053,7 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-                                    if(temp_humi_cnt >= 60){
+                                    if(temp_humi_cnt >= temp_humi_logging_cnt){
                                         temp_humi_cnt = 0;
                                     }else{
                                         temp_humi_cnt= temp_humi_cnt+1;
@@ -1550,6 +1612,8 @@ public class MainActivity extends AppCompatActivity{
         Start_TempHumi_time();
 
 
+        Logger.i("Device Start");
+
     }
     public static final int MULTIPLE_PERMISSIONS = 1801;
     private String[] permissions = {Manifest.permission.SYSTEM_ALERT_WINDOW};
@@ -1601,7 +1665,7 @@ public class MainActivity extends AppCompatActivity{
                 }
 
                 if (isDeny) {
-                    showNoPermissionToastAndFinish();
+//                    showNoPermissionToastAndFinish();
                 }
             }
         }

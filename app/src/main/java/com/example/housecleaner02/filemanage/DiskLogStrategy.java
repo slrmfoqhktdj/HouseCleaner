@@ -1,8 +1,6 @@
 package com.example.housecleaner02.filemanage;
 
 import android.os.Environment;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.example.housecleaner02.model.DeviceModel;
 import com.orhanobut.logger.LogStrategy;
@@ -11,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -20,6 +19,11 @@ public class DiskLogStrategy implements LogStrategy {
     private final SimpleDateFormat dateFormat;
     private final SimpleDateFormat FileNamedateFormat;
     private static final long MAX_FILE_SIZE = 1024 * 1024 * 1024; // 1GB
+
+    private int File_cnt = 0;
+    private String origin_filename = "";
+    private ArrayList<String> erred_message = new ArrayList<>();
+
 
     public DiskLogStrategy(File[] file) throws Exception {
 //        this.context = context;
@@ -44,19 +48,37 @@ public class DiskLogStrategy implements LogStrategy {
             String dateform = dateFormat.format(date);
             String FileName = FileNamedateFormat.format(date);
 
-
-//            File logFile = new File(DeviceModel.getDeviceLogFilePath()+"/", FileName +".txt");
-            File logFile = new File(logpathfile[1]+DeviceModel.getDeviceLogFilePath(),FileName +".txt");
-
-            if(!logFile.exists()){
-                logFile.mkdir();
+            if(!origin_filename.equals(FileName)){
+                origin_filename = FileName;
+                File_cnt = 0;
             }
 
+//            File logFile = new File(DeviceModel.getDeviceLogFilePath()+"/", FileName +".txt");
+            File logFile = new File(logpathfile[1]+DeviceModel.getDeviceLogFilePath(),FileName +"_"+File_cnt+".txt");
+
+
             try (FileWriter writer = new FileWriter(logFile, true)) {
+
+                if(erred_message.size()>0){
+                    for(int i = 0; i< erred_message.size(); i++){
+                        writer.append(dateform).append(" ").append(formatLogPriority(priority)).append(" : ").append(erred_message.get(i)).append("\n");
+                    }
+                }
+
+
                 writer.append(dateform).append(" ").append(formatLogPriority(priority)).append(" : ").append(message).append("\n");
                 writer.flush();
-            } catch (IOException e) {
+
+                erred_message.clear();
+
+            }   catch (IOException ie){
+                ie.printStackTrace();
+                File_cnt = File_cnt +1;
+                erred_message.add(message);
+
+            }   catch (Exception e) {
                 e.printStackTrace();
+
             }
 
 
