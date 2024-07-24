@@ -76,6 +76,12 @@ public class KeyControl {
     public static void setRepeat_PauseTime(int i){PrefsHelper.write(String.valueOf(KeyModel.Repeat_PauseTime),i);}
     public static Integer getRepeat_PauseTime(){return PrefsHelper.read(String.valueOf(KeyModel.Repeat_PauseTime),0);}
 
+    public static void setTH_Auto_Min(int i){PrefsHelper.write(String.valueOf(KeyModel.TH_Auto_Min),i);}
+    public static Integer getTH_Auto_Min(){return PrefsHelper.read(String.valueOf(KeyModel.TH_Auto_Min),28);}
+
+    public static void setTH_Auto_Max(int i){PrefsHelper.write(String.valueOf(KeyModel.TH_Auto_Max),i);}
+    public static Integer getTH_Auto_Max(){return PrefsHelper.read(String.valueOf(KeyModel.TH_Auto_Max),32);}
+
 
     public static void setAirCompressor01and02_RunningTime(int i){PrefsHelper.write(String.valueOf(KeyModel.AirCompressor01and02_RunningTime),i);}
     public static Integer getAirCompressor01and02_RunningTime(){return PrefsHelper.read(String.valueOf(KeyModel.AirCompressor01and02_RunningTime),1);}

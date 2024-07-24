@@ -28,6 +28,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ import com.example.housecleaner02.activity.HouseNozzleDialog;
 import com.example.housecleaner02.activity.HouseSettingDialog;
 import com.example.housecleaner02.activity.HouseTHDialog;
 import com.example.housecleaner02.activity.LoadingDialog;
+import com.example.housecleaner02.activity.THSettingDialog;
 import com.example.housecleaner02.adapter.ViewPagerAdapter;
 import com.example.housecleaner02.filemanage.CustomFormatStrategy;
 import com.example.housecleaner02.filemanage.DiskLogStrategy;
@@ -109,6 +111,7 @@ public class MainActivity extends AppCompatActivity{
     private ConstraintLayout House01_TH,House02_TH,House03_TH,House04_TH;   // 온습도
 
     private TextView Main_Time,Main_water_shortage;
+    private ImageView Main_TH_Setting;
 
 //    private TextView House01_Temp_tv,House01_Humi_tv,House02_Temp_tv,House02_Humi_tv,House03_Temp_tv,House03_Humi_tv,House04_Temp_tv,House04_Humi_tv;
     private TextView AirCompressor01and02_RunningTime_tv,Pump01and02_RunningTime_tv,House01and02_Cleaning01_Time_tv,House01and02_Cleaning02_Time_tv;
@@ -192,7 +195,6 @@ public class MainActivity extends AppCompatActivity{
                         Intent intent2 = new Intent("Page");
                         intent2.putExtra("index",0);
                         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
-
                     }
 
                     break;
@@ -254,6 +256,7 @@ public class MainActivity extends AppCompatActivity{
 
         Main_Time = findViewById(R.id.main_time);
         Main_water_shortage = findViewById(R.id.main_water_shortage);
+        Main_TH_Setting = findViewById(R.id.main_TH_setting);
 
 //        House01_Temp_tv = findViewById(R.id.House01_Temp);
 //        House01_Humi_tv = findViewById(R.id.House01_Humi);
@@ -424,6 +427,15 @@ public class MainActivity extends AppCompatActivity{
         viewModel.getHouse02_Nozzle_Auto().observe(this,House02_NozzleAuto_sw_ob);
         viewModel.getHouse03_Nozzle_Auto().observe(this,House03_NozzleAuto_sw_ob);
         viewModel.getHouse04_Nozzle_Auto().observe(this,House04_NozzleAuto_sw_ob);
+
+        Main_TH_Setting.setOnClickListener(v -> {
+            THSettingDialog thSettingDialog = new THSettingDialog(this,KeyControl.getTH_Auto_Min(),KeyControl.getTH_Auto_Max());
+            thSettingDialog.setTHSettingDialogListener((TH_Min,TH_Max) -> {
+                KeyControl.setTH_Auto_Min(TH_Min);
+                KeyControl.setTH_Auto_Max(TH_Max);
+            });
+            thSettingDialog.show();
+        });
 
 
         House_01_02.setOnClickListener(v -> {
@@ -706,6 +718,8 @@ public class MainActivity extends AppCompatActivity{
 
                             if(CRC16Util.receiveData(data,crc)){
 
+                                int th_min = KeyControl.getTH_Auto_Min();
+                                int th_max = KeyControl.getTH_Auto_Max();
 
                                 if(TH_Step==0){
                                     TH_Step = 1;
@@ -734,36 +748,37 @@ public class MainActivity extends AppCompatActivity{
 
                                     if(Boolean.TRUE.equals(viewModel.getHouse01_Nozzle_Auto().getValue())){
 
-                                        if((0xff & bytes[3])< 28 || (0xff & bytes[4])< 28){
+
+                                        if((0xff & bytes[3])< th_min || (0xff & bytes[4])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_1,(byte)1);
-                                        }else if((((0xff & bytes[3])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[4])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[3])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[4])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_1,(byte)2);
-                                        }else if((0xff & bytes[3])>= 32 || (0xff & bytes[4])>= 32){
+                                        }else if((0xff & bytes[3])>= th_max || (0xff & bytes[4])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_1,(byte)3);
                                         }
 
 
-                                        if((0xff & bytes[7])< 28 || (0xff & bytes[8])< 28){
+                                        if((0xff & bytes[7])< th_min || (0xff & bytes[8])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_2,(byte)1);
-                                        }else if((((0xff & bytes[7])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[8])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[7])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[8])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_2,(byte)2);
-                                        }else if((0xff & bytes[7])>= 32 || (0xff & bytes[8])>= 32){
+                                        }else if((0xff & bytes[7])>= th_max || (0xff & bytes[8])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_2,(byte)3);
                                         }
 
-                                        if((0xff & bytes[11])< 28 || (0xff & bytes[12])< 28){
+                                        if((0xff & bytes[11])< th_min || (0xff & bytes[12])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_3,(byte)1);
-                                        }else if((((0xff & bytes[11])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[12])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[11])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[12])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_3,(byte)2);
-                                        }else if((0xff & bytes[11])>= 32 || (0xff & bytes[12])>= 32){
+                                        }else if((0xff & bytes[11])>= th_max || (0xff & bytes[12])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_3,(byte)3);
                                         }
 
-                                        if((0xff & bytes[15])< 28 || (0xff & bytes[16])< 28){
+                                        if((0xff & bytes[15])< th_min || (0xff & bytes[16])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_4,(byte)1);
-                                        }else if((((0xff & bytes[15])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[16])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[15])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[16])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_4,(byte)2);
-                                        }else if((0xff & bytes[15])>= 32 || (0xff & bytes[16])>= 32){
+                                        }else if((0xff & bytes[15])>= th_max || (0xff & bytes[16])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_4,(byte)3);
                                         }
 
@@ -803,36 +818,36 @@ public class MainActivity extends AppCompatActivity{
                                     SerialPortManager.getInstance().SendSerialCom(SerialModel.Require_House_03_TH,null);
 
                                     if(Boolean.TRUE.equals(viewModel.getHouse02_Nozzle_Auto().getValue())){
-                                        if((0xff & bytes[3])< 28 || (0xff & bytes[4])< 28){
+                                        if((0xff & bytes[3])< th_min || (0xff & bytes[4])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_1,(byte)1);
-                                        }else if((((0xff & bytes[3])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[4])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[3])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[4])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_1,(byte)2);
-                                        }else if((0xff & bytes[3])>= 32 || (0xff & bytes[4])>= 32){
+                                        }else if((0xff & bytes[3])>= th_max || (0xff & bytes[4])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_1,(byte)3);
                                         }
 
 
-                                        if((0xff & bytes[7])< 28 || (0xff & bytes[8])< 28){
+                                        if((0xff & bytes[7])< th_min || (0xff & bytes[8])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_2,(byte)1);
-                                        }else if((((0xff & bytes[7])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[8])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[7])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[8])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_2,(byte)2);
-                                        }else if((0xff & bytes[7])>= 32 || (0xff & bytes[8])>= 32){
+                                        }else if((0xff & bytes[7])>= th_max || (0xff & bytes[8])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_2,(byte)3);
                                         }
 
-                                        if((0xff & bytes[11])< 28 || (0xff & bytes[12])< 28){
+                                        if((0xff & bytes[11])< th_min || (0xff & bytes[12])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_3,(byte)1);
-                                        }else if((((0xff & bytes[11])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[12])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[11])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[12])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_3,(byte)2);
-                                        }else if((0xff & bytes[11])>= 32 || (0xff & bytes[12])>= 32){
+                                        }else if((0xff & bytes[11])>= th_max || (0xff & bytes[12])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_3,(byte)3);
                                         }
 
-                                        if((0xff & bytes[15])< 28 || (0xff & bytes[16])< 28){
+                                        if((0xff & bytes[15])< th_min || (0xff & bytes[16])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_4,(byte)1);
-                                        }else if((((0xff & bytes[15])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[16])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[15])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[16])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_4,(byte)2);
-                                        }else if((0xff & bytes[15])>= 32 || (0xff & bytes[16])>= 32){
+                                        }else if((0xff & bytes[15])>= th_max || (0xff & bytes[16])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_4,(byte)3);
                                         }
                                     }
@@ -869,36 +884,36 @@ public class MainActivity extends AppCompatActivity{
                                     SerialPortManager.getInstance().SendSerialCom(SerialModel.Require_House_04_TH,null);
 
                                     if(Boolean.TRUE.equals(viewModel.getHouse03_Nozzle_Auto().getValue())){
-                                        if((0xff & bytes[3])< 28 || (0xff & bytes[4])< 28){
+                                        if((0xff & bytes[3])< th_min || (0xff & bytes[4])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_1,(byte)1);
-                                        }else if((((0xff & bytes[3])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[4])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[3])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[4])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_1,(byte)2);
-                                        }else if((0xff & bytes[3])>= 32 || (0xff & bytes[4])>= 32){
+                                        }else if((0xff & bytes[3])>= th_max || (0xff & bytes[4])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_1,(byte)3);
                                         }
 
 
-                                        if((0xff & bytes[7])< 28 || (0xff & bytes[8])< 28){
+                                        if((0xff & bytes[7])< th_min || (0xff & bytes[8])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_2,(byte)1);
-                                        }else if((((0xff & bytes[7])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[8])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[7])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[8])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_2,(byte)2);
-                                        }else if((0xff & bytes[7])>= 32 || (0xff & bytes[8])>= 32){
+                                        }else if((0xff & bytes[7])>= th_max || (0xff & bytes[8])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_2,(byte)3);
                                         }
 
-                                        if((0xff & bytes[11])< 28 || (0xff & bytes[12])< 28){
+                                        if((0xff & bytes[11])< th_min || (0xff & bytes[12])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_3,(byte)1);
-                                        }else if((((0xff & bytes[11])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[12])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[11])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[12])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_3,(byte)2);
-                                        }else if((0xff & bytes[11])>= 32 || (0xff & bytes[12])>= 32){
+                                        }else if((0xff & bytes[11])>= th_max || (0xff & bytes[12])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_3,(byte)3);
                                         }
 
-                                        if((0xff & bytes[15])< 28 || (0xff & bytes[16])< 28){
+                                        if((0xff & bytes[15])< th_min || (0xff & bytes[16])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_4,(byte)1);
-                                        }else if((((0xff & bytes[15])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[16])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[15])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[16])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_4,(byte)2);
-                                        }else if((0xff & bytes[15])>= 32 || (0xff & bytes[16])>= 32){
+                                        }else if((0xff & bytes[15])>= th_max || (0xff & bytes[16])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_4,(byte)3);
                                         }
                                     }
@@ -933,36 +948,36 @@ public class MainActivity extends AppCompatActivity{
                                     viewModel.getHouse04_Humi4_2().postValue(0xff & bytes[18]);
 
                                     if(Boolean.TRUE.equals(viewModel.getHouse04_Nozzle_Auto().getValue())){
-                                        if((0xff & bytes[3])< 28 || (0xff & bytes[4])< 28){
+                                        if((0xff & bytes[3])< th_min || (0xff & bytes[4])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_1,(byte)1);
-                                        }else if((((0xff & bytes[3])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[4])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[3])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[4])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_1,(byte)2);
-                                        }else if((0xff & bytes[3])>= 32 || (0xff & bytes[4])>= 32){
+                                        }else if((0xff & bytes[3])>= th_max || (0xff & bytes[4])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_1,(byte)3);
                                         }
 
 
-                                        if((0xff & bytes[7])< 28 || (0xff & bytes[8])< 28){
+                                        if((0xff & bytes[7])< th_min || (0xff & bytes[8])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_2,(byte)1);
-                                        }else if((((0xff & bytes[7])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[8])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[7])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[8])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_2,(byte)2);
-                                        }else if((0xff & bytes[7])>= 32 || (0xff & bytes[8])>= 32){
+                                        }else if((0xff & bytes[7])>= th_max || (0xff & bytes[8])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_2,(byte)3);
                                         }
 
-                                        if((0xff & bytes[11])< 28 || (0xff & bytes[12])< 28){
+                                        if((0xff & bytes[11])< th_min || (0xff & bytes[12])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_3,(byte)1);
-                                        }else if((((0xff & bytes[11])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[12])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[11])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[12])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_3,(byte)2);
-                                        }else if((0xff & bytes[11])>= 32 || (0xff & bytes[12])>= 32){
+                                        }else if((0xff & bytes[11])>= th_max || (0xff & bytes[12])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_3,(byte)3);
                                         }
 
-                                        if((0xff & bytes[15])< 28 || (0xff & bytes[16])< 28){
+                                        if((0xff & bytes[15])< th_min || (0xff & bytes[16])< th_min){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_4,(byte)1);
-                                        }else if((((0xff & bytes[15])>= 28)&&((0xff & bytes[3])<32)) || (((0xff & bytes[16])>= 28)&&((0xff & bytes[4])<32))){
+                                        }else if((((0xff & bytes[15])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[16])>= th_min)&&((0xff & bytes[4])<th_max))){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_4,(byte)2);
-                                        }else if((0xff & bytes[15])>= 32 || (0xff & bytes[16])>= 32){
+                                        }else if((0xff & bytes[15])>= th_max || (0xff & bytes[16])>= th_max){
                                             SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_4,(byte)3);
                                         }
                                     }

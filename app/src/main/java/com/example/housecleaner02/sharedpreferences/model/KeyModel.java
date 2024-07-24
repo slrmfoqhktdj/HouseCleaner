@@ -43,4 +43,8 @@ public enum KeyModel {
     House01and02_Cleaning02,
     House03and04_Cleaning02,
 
+
+    TH_Auto_Min,
+    TH_Auto_Max,
+
 }

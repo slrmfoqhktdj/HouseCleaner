@@ -47,6 +47,11 @@ public class DiskLogStrategy implements LogStrategy {
 
 //            File logFile = new File(DeviceModel.getDeviceLogFilePath()+"/", FileName +".txt");
             File logFile = new File(logpathfile[1]+DeviceModel.getDeviceLogFilePath(),FileName +".txt");
+
+            if(!logFile.exists()){
+                logFile.mkdir();
+            }
+
             try (FileWriter writer = new FileWriter(logFile, true)) {
                 writer.append(dateform).append(" ").append(formatLogPriority(priority)).append(" : ").append(message).append("\n");
                 writer.flush();

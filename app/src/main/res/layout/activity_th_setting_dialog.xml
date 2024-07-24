@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparency_black"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintHorizontal_bias="0.5"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent=".9">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+
+            android:shadowColor="#011851"
+            android:shadowDy="1"
+            android:shadowRadius="1"
+            android:text="자동 노즐 온도 설정"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="30sp"
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent=".1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05"
+
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent=".5"
+            tools:ignore="SpeakableTextPresentCheck"
+
+            />
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent=".55"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.45"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="1"
+
+
+
+            >
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:shadowColor="#011851"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="노즐 1단계"
+                android:textColor="@color/black"
+                android:textSize="23sp"
+                android:textStyle="bold"
+
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".25"
+                app:layout_constraintHorizontal_bias="0.1"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.11"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".2"
+                tools:ignore="SpeakableTextPresentCheck"
+
+
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:shadowColor="#011851"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="노즐 2단계"
+                android:textColor="@color/black"
+                android:textSize="23sp"
+                android:textStyle="bold"
+
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".25"
+                app:layout_constraintHorizontal_bias="0.5"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.11"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".2"
+                tools:ignore="SpeakableTextPresentCheck"
+
+
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:shadowColor="#011851"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="노즐 3단계"
+                android:textColor="@color/black"
+                android:textSize="23sp"
+                android:textStyle="bold"
+
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".25"
+                app:layout_constraintHorizontal_bias="0.9"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.11"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".2"
+                tools:ignore="SpeakableTextPresentCheck"
+
+
+                />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+
+                android:src="@drawable/setting_line"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".2"
+                app:layout_constraintHorizontal_bias="0.5"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.25"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".95"
+                tools:ignore="SpeakableTextPresentCheck"
+
+
+                />
+
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:shadowColor="#011851"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="미만"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".1"
+                app:layout_constraintHorizontal_bias="0.18"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".1"
+                tools:ignore="SpeakableTextPresentCheck"
+
+
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:shadowColor="#011851"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="이상"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".1"
+                app:layout_constraintHorizontal_bias="0.37"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".1"
+                tools:ignore="SpeakableTextPresentCheck"
+
+
+                />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:shadowColor="#011851"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="미만"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".1"
+                app:layout_constraintHorizontal_bias="0.61"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".1"
+                tools:ignore="SpeakableTextPresentCheck"
+
+
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:shadowColor="#011851"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="이상"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".1"
+                app:layout_constraintHorizontal_bias="0.81"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".1"
+                tools:ignore="SpeakableTextPresentCheck"
+
+
+                />
+
+
+
+            <TextView
+                android:id="@+id/Min_number"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:shadowColor="#011851"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
+
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".2"
+                app:layout_constraintHorizontal_bias="0.25"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.2"
+                tools:ignore="SpeakableTextPresentCheck"
+
+
+                />
+
+            <ImageButton
+                android:id="@+id/Min_up_btn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:src="@drawable/chevron_up"
+                android:background="@drawable/layout_bg_corner"
+
+                android:scaleType="fitCenter"
+
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".22"
+                app:layout_constraintHorizontal_bias=".18"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias=".8"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".12"
+                />
+
+            <ImageButton
+                android:id="@+id/Min_down_btn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+
+                android:src="@drawable/chevron_down"
+                android:background="@drawable/layout_bg_corner"
+
+                android:scaleType="fitCenter"
+
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".22"
+                app:layout_constraintHorizontal_bias=".36"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias=".8"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".12"
+                />
+
+
+
+
+
+
+
+            <TextView
+                android:id="@+id/Max_number"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:shadowColor="#011851"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
+
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".2"
+                app:layout_constraintHorizontal_bias="0.74"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.2"
+                tools:ignore="SpeakableTextPresentCheck"
+
+
+                />
+
+            <ImageButton
+                android:id="@+id/Max_up_btn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:src="@drawable/chevron_up"
+                android:background="@drawable/layout_bg_corner"
+
+                android:scaleType="fitCenter"
+
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".22"
+                app:layout_constraintHorizontal_bias=".63"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias=".8"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".12"
+                />
+
+            <ImageButton
+                android:id="@+id/Max_down_btn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+
+                android:src="@drawable/chevron_down"
+                android:background="@drawable/layout_bg_corner"
+
+                android:scaleType="fitCenter"
+
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".22"
+                app:layout_constraintHorizontal_bias=".81"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias=".8"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".12"
+                />
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent=".25"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1"
+
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="1"
+            tools:ignore="SpeakableTextPresentCheck"
+
+            >
+
+            <Button
+                android:id="@+id/negative_botton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="취소"
+                android:textSize="20sp"
+
+                android:textStyle="bold"
+                android:backgroundTint="@color/progress_end"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".55"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.2"
+                tools:ignore="SmallSp" />
+
+            <Button
+                android:id="@+id/positive_botton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="확인"
+                android:textSize="20sp"
+
+                android:textStyle="bold"
+
+                android:backgroundTint="@color/progress_end"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".55"
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.2"
+                tools:ignore="SmallSp"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
