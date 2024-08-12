@@ -17,56 +17,76 @@ public class KeyControl {
     public static Boolean getHouse04_Nozzle_Auto(){return PrefsHelper.read(String.valueOf(KeyModel.House04_Nozzle_Auto),true);}
 
     public static void setHouse01_Nozzle01(int house01_nozzle01){PrefsHelper.write(String.valueOf(KeyModel.House01_Nozzle01),house01_nozzle01);}
-    public static Integer getHouse01_Nozzle01(){return PrefsHelper.read(String.valueOf(KeyModel.House01_Nozzle01),2);}
+    public static Integer getHouse01_Nozzle01(){return PrefsHelper.read(String.valueOf(KeyModel.House01_Nozzle01),3);}
 
     public static void setHouse01_Nozzle02(int house01_nozzle02){PrefsHelper.write(String.valueOf(KeyModel.House01_Nozzle02),house01_nozzle02);}
-    public static Integer getHouse01_Nozzle02(){return PrefsHelper.read(String.valueOf(KeyModel.House01_Nozzle02),2);}
+    public static Integer getHouse01_Nozzle02(){return PrefsHelper.read(String.valueOf(KeyModel.House01_Nozzle02),3);}
 
     public static void setHouse01_Nozzle03(int house01_nozzle03){PrefsHelper.write(String.valueOf(KeyModel.House01_Nozzle03),house01_nozzle03);}
-    public static Integer getHouse01_Nozzle03(){return PrefsHelper.read(String.valueOf(KeyModel.House01_Nozzle03),2);}
+    public static Integer getHouse01_Nozzle03(){return PrefsHelper.read(String.valueOf(KeyModel.House01_Nozzle03),3);}
 
     public static void setHouse01_Nozzle04(int house01_nozzle04){PrefsHelper.write(String.valueOf(KeyModel.House01_Nozzle04),house01_nozzle04);}
-    public static Integer getHouse01_Nozzle04(){return PrefsHelper.read(String.valueOf(KeyModel.House01_Nozzle04),2);}
+    public static Integer getHouse01_Nozzle04(){return PrefsHelper.read(String.valueOf(KeyModel.House01_Nozzle04),3);}
 
+    public static void setHouse01_Nozzle05(int house01_nozzle05){PrefsHelper.write(String.valueOf(KeyModel.House01_Nozzle05),house01_nozzle05);}
+    public static Integer getHouse01_Nozzle05(){return PrefsHelper.read(String.valueOf(KeyModel.House01_Nozzle05),3);}
+
+    public static void setHouse01_Nozzle06(int house01_nozzle06){PrefsHelper.write(String.valueOf(KeyModel.House01_Nozzle06),house01_nozzle06);}
+    public static Integer getHouse01_Nozzle06(){return PrefsHelper.read(String.valueOf(KeyModel.House01_Nozzle06),3);}
 
     public static void setHouse02_Nozzle01(int house02_nozzle01){PrefsHelper.write(String.valueOf(KeyModel.House02_Nozzle01),house02_nozzle01);}
-    public static Integer getHouse02_Nozzle01(){return PrefsHelper.read(String.valueOf(KeyModel.House02_Nozzle01),2);}
+    public static Integer getHouse02_Nozzle01(){return PrefsHelper.read(String.valueOf(KeyModel.House02_Nozzle01),3);}
 
     public static void setHouse02_Nozzle02(int house02_nozzle02){PrefsHelper.write(String.valueOf(KeyModel.House02_Nozzle02),house02_nozzle02);}
-    public static Integer getHouse02_Nozzle02(){return PrefsHelper.read(String.valueOf(KeyModel.House02_Nozzle02),2);}
+    public static Integer getHouse02_Nozzle02(){return PrefsHelper.read(String.valueOf(KeyModel.House02_Nozzle02),3);}
 
     public static void setHouse02_Nozzle03(int house02_nozzle03){PrefsHelper.write(String.valueOf(KeyModel.House02_Nozzle03),house02_nozzle03);}
-    public static Integer getHouse02_Nozzle03(){return PrefsHelper.read(String.valueOf(KeyModel.House02_Nozzle03),2);}
+    public static Integer getHouse02_Nozzle03(){return PrefsHelper.read(String.valueOf(KeyModel.House02_Nozzle03),3);}
 
     public static void setHouse02_Nozzle04(int house02_nozzle04){PrefsHelper.write(String.valueOf(KeyModel.House02_Nozzle04),house02_nozzle04);}
-    public static Integer getHouse02_Nozzle04(){return PrefsHelper.read(String.valueOf(KeyModel.House02_Nozzle04),2);}
+    public static Integer getHouse02_Nozzle04(){return PrefsHelper.read(String.valueOf(KeyModel.House02_Nozzle04),3);}
 
+    public static void setHouse02_Nozzle05(int house02_nozzle05){PrefsHelper.write(String.valueOf(KeyModel.House02_Nozzle05),house02_nozzle05);}
+    public static Integer getHouse02_Nozzle05(){return PrefsHelper.read(String.valueOf(KeyModel.House02_Nozzle05),3);}
+
+    public static void setHouse02_Nozzle06(int house02_nozzle06){PrefsHelper.write(String.valueOf(KeyModel.House02_Nozzle06),house02_nozzle06);}
+    public static Integer getHouse02_Nozzle06(){return PrefsHelper.read(String.valueOf(KeyModel.House02_Nozzle06),3);}
 
     public static void setHouse03_Nozzle01(int house03_nozzle01){PrefsHelper.write(String.valueOf(KeyModel.House03_Nozzle01),house03_nozzle01);}
-    public static Integer getHouse03_Nozzle01(){return PrefsHelper.read(String.valueOf(KeyModel.House03_Nozzle01),2);}
+    public static Integer getHouse03_Nozzle01(){return PrefsHelper.read(String.valueOf(KeyModel.House03_Nozzle01),3);}
 
     public static void setHouse03_Nozzle02(int house03_nozzle02){PrefsHelper.write(String.valueOf(KeyModel.House03_Nozzle02),house03_nozzle02);}
-    public static Integer getHouse03_Nozzle02(){return PrefsHelper.read(String.valueOf(KeyModel.House03_Nozzle02),2);}
+    public static Integer getHouse03_Nozzle02(){return PrefsHelper.read(String.valueOf(KeyModel.House03_Nozzle02),3);}
 
     public static void setHouse03_Nozzle03(int house03_nozzle03){PrefsHelper.write(String.valueOf(KeyModel.House03_Nozzle03),house03_nozzle03);}
-    public static Integer getHouse03_Nozzle03(){return PrefsHelper.read(String.valueOf(KeyModel.House03_Nozzle03),2);}
+    public static Integer getHouse03_Nozzle03(){return PrefsHelper.read(String.valueOf(KeyModel.House03_Nozzle03),3);}
 
     public static void setHouse03_Nozzle04(int house03_nozzle04){PrefsHelper.write(String.valueOf(KeyModel.House03_Nozzle04),house03_nozzle04);}
-    public static Integer getHouse03_Nozzle04(){return PrefsHelper.read(String.valueOf(KeyModel.House03_Nozzle04),2);}
+    public static Integer getHouse03_Nozzle04(){return PrefsHelper.read(String.valueOf(KeyModel.House03_Nozzle04),3);}
 
+    public static void setHouse03_Nozzle05(int house03_nozzle05){PrefsHelper.write(String.valueOf(KeyModel.House03_Nozzle05),house03_nozzle05);}
+    public static Integer getHouse03_Nozzle05(){return PrefsHelper.read(String.valueOf(KeyModel.House03_Nozzle05),3);}
+
+    public static void setHouse03_Nozzle06(int house03_nozzle06){PrefsHelper.write(String.valueOf(KeyModel.House03_Nozzle06),house03_nozzle06);}
+    public static Integer getHouse03_Nozzle06(){return PrefsHelper.read(String.valueOf(KeyModel.House03_Nozzle06),3);}
 
     public static void setHouse04_Nozzle01(int house04_nozzle01){PrefsHelper.write(String.valueOf(KeyModel.House04_Nozzle01),house04_nozzle01);}
-    public static Integer getHouse04_Nozzle01(){return PrefsHelper.read(String.valueOf(KeyModel.House04_Nozzle01),2);}
+    public static Integer getHouse04_Nozzle01(){return PrefsHelper.read(String.valueOf(KeyModel.House04_Nozzle01),3);}
 
     public static void setHouse04_Nozzle02(int house04_nozzle02){PrefsHelper.write(String.valueOf(KeyModel.House04_Nozzle02),house04_nozzle02);}
-    public static Integer getHouse04_Nozzle02(){return PrefsHelper.read(String.valueOf(KeyModel.House04_Nozzle02),2);}
+    public static Integer getHouse04_Nozzle02(){return PrefsHelper.read(String.valueOf(KeyModel.House04_Nozzle02),3);}
 
     public static void setHouse04_Nozzle03(int house04_nozzle03){PrefsHelper.write(String.valueOf(KeyModel.House04_Nozzle03),house04_nozzle03);}
-    public static Integer getHouse04_Nozzle03(){return PrefsHelper.read(String.valueOf(KeyModel.House04_Nozzle03),2);}
+    public static Integer getHouse04_Nozzle03(){return PrefsHelper.read(String.valueOf(KeyModel.House04_Nozzle03),3);}
 
     public static void setHouse04_Nozzle04(int house04_nozzle04){PrefsHelper.write(String.valueOf(KeyModel.House04_Nozzle04),house04_nozzle04);}
-    public static Integer getHouse04_Nozzle04(){return PrefsHelper.read(String.valueOf(KeyModel.House04_Nozzle04),2);}
+    public static Integer getHouse04_Nozzle04(){return PrefsHelper.read(String.valueOf(KeyModel.House04_Nozzle04),3);}
 
+    public static void setHouse04_Nozzle05(int house04_nozzle05){PrefsHelper.write(String.valueOf(KeyModel.House04_Nozzle05),house04_nozzle05);}
+    public static Integer getHouse04_Nozzle05(){return PrefsHelper.read(String.valueOf(KeyModel.House04_Nozzle05),3);}
+
+    public static void setHouse04_Nozzle06(int house04_nozzle06){PrefsHelper.write(String.valueOf(KeyModel.House04_Nozzle06),house04_nozzle06);}
+    public static Integer getHouse04_Nozzle06(){return PrefsHelper.read(String.valueOf(KeyModel.House04_Nozzle06),3);}
 
 
 
@@ -76,11 +96,11 @@ public class KeyControl {
     public static void setRepeat_PauseTime(int i){PrefsHelper.write(String.valueOf(KeyModel.Repeat_PauseTime),i);}
     public static Integer getRepeat_PauseTime(){return PrefsHelper.read(String.valueOf(KeyModel.Repeat_PauseTime),0);}
 
-    public static void setTH_Auto_Min(int i){PrefsHelper.write(String.valueOf(KeyModel.TH_Auto_Min),i);}
-    public static Integer getTH_Auto_Min(){return PrefsHelper.read(String.valueOf(KeyModel.TH_Auto_Min),28);}
+    public static void setDeviation(int i){PrefsHelper.write(String.valueOf(KeyModel.Deviation),i);}
+    public static Integer getDeviation(){return PrefsHelper.read(String.valueOf(KeyModel.Deviation),1);}
 
-    public static void setTH_Auto_Max(int i){PrefsHelper.write(String.valueOf(KeyModel.TH_Auto_Max),i);}
-    public static Integer getTH_Auto_Max(){return PrefsHelper.read(String.valueOf(KeyModel.TH_Auto_Max),32);}
+    public static void setTh_main(int i){PrefsHelper.write(String.valueOf(KeyModel.th_main),i);}
+    public static Integer getTh_main(){return PrefsHelper.read(String.valueOf(KeyModel.th_main),30);}
 
 
     public static void setAirCompressor01and02_RunningTime(int i){PrefsHelper.write(String.valueOf(KeyModel.AirCompressor01and02_RunningTime),i);}

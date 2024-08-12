@@ -105,7 +105,7 @@ public class HouseSettingDialog extends AlertDialog{
         });
 
         AirCompressor_RunningTime_down_btn.setOnClickListener(v -> {
-            if(AirCompressor_RunningTime_Int >1){
+            if(AirCompressor_RunningTime_Int >0){
 
                 if(AirCompressor_RunningTime_Int > Pump_RunningTime_Int){
                     AirCompressor_RunningTime_Int = AirCompressor_RunningTime_Int-1;
@@ -131,7 +131,7 @@ public class HouseSettingDialog extends AlertDialog{
 
 
         Pump_RunningTime_down_btn.setOnClickListener(v -> {
-            if(Pump_RunningTime_Int >1){
+            if(Pump_RunningTime_Int >0){
                 Pump_RunningTime_Int = Pump_RunningTime_Int-1;
                 Pump_RunningTime_tv.setText(String.valueOf(Pump_RunningTime_Int));
             }
@@ -143,7 +143,7 @@ public class HouseSettingDialog extends AlertDialog{
 
         House_Cleaning01_Time_down_btn.setOnClickListener(v -> {
             int Time = Integer.parseInt((String) House_Cleaning01_Time_tv.getText());
-            if(Time >1){
+            if(Time >0){
                 House_Cleaning01_Time_tv.setText(String.valueOf(Time-1));
             }
         });

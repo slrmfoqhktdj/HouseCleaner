@@ -90,11 +90,11 @@ public class MainActivity extends AppCompatActivity{
 
     private int temp_humi_cnt = -1;
     
-    private final int Comp_Pump_Cleanner_time = 60;    // 컴프,콤프,청소 시간단위(초)
+    private final int Comp_Pump_Cleanner_time = 10;    // 컴프,콤프,청소 시간단위(초)
     
     private Boolean first_info = true; // 처음 시작될때 정보물어보기, 아닐경우 시작
 
-    private Boolean Pause_End = false; // 처음 시작될때 정보물어보기, 아닐경우 시작
+//    private Boolean Pause_End = false; // 처음 시작될때 정보물어보기, 아닐경우 시작
 
     private int TH_Step = 0;
 
@@ -137,8 +137,46 @@ public class MainActivity extends AppCompatActivity{
 
 //                        SerialPortManager.getInstance().sendBytes(data);
 
-                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Air_Pump_Start,null);
-
+                        // 다음시퀀스시간이 0일경우
+                        if(viewModel.getAirCompressor01and02_RunningTime().getValue()!=0){
+                            SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Air_Pump_Start,null);
+                        }else if(viewModel.getAirCompressor03and04_RunningTime().getValue()!=0){
+                            viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
+                            viewModel.getCleanning_Running_Situation_2().postValue(0);
+                            SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Air_Pump_Start,null);
+                        }else if(viewModel.getHouse01and02_Cleaning01_Time().getValue()!=0){
+                            viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
+                            viewModel.getCleanning_Running_Situation_2().postValue(1);
+                            if(viewModel.getHouse01and02_Cleaning01_Time().getValue()>2){
+                                // 콤프 펌프 둘다 0x01
+                                SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Start,null);
+                            }else{
+                                // 콤프만 0x01 펌프는 0x00
+                                SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Air_Start,null);
+                            }
+                        }else if(viewModel.getHouse03and04_Cleaning01_Time().getValue()!=0){
+                            viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
+                            viewModel.getCleanning_Running_Situation_2().postValue(1);
+                            if(viewModel.getHouse03and04_Cleaning01_Time().getValue()>2){
+                                // 콤프 펌프 둘다 0x01
+                                SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Start,null);
+                            }else{
+                                // 콤프만 0x01 펌프는 0x00
+                                SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Air_Start,null);
+                            }
+                        }else if(viewModel.getHouse01and02_Cleaning02_Time().getValue()!=0){
+                            viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
+                            viewModel.getCleanning_Running_Situation_2().postValue(2);
+                            CleannerType = true;
+                            SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner02_Start,null);
+                        }else if(viewModel.getHouse03and04_Cleaning02_Time().getValue()!=0){
+                            viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
+                            viewModel.getCleanning_Running_Situation_2().postValue(2);
+                            CleannerType = true;
+                            SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Start,null);
+                        }else{
+                            ToZeroPage();
+                        }
 
                         Logger.i("Running Start");
 //                        Logger.i("Start Cleanner Plan");
@@ -172,32 +210,33 @@ public class MainActivity extends AppCompatActivity{
                 case "End":
 
 //
-                    Pause_End = true;
+//                    Pause_End = true;
+//
+//                    DeviceModel s_1 = viewModel.getCleanning_Running_Situation_1().getValue();
+//                    int s_2 = viewModel.getCleanning_Running_Situation_2().getValue();
+//
+//                    Log.d(TAG,"End : "+ s_1 + ", "+ s_2);
+//
+//                    if(s_1.equals(DeviceModel.House_01_02) && s_2 == 0){
+//                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Air_Stop,null);
+//                    }else if(s_1.equals(DeviceModel.House_01_02) && s_2 == 1){
+//                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Air_Stop,null);
+//                    }else if(s_1.equals(DeviceModel.House_01_02) && s_2 == 2){
+//                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner02_Stop,null);
+//                    }else if(s_1.equals(DeviceModel.House_03_04) && s_2 == 0){
+//                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Air_Stop,null);
+//                    }else if(s_1.equals(DeviceModel.House_03_04) && s_2 == 1){
+//                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Air_Stop,null);
+//                    }else if(s_1.equals(DeviceModel.House_03_04) && s_2 == 2){
+//                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Stop,null);
+//                    }else{
+//                        Pause_End = false;
+//
+//                        ToZeroPage();
+//                    }
 
-                    DeviceModel s_1 = viewModel.getCleanning_Running_Situation_1().getValue();
-                    int s_2 = viewModel.getCleanning_Running_Situation_2().getValue();
 
-                    Log.d(TAG,"End : "+ s_1 + ", "+ s_2);
-
-                    if(s_1.equals(DeviceModel.House_01_02) && s_2 == 0){
-                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Air_Stop,null);
-                    }else if(s_1.equals(DeviceModel.House_01_02) && s_2 == 1){
-                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Air_Stop,null);
-                    }else if(s_1.equals(DeviceModel.House_01_02) && s_2 == 2){
-                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner02_Stop,null);
-                    }else if(s_1.equals(DeviceModel.House_03_04) && s_2 == 0){
-                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Air_Stop,null);
-                    }else if(s_1.equals(DeviceModel.House_03_04) && s_2 == 1){
-                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Air_Stop,null);
-                    }else if(s_1.equals(DeviceModel.House_03_04) && s_2 == 2){
-                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Stop,null);
-                    }else{
-                        Pause_End = false;
-
-                        Intent intent2 = new Intent("Page");
-                        intent2.putExtra("index",0);
-                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
-                    }
+                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_All_Stop,null);
 
                     break;
             }
@@ -431,12 +470,12 @@ public class MainActivity extends AppCompatActivity{
         viewModel.getHouse04_Nozzle_Auto().observe(this,House04_NozzleAuto_sw_ob);
 
         Main_TH_Setting.setOnClickListener(v -> {
-            THSettingDialog thSettingDialog = new THSettingDialog(this,KeyControl.getTH_Auto_Min(),KeyControl.getTH_Auto_Max());
-            thSettingDialog.setTHSettingDialogListener((TH_Min,TH_Max) -> {
-                KeyControl.setTH_Auto_Min(TH_Min);
-                KeyControl.setTH_Auto_Max(TH_Max);
+            THSettingDialog thSettingDialog = new THSettingDialog(this,KeyControl.getDeviation(),KeyControl.getTh_main());
+            thSettingDialog.setTHSettingDialogListener((Deviation,Th_main) -> {
+                KeyControl.setDeviation(Deviation);
+                KeyControl.setTh_main(Th_main);
 
-                Logger.i("Auto Nozzle Setting Changed : TH_Min = "+KeyControl.getTH_Auto_Min()+", TH_Max = "+KeyControl.getTH_Auto_Max());
+                Logger.i("Auto Nozzle Setting Changed : Deviation = "+KeyControl.getDeviation()+", TH_Max = "+KeyControl.getTh_main());
             });
             thSettingDialog.show();
         });
@@ -549,27 +588,51 @@ public class MainActivity extends AppCompatActivity{
 
 
         House01_NozzleAuto.setOnClickListener(v -> {
-            HouseNozzleDialog houseNozzleDialog = new HouseNozzleDialog(this,DeviceModel.House_01, Boolean.TRUE.equals(viewModel.getHouse01_Nozzle_Auto().getValue()),KeyControl.getHouse01_Nozzle01(),KeyControl.getHouse01_Nozzle02(),KeyControl.getHouse01_Nozzle03(),KeyControl.getHouse01_Nozzle04());
-            houseNozzleDialog.setHouseNozzleDialogListener((auto,Nozzle_01,Nozzle_02,Nozzle_03,Nozzle_04) -> {
+            HouseNozzleDialog houseNozzleDialog = new HouseNozzleDialog(this,DeviceModel.House_01, Boolean.TRUE.equals(viewModel.getHouse01_Nozzle_Auto().getValue()),KeyControl.getHouse01_Nozzle01(),KeyControl.getHouse01_Nozzle02(),KeyControl.getHouse01_Nozzle03(),KeyControl.getHouse01_Nozzle04(),KeyControl.getHouse01_Nozzle05(),KeyControl.getHouse01_Nozzle06());
+            houseNozzleDialog.setHouseNozzleDialogListener((auto,Nozzle_01,Nozzle_02,Nozzle_03,Nozzle_04,Nozzle_05,Nozzle_06) -> {
 
-                if(!KeyControl.getHouse01_Nozzle01().equals(Nozzle_01)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_1, (byte) Nozzle_01);
-                    KeyControl.setHouse01_Nozzle01(Nozzle_01);
-                }
 
-                if(!KeyControl.getHouse01_Nozzle02().equals(Nozzle_02)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_2, (byte) Nozzle_02);
-                    KeyControl.setHouse01_Nozzle02(Nozzle_02);
-                }
+                if(!auto) {
 
-                if(!KeyControl.getHouse01_Nozzle03().equals(Nozzle_03)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_3, (byte) Nozzle_03);
-                    KeyControl.setHouse01_Nozzle03(Nozzle_03);
-                }
+                    if (!KeyControl.getHouse01_Nozzle01().equals(Nozzle_01)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_1, (byte) Nozzle_01);
+                        KeyControl.setHouse01_Nozzle01(Nozzle_01);
+                    }
 
-                if(!KeyControl.getHouse01_Nozzle04().equals(Nozzle_04)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_4, (byte) Nozzle_04);
-                    KeyControl.setHouse01_Nozzle04(Nozzle_04);
+                    if (!KeyControl.getHouse01_Nozzle02().equals(Nozzle_02)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_2, (byte) Nozzle_02);
+                        KeyControl.setHouse01_Nozzle02(Nozzle_02);
+                    }
+
+                    if (!KeyControl.getHouse01_Nozzle03().equals(Nozzle_03)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_3, (byte) Nozzle_03);
+                        KeyControl.setHouse01_Nozzle03(Nozzle_03);
+                    }
+
+                    if (!KeyControl.getHouse01_Nozzle04().equals(Nozzle_04)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_4, (byte) Nozzle_04);
+                        KeyControl.setHouse01_Nozzle04(Nozzle_04);
+                    }
+
+                    if (!KeyControl.getHouse01_Nozzle05().equals(Nozzle_05)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_5, (byte) Nozzle_05);
+                        KeyControl.setHouse01_Nozzle05(Nozzle_05);
+                    }
+
+                    if (!KeyControl.getHouse01_Nozzle06().equals(Nozzle_06)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_6, (byte) Nozzle_06);
+                        KeyControl.setHouse01_Nozzle06(Nozzle_06);
+                    }
+                }else{
+                    int Deviation = KeyControl.getDeviation();
+                    int Th_main = KeyControl.getTh_main();
+
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse01_Temp1_1().getValue(),SerialModel.House_01_Nozzle_1);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse01_Temp2_1().getValue(),SerialModel.House_01_Nozzle_2);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse01_Temp3_1().getValue(),SerialModel.House_01_Nozzle_3);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse01_Temp4_1().getValue(),SerialModel.House_01_Nozzle_4);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse01_Temp5_1().getValue(),SerialModel.House_01_Nozzle_5);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse01_Temp6_1().getValue(),SerialModel.House_01_Nozzle_6);
                 }
 
                 viewModel.setHouse01_Nozzle_Auto(auto);
@@ -579,30 +642,51 @@ public class MainActivity extends AppCompatActivity{
         });
 
         House02_NozzleAuto.setOnClickListener(v -> {
-            HouseNozzleDialog houseNozzleDialog = new HouseNozzleDialog(this,DeviceModel.House_02, Boolean.TRUE.equals(viewModel.getHouse02_Nozzle_Auto().getValue()),KeyControl.getHouse02_Nozzle01(),KeyControl.getHouse02_Nozzle02(),KeyControl.getHouse02_Nozzle03(),KeyControl.getHouse02_Nozzle04());
-            houseNozzleDialog.setHouseNozzleDialogListener((auto,Nozzle_01,Nozzle_02,Nozzle_03,Nozzle_04) -> {
+            HouseNozzleDialog houseNozzleDialog = new HouseNozzleDialog(this,DeviceModel.House_02, Boolean.TRUE.equals(viewModel.getHouse02_Nozzle_Auto().getValue()),KeyControl.getHouse02_Nozzle01(),KeyControl.getHouse02_Nozzle02(),KeyControl.getHouse02_Nozzle03(),KeyControl.getHouse02_Nozzle04(),KeyControl.getHouse02_Nozzle05(),KeyControl.getHouse02_Nozzle06());
+            houseNozzleDialog.setHouseNozzleDialogListener((auto,Nozzle_01,Nozzle_02,Nozzle_03,Nozzle_04,Nozzle_05,Nozzle_06) -> {
 
-                if(!KeyControl.getHouse02_Nozzle01().equals(Nozzle_01)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_1, (byte) Nozzle_01);
-                    KeyControl.setHouse02_Nozzle01(Nozzle_01);
+                if(!auto) {
+
+                    if (!KeyControl.getHouse02_Nozzle01().equals(Nozzle_01)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_1, (byte) Nozzle_01);
+                        KeyControl.setHouse02_Nozzle01(Nozzle_01);
+                    }
+
+                    if (!KeyControl.getHouse02_Nozzle02().equals(Nozzle_02)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_2, (byte) Nozzle_02);
+                        KeyControl.setHouse02_Nozzle02(Nozzle_02);
+                    }
+
+                    if (!KeyControl.getHouse02_Nozzle03().equals(Nozzle_03)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_3, (byte) Nozzle_03);
+                        KeyControl.setHouse02_Nozzle03(Nozzle_03);
+                    }
+
+                    if (!KeyControl.getHouse02_Nozzle04().equals(Nozzle_04)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_4, (byte) Nozzle_04);
+                        KeyControl.setHouse02_Nozzle04(Nozzle_04);
+                    }
+
+                    if (!KeyControl.getHouse02_Nozzle05().equals(Nozzle_05)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_5, (byte) Nozzle_05);
+                        KeyControl.setHouse02_Nozzle05(Nozzle_05);
+                    }
+
+                    if (!KeyControl.getHouse02_Nozzle06().equals(Nozzle_06)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_6, (byte) Nozzle_06);
+                        KeyControl.setHouse02_Nozzle06(Nozzle_06);
+                    }
+                }else{
+                    int Deviation = KeyControl.getDeviation();
+                    int Th_main = KeyControl.getTh_main();
+
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse02_Temp1_1().getValue(),SerialModel.House_02_Nozzle_1);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse02_Temp2_1().getValue(),SerialModel.House_02_Nozzle_2);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse02_Temp3_1().getValue(),SerialModel.House_02_Nozzle_3);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse02_Temp4_1().getValue(),SerialModel.House_02_Nozzle_4);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse02_Temp5_1().getValue(),SerialModel.House_02_Nozzle_5);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse02_Temp6_1().getValue(),SerialModel.House_02_Nozzle_6);
                 }
-
-                if(!KeyControl.getHouse02_Nozzle02().equals(Nozzle_02)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_2, (byte) Nozzle_02);
-                    KeyControl.setHouse02_Nozzle02(Nozzle_02);
-                }
-
-                if(!KeyControl.getHouse02_Nozzle03().equals(Nozzle_03)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_3, (byte) Nozzle_03);
-                    KeyControl.setHouse02_Nozzle03(Nozzle_03);
-                }
-
-                if(!KeyControl.getHouse02_Nozzle04().equals(Nozzle_04)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_4, (byte) Nozzle_04);
-                    KeyControl.setHouse02_Nozzle04(Nozzle_04);
-                }
-
-
 
                 viewModel.setHouse02_Nozzle_Auto(auto);
 
@@ -612,27 +696,50 @@ public class MainActivity extends AppCompatActivity{
         });
 
         House03_NozzleAuto.setOnClickListener(v -> {
-            HouseNozzleDialog houseNozzleDialog = new HouseNozzleDialog(this,DeviceModel.House_03, Boolean.TRUE.equals(viewModel.getHouse03_Nozzle_Auto().getValue()),KeyControl.getHouse03_Nozzle01(),KeyControl.getHouse03_Nozzle02(),KeyControl.getHouse03_Nozzle03(),KeyControl.getHouse03_Nozzle04());
-            houseNozzleDialog.setHouseNozzleDialogListener((auto,Nozzle_01,Nozzle_02,Nozzle_03,Nozzle_04) -> {
+            HouseNozzleDialog houseNozzleDialog = new HouseNozzleDialog(this,DeviceModel.House_03, Boolean.TRUE.equals(viewModel.getHouse03_Nozzle_Auto().getValue()),KeyControl.getHouse03_Nozzle01(),KeyControl.getHouse03_Nozzle02(),KeyControl.getHouse03_Nozzle03(),KeyControl.getHouse03_Nozzle04(),KeyControl.getHouse03_Nozzle05(),KeyControl.getHouse03_Nozzle06());
+            houseNozzleDialog.setHouseNozzleDialogListener((auto,Nozzle_01,Nozzle_02,Nozzle_03,Nozzle_04,Nozzle_05,Nozzle_06) -> {
 
-                if(!KeyControl.getHouse03_Nozzle01().equals(Nozzle_01)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_1, (byte) Nozzle_01);
-                    KeyControl.setHouse03_Nozzle01(Nozzle_01);
-                }
+                if(!auto) {
 
-                if(!KeyControl.getHouse03_Nozzle02().equals(Nozzle_02)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_2, (byte) Nozzle_02);
-                    KeyControl.setHouse03_Nozzle02(Nozzle_02);
-                }
+                    if (!KeyControl.getHouse03_Nozzle01().equals(Nozzle_01)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_1, (byte) Nozzle_01);
+                        KeyControl.setHouse03_Nozzle01(Nozzle_01);
+                    }
 
-                if(!KeyControl.getHouse03_Nozzle03().equals(Nozzle_03)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_3, (byte) Nozzle_03);
-                    KeyControl.setHouse03_Nozzle03(Nozzle_03);
-                }
+                    if (!KeyControl.getHouse03_Nozzle02().equals(Nozzle_02)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_2, (byte) Nozzle_02);
+                        KeyControl.setHouse03_Nozzle02(Nozzle_02);
+                    }
 
-                if(!KeyControl.getHouse03_Nozzle04().equals(Nozzle_04)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_4, (byte) Nozzle_04);
-                    KeyControl.setHouse03_Nozzle04(Nozzle_04);
+                    if (!KeyControl.getHouse03_Nozzle03().equals(Nozzle_03)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_3, (byte) Nozzle_03);
+                        KeyControl.setHouse03_Nozzle03(Nozzle_03);
+                    }
+
+                    if (!KeyControl.getHouse03_Nozzle04().equals(Nozzle_04)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_4, (byte) Nozzle_04);
+                        KeyControl.setHouse03_Nozzle04(Nozzle_04);
+                    }
+
+                    if (!KeyControl.getHouse03_Nozzle05().equals(Nozzle_05)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_5, (byte) Nozzle_05);
+                        KeyControl.setHouse03_Nozzle05(Nozzle_05);
+                    }
+
+                    if (!KeyControl.getHouse03_Nozzle06().equals(Nozzle_06)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_6, (byte) Nozzle_06);
+                        KeyControl.setHouse03_Nozzle06(Nozzle_06);
+                    }
+                }else{
+                    int Deviation = KeyControl.getDeviation();
+                    int Th_main = KeyControl.getTh_main();
+
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse03_Temp1_1().getValue(),SerialModel.House_03_Nozzle_1);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse03_Temp2_1().getValue(),SerialModel.House_03_Nozzle_2);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse03_Temp3_1().getValue(),SerialModel.House_03_Nozzle_3);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse03_Temp4_1().getValue(),SerialModel.House_03_Nozzle_4);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse03_Temp5_1().getValue(),SerialModel.House_03_Nozzle_5);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse03_Temp6_1().getValue(),SerialModel.House_03_Nozzle_6);
                 }
 
                 viewModel.setHouse03_Nozzle_Auto(auto);
@@ -642,27 +749,50 @@ public class MainActivity extends AppCompatActivity{
         });
 
         House04_NozzleAuto.setOnClickListener(v -> {
-            HouseNozzleDialog houseNozzleDialog = new HouseNozzleDialog(this,DeviceModel.House_04, Boolean.TRUE.equals(viewModel.getHouse04_Nozzle_Auto().getValue()),KeyControl.getHouse04_Nozzle01(),KeyControl.getHouse04_Nozzle02(),KeyControl.getHouse04_Nozzle03(),KeyControl.getHouse04_Nozzle04());
-            houseNozzleDialog.setHouseNozzleDialogListener((auto,Nozzle_01,Nozzle_02,Nozzle_03,Nozzle_04) -> {
+            HouseNozzleDialog houseNozzleDialog = new HouseNozzleDialog(this,DeviceModel.House_04, Boolean.TRUE.equals(viewModel.getHouse04_Nozzle_Auto().getValue()),KeyControl.getHouse04_Nozzle01(),KeyControl.getHouse04_Nozzle02(),KeyControl.getHouse04_Nozzle03(),KeyControl.getHouse04_Nozzle04(),KeyControl.getHouse04_Nozzle05(),KeyControl.getHouse04_Nozzle06());
+            houseNozzleDialog.setHouseNozzleDialogListener((auto,Nozzle_01,Nozzle_02,Nozzle_03,Nozzle_04,Nozzle_05,Nozzle_06) -> {
 
-                if(!KeyControl.getHouse04_Nozzle01().equals(Nozzle_01)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_1, (byte) Nozzle_01);
-                    KeyControl.setHouse04_Nozzle01(Nozzle_01);
-                }
+                if(!auto) {
+                    if (!KeyControl.getHouse04_Nozzle01().equals(Nozzle_01)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_1, (byte) Nozzle_01);
+                        KeyControl.setHouse04_Nozzle01(Nozzle_01);
+                    }
 
-                if(!KeyControl.getHouse04_Nozzle02().equals(Nozzle_02)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_2, (byte) Nozzle_02);
-                    KeyControl.setHouse04_Nozzle02(Nozzle_02);
-                }
+                    if (!KeyControl.getHouse04_Nozzle02().equals(Nozzle_02)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_2, (byte) Nozzle_02);
+                        KeyControl.setHouse04_Nozzle02(Nozzle_02);
+                    }
 
-                if(!KeyControl.getHouse04_Nozzle03().equals(Nozzle_03)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_3, (byte) Nozzle_03);
-                    KeyControl.setHouse04_Nozzle03(Nozzle_03);
-                }
+                    if (!KeyControl.getHouse04_Nozzle03().equals(Nozzle_03)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_3, (byte) Nozzle_03);
+                        KeyControl.setHouse04_Nozzle03(Nozzle_03);
+                    }
 
-                if(!KeyControl.getHouse04_Nozzle04().equals(Nozzle_04)){
-                    SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_4, (byte) Nozzle_04);
-                    KeyControl.setHouse04_Nozzle04(Nozzle_04);
+                    if (!KeyControl.getHouse04_Nozzle04().equals(Nozzle_04)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_4, (byte) Nozzle_04);
+                        KeyControl.setHouse04_Nozzle04(Nozzle_04);
+                    }
+
+                    if (!KeyControl.getHouse04_Nozzle05().equals(Nozzle_05)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_5, (byte) Nozzle_05);
+                        KeyControl.setHouse04_Nozzle05(Nozzle_05);
+                    }
+
+                    if (!KeyControl.getHouse04_Nozzle06().equals(Nozzle_06)) {
+                        SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_6, (byte) Nozzle_06);
+                        KeyControl.setHouse04_Nozzle06(Nozzle_06);
+                    }
+
+                }else{
+                    int Deviation = KeyControl.getDeviation();
+                    int Th_main = KeyControl.getTh_main();
+
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse04_Temp1_1().getValue(),SerialModel.House_04_Nozzle_1);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse04_Temp2_1().getValue(),SerialModel.House_04_Nozzle_2);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse04_Temp3_1().getValue(),SerialModel.House_04_Nozzle_3);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse04_Temp4_1().getValue(),SerialModel.House_04_Nozzle_4);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse04_Temp5_1().getValue(),SerialModel.House_04_Nozzle_5);
+                    TH_Set_Command(Th_main,Deviation,viewModel.getHouse04_Temp6_1().getValue(),SerialModel.House_04_Nozzle_6);
                 }
 
                 viewModel.setHouse04_Nozzle_Auto(auto);
@@ -672,27 +802,45 @@ public class MainActivity extends AppCompatActivity{
 
 
 
+//        House01_TH.setOnClickListener(v->{
+//            HouseTHDialog houseTHDialog = new HouseTHDialog(this,DeviceModel.House_01,viewModel.getHouse01_Temp1_1().getValue(),viewModel.getHouse01_Temp1_2().getValue(),viewModel.getHouse01_Temp2_1().getValue(),viewModel.getHouse01_Temp2_2().getValue(),viewModel.getHouse01_Temp3_1().getValue(),viewModel.getHouse01_Temp3_2().getValue(),viewModel.getHouse01_Temp4_1().getValue(),viewModel.getHouse01_Temp4_2().getValue(),viewModel.getHouse01_Humi1_1().getValue(),viewModel.getHouse01_Humi1_2().getValue(),viewModel.getHouse01_Humi2_1().getValue(),viewModel.getHouse01_Humi2_2().getValue(),viewModel.getHouse01_Humi3_1().getValue(),viewModel.getHouse01_Humi3_2().getValue(),viewModel.getHouse01_Humi4_1().getValue(),viewModel.getHouse01_Humi4_2().getValue());
+//            houseTHDialog.show();
+//        });
+//
+//        House02_TH.setOnClickListener(v->{
+//            HouseTHDialog houseTHDialog = new HouseTHDialog(this,DeviceModel.House_02,viewModel.getHouse02_Temp1_1().getValue(),viewModel.getHouse02_Temp1_2().getValue(),viewModel.getHouse02_Temp2_1().getValue(),viewModel.getHouse02_Temp2_2().getValue(),viewModel.getHouse02_Temp3_1().getValue(),viewModel.getHouse02_Temp3_2().getValue(),viewModel.getHouse02_Temp4_1().getValue(),viewModel.getHouse02_Temp4_2().getValue(),viewModel.getHouse02_Humi1_1().getValue(),viewModel.getHouse02_Humi1_2().getValue(),viewModel.getHouse02_Humi2_1().getValue(),viewModel.getHouse02_Humi2_2().getValue(),viewModel.getHouse02_Humi3_1().getValue(),viewModel.getHouse02_Humi3_2().getValue(),viewModel.getHouse02_Humi4_1().getValue(),viewModel.getHouse02_Humi4_2().getValue());
+//            houseTHDialog.show();
+//        });
+//
+//        House03_TH.setOnClickListener(v->{
+//            HouseTHDialog houseTHDialog = new HouseTHDialog(this,DeviceModel.House_03,viewModel.getHouse03_Temp1_1().getValue(),viewModel.getHouse03_Temp1_2().getValue(),viewModel.getHouse03_Temp2_1().getValue(),viewModel.getHouse03_Temp2_2().getValue(),viewModel.getHouse03_Temp3_1().getValue(),viewModel.getHouse03_Temp3_2().getValue(),viewModel.getHouse03_Temp4_1().getValue(),viewModel.getHouse03_Temp4_2().getValue(),viewModel.getHouse03_Humi1_1().getValue(),viewModel.getHouse03_Humi1_2().getValue(),viewModel.getHouse03_Humi2_1().getValue(),viewModel.getHouse03_Humi2_2().getValue(),viewModel.getHouse03_Humi3_1().getValue(),viewModel.getHouse03_Humi3_2().getValue(),viewModel.getHouse03_Humi4_1().getValue(),viewModel.getHouse03_Humi4_2().getValue());
+//            houseTHDialog.show();
+//        });
+//
+//        House04_TH.setOnClickListener(v->{
+//            HouseTHDialog houseTHDialog = new HouseTHDialog(this,DeviceModel.House_04,viewModel.getHouse04_Temp1_1().getValue(),viewModel.getHouse04_Temp1_2().getValue(),viewModel.getHouse04_Temp2_1().getValue(),viewModel.getHouse04_Temp2_2().getValue(),viewModel.getHouse04_Temp3_1().getValue(),viewModel.getHouse04_Temp3_2().getValue(),viewModel.getHouse04_Temp4_1().getValue(),viewModel.getHouse04_Temp4_2().getValue(),viewModel.getHouse04_Humi1_1().getValue(),viewModel.getHouse04_Humi1_2().getValue(),viewModel.getHouse04_Humi2_1().getValue(),viewModel.getHouse04_Humi2_2().getValue(),viewModel.getHouse04_Humi3_1().getValue(),viewModel.getHouse04_Humi3_2().getValue(),viewModel.getHouse04_Humi4_1().getValue(),viewModel.getHouse04_Humi4_2().getValue());
+//            houseTHDialog.show();
+//        });
 
         House01_TH.setOnClickListener(v->{
-            HouseTHDialog houseTHDialog = new HouseTHDialog(this,DeviceModel.House_01,viewModel.getHouse01_Temp1_1().getValue(),viewModel.getHouse01_Temp1_2().getValue(),viewModel.getHouse01_Temp2_1().getValue(),viewModel.getHouse01_Temp2_2().getValue(),viewModel.getHouse01_Temp3_1().getValue(),viewModel.getHouse01_Temp3_2().getValue(),viewModel.getHouse01_Temp4_1().getValue(),viewModel.getHouse01_Temp4_2().getValue(),viewModel.getHouse01_Humi1_1().getValue(),viewModel.getHouse01_Humi1_2().getValue(),viewModel.getHouse01_Humi2_1().getValue(),viewModel.getHouse01_Humi2_2().getValue(),viewModel.getHouse01_Humi3_1().getValue(),viewModel.getHouse01_Humi3_2().getValue(),viewModel.getHouse01_Humi4_1().getValue(),viewModel.getHouse01_Humi4_2().getValue());
+            HouseTHDialog houseTHDialog = new HouseTHDialog(this,DeviceModel.House_01,viewModel.getHouse01_Temp1_1().getValue(),viewModel.getHouse01_Temp2_1().getValue(),viewModel.getHouse01_Temp3_1().getValue(),viewModel.getHouse01_Temp4_1().getValue(),viewModel.getHouse01_Temp5_1().getValue(),viewModel.getHouse01_Temp6_1().getValue(),viewModel.getHouse01_Humi1_1().getValue(),viewModel.getHouse01_Humi2_1().getValue(),viewModel.getHouse01_Humi3_1().getValue(),viewModel.getHouse01_Humi4_1().getValue(),viewModel.getHouse01_Humi5_1().getValue(),viewModel.getHouse01_Humi6_1().getValue());
             houseTHDialog.show();
         });
 
         House02_TH.setOnClickListener(v->{
-            HouseTHDialog houseTHDialog = new HouseTHDialog(this,DeviceModel.House_02,viewModel.getHouse02_Temp1_1().getValue(),viewModel.getHouse02_Temp1_2().getValue(),viewModel.getHouse02_Temp2_1().getValue(),viewModel.getHouse02_Temp2_2().getValue(),viewModel.getHouse02_Temp3_1().getValue(),viewModel.getHouse02_Temp3_2().getValue(),viewModel.getHouse02_Temp4_1().getValue(),viewModel.getHouse02_Temp4_2().getValue(),viewModel.getHouse02_Humi1_1().getValue(),viewModel.getHouse02_Humi1_2().getValue(),viewModel.getHouse02_Humi2_1().getValue(),viewModel.getHouse02_Humi2_2().getValue(),viewModel.getHouse02_Humi3_1().getValue(),viewModel.getHouse02_Humi3_2().getValue(),viewModel.getHouse02_Humi4_1().getValue(),viewModel.getHouse02_Humi4_2().getValue());
+            HouseTHDialog houseTHDialog = new HouseTHDialog(this,DeviceModel.House_02,viewModel.getHouse02_Temp1_1().getValue(),viewModel.getHouse02_Temp2_1().getValue(),viewModel.getHouse02_Temp3_1().getValue(),viewModel.getHouse02_Temp4_1().getValue(),viewModel.getHouse02_Temp5_1().getValue(),viewModel.getHouse02_Temp6_1().getValue(),viewModel.getHouse02_Humi1_1().getValue(),viewModel.getHouse02_Humi2_1().getValue(),viewModel.getHouse02_Humi3_1().getValue(),viewModel.getHouse02_Humi4_1().getValue(),viewModel.getHouse02_Humi5_1().getValue(),viewModel.getHouse02_Humi6_1().getValue());
             houseTHDialog.show();
         });
 
         House03_TH.setOnClickListener(v->{
-            HouseTHDialog houseTHDialog = new HouseTHDialog(this,DeviceModel.House_03,viewModel.getHouse03_Temp1_1().getValue(),viewModel.getHouse03_Temp1_2().getValue(),viewModel.getHouse03_Temp2_1().getValue(),viewModel.getHouse03_Temp2_2().getValue(),viewModel.getHouse03_Temp3_1().getValue(),viewModel.getHouse03_Temp3_2().getValue(),viewModel.getHouse03_Temp4_1().getValue(),viewModel.getHouse03_Temp4_2().getValue(),viewModel.getHouse03_Humi1_1().getValue(),viewModel.getHouse03_Humi1_2().getValue(),viewModel.getHouse03_Humi2_1().getValue(),viewModel.getHouse03_Humi2_2().getValue(),viewModel.getHouse03_Humi3_1().getValue(),viewModel.getHouse03_Humi3_2().getValue(),viewModel.getHouse03_Humi4_1().getValue(),viewModel.getHouse03_Humi4_2().getValue());
+            HouseTHDialog houseTHDialog = new HouseTHDialog(this,DeviceModel.House_03,viewModel.getHouse03_Temp1_1().getValue(),viewModel.getHouse03_Temp2_1().getValue(),viewModel.getHouse03_Temp3_1().getValue(),viewModel.getHouse03_Temp4_1().getValue(),viewModel.getHouse03_Temp5_1().getValue(),viewModel.getHouse03_Temp6_1().getValue(),viewModel.getHouse03_Humi1_1().getValue(),viewModel.getHouse03_Humi2_1().getValue(),viewModel.getHouse03_Humi3_1().getValue(),viewModel.getHouse03_Humi4_1().getValue(),viewModel.getHouse03_Humi5_1().getValue(),viewModel.getHouse03_Humi6_1().getValue());
             houseTHDialog.show();
         });
 
         House04_TH.setOnClickListener(v->{
-            HouseTHDialog houseTHDialog = new HouseTHDialog(this,DeviceModel.House_04,viewModel.getHouse04_Temp1_1().getValue(),viewModel.getHouse04_Temp1_2().getValue(),viewModel.getHouse04_Temp2_1().getValue(),viewModel.getHouse04_Temp2_2().getValue(),viewModel.getHouse04_Temp3_1().getValue(),viewModel.getHouse04_Temp3_2().getValue(),viewModel.getHouse04_Temp4_1().getValue(),viewModel.getHouse04_Temp4_2().getValue(),viewModel.getHouse04_Humi1_1().getValue(),viewModel.getHouse04_Humi1_2().getValue(),viewModel.getHouse04_Humi2_1().getValue(),viewModel.getHouse04_Humi2_2().getValue(),viewModel.getHouse04_Humi3_1().getValue(),viewModel.getHouse04_Humi3_2().getValue(),viewModel.getHouse04_Humi4_1().getValue(),viewModel.getHouse04_Humi4_2().getValue());
+            HouseTHDialog houseTHDialog = new HouseTHDialog(this,DeviceModel.House_04,viewModel.getHouse04_Temp1_1().getValue(),viewModel.getHouse04_Temp2_1().getValue(),viewModel.getHouse04_Temp3_1().getValue(),viewModel.getHouse04_Temp4_1().getValue(),viewModel.getHouse04_Temp5_1().getValue(),viewModel.getHouse04_Temp6_1().getValue(),viewModel.getHouse04_Humi1_1().getValue(),viewModel.getHouse04_Humi2_1().getValue(),viewModel.getHouse04_Humi3_1().getValue(),viewModel.getHouse04_Humi4_1().getValue(),viewModel.getHouse04_Humi5_1().getValue(),viewModel.getHouse04_Humi6_1().getValue());
             houseTHDialog.show();
         });
-
 
 
 
@@ -719,336 +867,254 @@ public class MainActivity extends AppCompatActivity{
 
 
                 try{
-                    if (bytes[1]==SerialModel.InfoReceive){  //정보응답
+                    if (bytes[1]==SerialModel.InfoReceive_1){  //정보응답
 
-                        Log.d(TAG, "종류：" + SerialModel.InfoReceive);
+                        Log.d(TAG, "종류：" + SerialModel.InfoReceive_1);
 
                         
                         Stop_Command_time();
                         
                         try {
-                            byte[] data = new byte[]{bytes[3],bytes[4],bytes[5],bytes[6],bytes[7],bytes[8],bytes[9],bytes[10],bytes[11],bytes[12],bytes[13],bytes[14],bytes[15],bytes[16],bytes[17],bytes[18],bytes[19]};
-                            byte[] crc = new byte[]{bytes[20],bytes[21]};
+                            byte[] data = new byte[]{bytes[3],bytes[4],bytes[5],bytes[6],bytes[7],bytes[8],bytes[9],bytes[10],bytes[11],bytes[12],bytes[13],bytes[14],bytes[15]};
+                            byte[] crc = new byte[]{bytes[16],bytes[17]};
 
                             if(CRC16Util.receiveData(data,crc)){
+
                                 KeyControl.setHouse01_Nozzle01(0xff & bytes[3]);
                                 KeyControl.setHouse01_Nozzle02(0xff & bytes[4]);
                                 KeyControl.setHouse01_Nozzle03(0xff & bytes[5]);
                                 KeyControl.setHouse01_Nozzle04(0xff & bytes[6]);
+                                KeyControl.setHouse01_Nozzle05(0xff & bytes[7]);
+                                KeyControl.setHouse01_Nozzle06(0xff & bytes[8]);
 
-                                KeyControl.setHouse02_Nozzle01(0xff & bytes[7]);
-                                KeyControl.setHouse02_Nozzle02(0xff & bytes[8]);
-                                KeyControl.setHouse02_Nozzle03(0xff & bytes[9]);
-                                KeyControl.setHouse02_Nozzle04(0xff & bytes[10]);
-
-                                KeyControl.setHouse03_Nozzle01(0xff & bytes[11]);
-                                KeyControl.setHouse03_Nozzle02(0xff & bytes[12]);
-                                KeyControl.setHouse03_Nozzle03(0xff & bytes[13]);
-                                KeyControl.setHouse03_Nozzle04(0xff & bytes[14]);
-
-                                KeyControl.setHouse04_Nozzle01(0xff & bytes[15]);
-                                KeyControl.setHouse04_Nozzle02(0xff & bytes[16]);
-                                KeyControl.setHouse04_Nozzle03(0xff & bytes[17]);
-                                KeyControl.setHouse04_Nozzle04(0xff & bytes[18]);
-
-                                viewModel.getWater_Shortage().postValue(bytes[19] != 0x00);
-
-                                if(first_info){         // 처음 기기를 시작할때
-                                    first_info = false;
-                                }else{                  // 시작 버튼을 누를때
-                                    if(bytes[19] != 0x00){      // 물이 부족할때
-                                        AlarmDialogShow("물부족","물이 부족합니다. 적정량의 물이 존재하는지 확인해주세요.");
-                                        Logger.i("Warnning : Water Shartage");
-                                        Intent intent = new Intent("Page");
-                                        intent.putExtra("index",0);
-                                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
-                                    }else{
-                                        mViewPager.setCurrentItem(1);
-                                    }
-                                }
+                                KeyControl.setHouse02_Nozzle01(0xff & bytes[9]);
+                                KeyControl.setHouse02_Nozzle02(0xff & bytes[10]);
+                                KeyControl.setHouse02_Nozzle03(0xff & bytes[11]);
+                                KeyControl.setHouse02_Nozzle04(0xff & bytes[12]);
+                                KeyControl.setHouse02_Nozzle03(0xff & bytes[13]);
+                                KeyControl.setHouse02_Nozzle04(0xff & bytes[14]);
                             }
                         }catch (Exception e){
                             e.printStackTrace();
                         }
 
-                    }else if(bytes[1]==SerialModel.THReceive){  //온습도응답
+                    }else if (bytes[1]==SerialModel.InfoReceive_2){  //정보응답
+
+                        Log.d(TAG, "종류：" + SerialModel.InfoReceive_2);
+
+
+                        Stop_Command_time();
+
+                        try {
+                            byte[] data = new byte[]{bytes[3],bytes[4],bytes[5],bytes[6],bytes[7],bytes[8],bytes[9],bytes[10],bytes[11],bytes[12],bytes[13],bytes[14],bytes[15]};
+                            byte[] crc = new byte[]{bytes[16],bytes[17]};
+
+                            if(CRC16Util.receiveData(data,crc)){
+                                KeyControl.setHouse03_Nozzle01(0xff & bytes[3]);
+                                KeyControl.setHouse03_Nozzle02(0xff & bytes[4]);
+                                KeyControl.setHouse03_Nozzle03(0xff & bytes[5]);
+                                KeyControl.setHouse03_Nozzle04(0xff & bytes[6]);
+                                KeyControl.setHouse03_Nozzle05(0xff & bytes[7]);
+                                KeyControl.setHouse03_Nozzle06(0xff & bytes[8]);
+
+                                KeyControl.setHouse04_Nozzle01(0xff & bytes[9]);
+                                KeyControl.setHouse04_Nozzle02(0xff & bytes[10]);
+                                KeyControl.setHouse04_Nozzle03(0xff & bytes[11]);
+                                KeyControl.setHouse04_Nozzle04(0xff & bytes[12]);
+                                KeyControl.setHouse04_Nozzle03(0xff & bytes[13]);
+                                KeyControl.setHouse04_Nozzle04(0xff & bytes[14]);
+
+                                viewModel.getWater_Shortage().postValue(bytes[15] != 0x00);
+
+                                if(first_info){         // 처음 기기를 시작할때
+                                    first_info = false;
+                                }else{
+                                    // 시작 버튼을 누를때
+                                    if(bytes[15] != 0x00){      // 물이 부족할때
+                                        AlarmDialogShow("물부족","물이 부족합니다. 적정량의 물이 존재하는지 확인해주세요.");
+                                        Logger.i("Warnning : Water Shartage");
+                                        ToZeroPage();
+                                    }else{
+                                        mViewPager.setCurrentItem(1);
+                                    }
+                                }
+
+
+
+
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                    } else if(bytes[1]==SerialModel.THReceive){  //온습도응답
                         try {
                             Log.d(TAG, "종류：" + "SerialModel.THReceive");
 
-                            byte[] data = new byte[]{bytes[3],bytes[4],bytes[5],bytes[6],bytes[7],bytes[8],bytes[9],bytes[10],bytes[11],bytes[12],bytes[13],bytes[14],bytes[15],bytes[16],bytes[17],bytes[18]};
-                            byte[] crc = new byte[]{bytes[19],bytes[20]};
+                            byte[] data = new byte[]{bytes[3],bytes[4],bytes[5],bytes[6],bytes[7],bytes[8],bytes[9],bytes[10],bytes[11],bytes[12],bytes[13],bytes[14]};
+                            byte[] crc = new byte[]{bytes[15],bytes[16]};
 
                             if(CRC16Util.receiveData(data,crc)){
 
-                                int th_min = KeyControl.getTH_Auto_Min();
-                                int th_max = KeyControl.getTH_Auto_Max();
-
+                                int Deviation = KeyControl.getDeviation();
+                                int Th_main = KeyControl.getTh_main();
+                                
+                                int temp1 = (0xff & bytes[3]);
+                                int humi1 = (0xff & bytes[4]);
+                                int temp2 = (0xff & bytes[5]);
+                                int humi2 = (0xff & bytes[6]);
+                                int temp3 = (0xff & bytes[7]);
+                                int humi3 = (0xff & bytes[8]);
+                                int temp4 = (0xff & bytes[9]);
+                                int humi4 = (0xff & bytes[10]);
+                                int temp5 = (0xff & bytes[11]);
+                                int humi5 = (0xff & bytes[12]);
+                                int temp6 = (0xff & bytes[13]);
+                                int humi6 = (0xff & bytes[14]);
+                                
                                 if(TH_Step==0){
                                     TH_Step = 1;
 
-                                    viewModel.getHouse01_Temp1_1().postValue(0xff & bytes[3]);
-                                    viewModel.getHouse01_Temp1_2().postValue(0xff & bytes[4]);
-                                    viewModel.getHouse01_Humi1_1().postValue(0xff & bytes[5]);
-                                    viewModel.getHouse01_Humi1_2().postValue(0xff & bytes[6]);
-
-                                    viewModel.getHouse01_Temp2_1().postValue(0xff & bytes[7]);
-                                    viewModel.getHouse01_Temp2_2().postValue(0xff & bytes[8]);
-                                    viewModel.getHouse01_Humi2_1().postValue(0xff & bytes[9]);
-                                    viewModel.getHouse01_Humi2_2().postValue(0xff & bytes[10]);
-
-                                    viewModel.getHouse01_Temp3_1().postValue(0xff & bytes[11]);
-                                    viewModel.getHouse01_Temp3_2().postValue(0xff & bytes[12]);
-                                    viewModel.getHouse01_Humi3_1().postValue(0xff & bytes[13]);
-                                    viewModel.getHouse01_Humi3_2().postValue(0xff & bytes[14]);
-
-                                    viewModel.getHouse01_Temp4_1().postValue(0xff & bytes[15]);
-                                    viewModel.getHouse01_Temp4_2().postValue(0xff & bytes[16]);
-                                    viewModel.getHouse01_Humi4_1().postValue(0xff & bytes[17]);
-                                    viewModel.getHouse01_Humi4_2().postValue(0xff & bytes[18]);
+                                    viewModel.getHouse01_Temp1_1().postValue(temp1);
+                                    viewModel.getHouse01_Humi1_1().postValue(humi1);
+                                    viewModel.getHouse01_Temp2_1().postValue(temp2);
+                                    viewModel.getHouse01_Humi2_1().postValue(humi2);
+                                    viewModel.getHouse01_Temp3_1().postValue(temp3);
+                                    viewModel.getHouse01_Humi3_1().postValue(humi3);
+                                    viewModel.getHouse01_Temp4_1().postValue(temp4);
+                                    viewModel.getHouse01_Humi4_1().postValue(humi4);
+                                    viewModel.getHouse01_Temp5_1().postValue(temp5);
+                                    viewModel.getHouse01_Humi5_1().postValue(humi5);
+                                    viewModel.getHouse01_Temp6_1().postValue(temp6);
+                                    viewModel.getHouse01_Humi6_1().postValue(humi6);
 
                                     SerialPortManager.getInstance().SendSerialCom(SerialModel.Require_House_02_TH,null);
 
                                     if(Boolean.TRUE.equals(viewModel.getHouse01_Nozzle_Auto().getValue())){
-
-
-                                        if((0xff & bytes[3])< th_min || (0xff & bytes[4])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_1,(byte)1);
-                                        }else if((((0xff & bytes[3])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[4])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_1,(byte)2);
-                                        }else if((0xff & bytes[3])>= th_max || (0xff & bytes[4])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_1,(byte)3);
-                                        }
-
-
-                                        if((0xff & bytes[7])< th_min || (0xff & bytes[8])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_2,(byte)1);
-                                        }else if((((0xff & bytes[7])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[8])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_2,(byte)2);
-                                        }else if((0xff & bytes[7])>= th_max || (0xff & bytes[8])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_2,(byte)3);
-                                        }
-
-                                        if((0xff & bytes[11])< th_min || (0xff & bytes[12])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_3,(byte)1);
-                                        }else if((((0xff & bytes[11])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[12])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_3,(byte)2);
-                                        }else if((0xff & bytes[11])>= th_max || (0xff & bytes[12])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_3,(byte)3);
-                                        }
-
-                                        if((0xff & bytes[15])< th_min || (0xff & bytes[16])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_4,(byte)1);
-                                        }else if((((0xff & bytes[15])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[16])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_4,(byte)2);
-                                        }else if((0xff & bytes[15])>= th_max || (0xff & bytes[16])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_01_Nozzle_4,(byte)3);
-                                        }
+                                        
+                                        TH_Set_Command(Th_main,Deviation,temp1,SerialModel.House_01_Nozzle_1);
+                                        TH_Set_Command(Th_main,Deviation,temp2,SerialModel.House_01_Nozzle_2);
+                                        TH_Set_Command(Th_main,Deviation,temp3,SerialModel.House_01_Nozzle_3);
+                                        TH_Set_Command(Th_main,Deviation,temp4,SerialModel.House_01_Nozzle_4);
+                                        TH_Set_Command(Th_main,Deviation,temp5,SerialModel.House_01_Nozzle_5);
+                                        TH_Set_Command(Th_main,Deviation,temp6,SerialModel.House_01_Nozzle_6);
+                                        
 
                                     }
 
 
                                     if(temp_humi_cnt == -1 || temp_humi_cnt == temp_humi_logging_cnt){
-                                        Logger.i("House01 = 1("+(0xff & bytes[3])+"/"+(0xff & bytes[4])+","+KeyControl.getHouse01_Nozzle01()+
-                                                ")  2("+(0xff & bytes[7])+"/"+(0xff & bytes[8])+","+KeyControl.getHouse01_Nozzle02()+
-                                                ")  3("+(0xff & bytes[11])+"/"+(0xff & bytes[12])+","+KeyControl.getHouse01_Nozzle03()+
-                                                ")  4("+(0xff & bytes[15])+"/"+(0xff & bytes[16])+","+KeyControl.getHouse01_Nozzle04()+")");
+
+                                        Logger.i(String.format(getString(R.string.TH_log),temp1,humi1,KeyControl.getHouse01_Nozzle01(),
+                                                temp2,humi2,KeyControl.getHouse01_Nozzle02(),
+                                                temp3,humi3,KeyControl.getHouse01_Nozzle03(),
+                                                temp4,humi4,KeyControl.getHouse01_Nozzle04(),
+                                                temp5,humi5,KeyControl.getHouse01_Nozzle05(),
+                                                temp6,humi6,KeyControl.getHouse01_Nozzle06(),"House01"));
                                     }
 
                                 }else if (TH_Step ==1){
                                     TH_Step = 2;
 
-                                    viewModel.getHouse02_Temp1_1().postValue(0xff & bytes[3]);
-                                    viewModel.getHouse02_Temp1_2().postValue(0xff & bytes[4]);
-                                    viewModel.getHouse02_Humi1_1().postValue(0xff & bytes[5]);
-                                    viewModel.getHouse02_Humi1_2().postValue(0xff & bytes[6]);
-
-                                    viewModel.getHouse02_Temp2_1().postValue(0xff & bytes[7]);
-                                    viewModel.getHouse02_Temp2_2().postValue(0xff & bytes[8]);
-                                    viewModel.getHouse02_Humi2_1().postValue(0xff & bytes[9]);
-                                    viewModel.getHouse02_Humi2_2().postValue(0xff & bytes[10]);
-
-                                    viewModel.getHouse02_Temp3_1().postValue(0xff & bytes[11]);
-                                    viewModel.getHouse02_Temp3_2().postValue(0xff & bytes[12]);
-                                    viewModel.getHouse02_Humi3_1().postValue(0xff & bytes[13]);
-                                    viewModel.getHouse02_Humi3_2().postValue(0xff & bytes[14]);
-
-                                    viewModel.getHouse02_Temp4_1().postValue(0xff & bytes[15]);
-                                    viewModel.getHouse02_Temp4_2().postValue(0xff & bytes[16]);
-                                    viewModel.getHouse02_Humi4_1().postValue(0xff & bytes[17]);
-                                    viewModel.getHouse02_Humi4_2().postValue(0xff & bytes[18]);
+                                    viewModel.getHouse02_Temp1_1().postValue(temp1);
+                                    viewModel.getHouse02_Humi1_1().postValue(humi1);
+                                    viewModel.getHouse02_Temp2_1().postValue(temp2);
+                                    viewModel.getHouse02_Humi2_1().postValue(humi2);
+                                    viewModel.getHouse02_Temp3_1().postValue(temp3);
+                                    viewModel.getHouse02_Humi3_1().postValue(humi3);
+                                    viewModel.getHouse02_Temp4_1().postValue(temp4);
+                                    viewModel.getHouse02_Humi4_1().postValue(humi4);
+                                    viewModel.getHouse02_Temp5_1().postValue(temp5);
+                                    viewModel.getHouse02_Humi5_1().postValue(humi5);
+                                    viewModel.getHouse02_Temp6_1().postValue(temp6);
+                                    viewModel.getHouse02_Humi6_1().postValue(humi6);
 
                                     SerialPortManager.getInstance().SendSerialCom(SerialModel.Require_House_03_TH,null);
 
                                     if(Boolean.TRUE.equals(viewModel.getHouse02_Nozzle_Auto().getValue())){
-                                        if((0xff & bytes[3])< th_min || (0xff & bytes[4])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_1,(byte)1);
-                                        }else if((((0xff & bytes[3])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[4])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_1,(byte)2);
-                                        }else if((0xff & bytes[3])>= th_max || (0xff & bytes[4])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_1,(byte)3);
-                                        }
-
-
-                                        if((0xff & bytes[7])< th_min || (0xff & bytes[8])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_2,(byte)1);
-                                        }else if((((0xff & bytes[7])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[8])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_2,(byte)2);
-                                        }else if((0xff & bytes[7])>= th_max || (0xff & bytes[8])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_2,(byte)3);
-                                        }
-
-                                        if((0xff & bytes[11])< th_min || (0xff & bytes[12])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_3,(byte)1);
-                                        }else if((((0xff & bytes[11])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[12])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_3,(byte)2);
-                                        }else if((0xff & bytes[11])>= th_max || (0xff & bytes[12])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_3,(byte)3);
-                                        }
-
-                                        if((0xff & bytes[15])< th_min || (0xff & bytes[16])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_4,(byte)1);
-                                        }else if((((0xff & bytes[15])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[16])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_4,(byte)2);
-                                        }else if((0xff & bytes[15])>= th_max || (0xff & bytes[16])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_02_Nozzle_4,(byte)3);
-                                        }
+                                        TH_Set_Command(Th_main,Deviation,temp1,SerialModel.House_02_Nozzle_1);
+                                        TH_Set_Command(Th_main,Deviation,temp2,SerialModel.House_02_Nozzle_2);
+                                        TH_Set_Command(Th_main,Deviation,temp3,SerialModel.House_02_Nozzle_3);
+                                        TH_Set_Command(Th_main,Deviation,temp4,SerialModel.House_02_Nozzle_4);
+                                        TH_Set_Command(Th_main,Deviation,temp5,SerialModel.House_02_Nozzle_5);
+                                        TH_Set_Command(Th_main,Deviation,temp6,SerialModel.House_02_Nozzle_6);
                                     }
 
                                     if(temp_humi_cnt == -1 || temp_humi_cnt == temp_humi_logging_cnt){
-                                        Logger.i("House02 = 1("+(0xff & bytes[3])+"/"+(0xff & bytes[4])+","+KeyControl.getHouse02_Nozzle01()+
-                                                ")  2("+(0xff & bytes[7])+"/"+(0xff & bytes[8])+","+KeyControl.getHouse02_Nozzle02()+
-                                                ")  3("+(0xff & bytes[11])+"/"+(0xff & bytes[12])+","+KeyControl.getHouse02_Nozzle03()+
-                                                ")  4("+(0xff & bytes[15])+"/"+(0xff & bytes[16])+","+KeyControl.getHouse02_Nozzle04()+")");
+                                        Logger.i(String.format(getString(R.string.TH_log),temp1,humi1,KeyControl.getHouse02_Nozzle01(),
+                                                temp2,humi2,KeyControl.getHouse02_Nozzle02(),
+                                                temp3,humi3,KeyControl.getHouse02_Nozzle03(),
+                                                temp4,humi4,KeyControl.getHouse02_Nozzle04(),
+                                                temp5,humi5,KeyControl.getHouse02_Nozzle05(),
+                                                temp6,humi6,KeyControl.getHouse02_Nozzle06(),"House02"));
                                     }
                                 }else if (TH_Step ==2){
                                     TH_Step = 3;
 
-                                    viewModel.getHouse03_Temp1_1().postValue(0xff & bytes[3]);
-                                    viewModel.getHouse03_Temp1_2().postValue(0xff & bytes[4]);
-                                    viewModel.getHouse03_Humi1_1().postValue(0xff & bytes[5]);
-                                    viewModel.getHouse03_Humi1_2().postValue(0xff & bytes[6]);
-
-                                    viewModel.getHouse03_Temp2_1().postValue(0xff & bytes[7]);
-                                    viewModel.getHouse03_Temp2_2().postValue(0xff & bytes[8]);
-                                    viewModel.getHouse03_Humi2_1().postValue(0xff & bytes[9]);
-                                    viewModel.getHouse03_Humi2_2().postValue(0xff & bytes[10]);
-
-                                    viewModel.getHouse03_Temp3_1().postValue(0xff & bytes[11]);
-                                    viewModel.getHouse03_Temp3_2().postValue(0xff & bytes[12]);
-                                    viewModel.getHouse03_Humi3_1().postValue(0xff & bytes[13]);
-                                    viewModel.getHouse03_Humi3_2().postValue(0xff & bytes[14]);
-
-                                    viewModel.getHouse03_Temp4_1().postValue(0xff & bytes[15]);
-                                    viewModel.getHouse03_Temp4_2().postValue(0xff & bytes[16]);
-                                    viewModel.getHouse03_Humi4_1().postValue(0xff & bytes[17]);
-                                    viewModel.getHouse03_Humi4_2().postValue(0xff & bytes[18]);
+                                    viewModel.getHouse03_Temp1_1().postValue(temp1);
+                                    viewModel.getHouse03_Humi1_1().postValue(humi1);
+                                    viewModel.getHouse03_Temp2_1().postValue(temp2);
+                                    viewModel.getHouse03_Humi2_1().postValue(humi2);
+                                    viewModel.getHouse03_Temp3_1().postValue(temp3);
+                                    viewModel.getHouse03_Humi3_1().postValue(humi3);
+                                    viewModel.getHouse03_Temp4_1().postValue(temp4);
+                                    viewModel.getHouse03_Humi4_1().postValue(humi4);
+                                    viewModel.getHouse03_Temp5_1().postValue(temp5);
+                                    viewModel.getHouse03_Humi5_1().postValue(humi5);
+                                    viewModel.getHouse03_Temp6_1().postValue(temp6);
+                                    viewModel.getHouse03_Humi6_1().postValue(humi6);
 
                                     SerialPortManager.getInstance().SendSerialCom(SerialModel.Require_House_04_TH,null);
 
                                     if(Boolean.TRUE.equals(viewModel.getHouse03_Nozzle_Auto().getValue())){
-                                        if((0xff & bytes[3])< th_min || (0xff & bytes[4])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_1,(byte)1);
-                                        }else if((((0xff & bytes[3])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[4])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_1,(byte)2);
-                                        }else if((0xff & bytes[3])>= th_max || (0xff & bytes[4])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_1,(byte)3);
-                                        }
-
-
-                                        if((0xff & bytes[7])< th_min || (0xff & bytes[8])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_2,(byte)1);
-                                        }else if((((0xff & bytes[7])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[8])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_2,(byte)2);
-                                        }else if((0xff & bytes[7])>= th_max || (0xff & bytes[8])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_2,(byte)3);
-                                        }
-
-                                        if((0xff & bytes[11])< th_min || (0xff & bytes[12])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_3,(byte)1);
-                                        }else if((((0xff & bytes[11])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[12])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_3,(byte)2);
-                                        }else if((0xff & bytes[11])>= th_max || (0xff & bytes[12])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_3,(byte)3);
-                                        }
-
-                                        if((0xff & bytes[15])< th_min || (0xff & bytes[16])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_4,(byte)1);
-                                        }else if((((0xff & bytes[15])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[16])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_4,(byte)2);
-                                        }else if((0xff & bytes[15])>= th_max || (0xff & bytes[16])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_03_Nozzle_4,(byte)3);
-                                        }
+                                        TH_Set_Command(Th_main,Deviation,temp1,SerialModel.House_03_Nozzle_1);
+                                        TH_Set_Command(Th_main,Deviation,temp2,SerialModel.House_03_Nozzle_2);
+                                        TH_Set_Command(Th_main,Deviation,temp3,SerialModel.House_03_Nozzle_3);
+                                        TH_Set_Command(Th_main,Deviation,temp4,SerialModel.House_03_Nozzle_4);
+                                        TH_Set_Command(Th_main,Deviation,temp5,SerialModel.House_03_Nozzle_5);
+                                        TH_Set_Command(Th_main,Deviation,temp6,SerialModel.House_03_Nozzle_6);
                                     }
 
                                     if(temp_humi_cnt == -1 || temp_humi_cnt == temp_humi_logging_cnt){
-                                        Logger.i("House03 = 1("+(0xff & bytes[3])+"/"+(0xff & bytes[4])+","+KeyControl.getHouse03_Nozzle01()+
-                                                ")  2("+(0xff & bytes[7])+"/"+(0xff & bytes[8])+","+KeyControl.getHouse03_Nozzle02()+
-                                                ")  3("+(0xff & bytes[11])+"/"+(0xff & bytes[12])+","+KeyControl.getHouse03_Nozzle03()+
-                                                ")  4("+(0xff & bytes[15])+"/"+(0xff & bytes[16])+","+KeyControl.getHouse03_Nozzle04()+")");
+                                        Logger.i(String.format(getString(R.string.TH_log),temp1,humi1,KeyControl.getHouse03_Nozzle01(),
+                                                temp2,humi2,KeyControl.getHouse03_Nozzle02(),
+                                                temp3,humi3,KeyControl.getHouse03_Nozzle03(),
+                                                temp4,humi4,KeyControl.getHouse03_Nozzle04(),
+                                                temp5,humi5,KeyControl.getHouse03_Nozzle05(),
+                                                temp6,humi6,KeyControl.getHouse03_Nozzle06(),"House03"));
                                     }
                                 }else if (TH_Step ==3){
                                     TH_Step = 0;
 
-                                    viewModel.getHouse04_Temp1_1().postValue(0xff & bytes[3]);
-                                    viewModel.getHouse04_Temp1_2().postValue(0xff & bytes[4]);
-                                    viewModel.getHouse04_Humi1_1().postValue(0xff & bytes[5]);
-                                    viewModel.getHouse04_Humi1_2().postValue(0xff & bytes[6]);
-
-                                    viewModel.getHouse04_Temp2_1().postValue(0xff & bytes[7]);
-                                    viewModel.getHouse04_Temp2_2().postValue(0xff & bytes[8]);
-                                    viewModel.getHouse04_Humi2_1().postValue(0xff & bytes[9]);
-                                    viewModel.getHouse04_Humi2_2().postValue(0xff & bytes[10]);
-
-                                    viewModel.getHouse04_Temp3_1().postValue(0xff & bytes[11]);
-                                    viewModel.getHouse04_Temp3_2().postValue(0xff & bytes[12]);
-                                    viewModel.getHouse04_Humi3_1().postValue(0xff & bytes[13]);
-                                    viewModel.getHouse04_Humi3_2().postValue(0xff & bytes[14]);
-
-                                    viewModel.getHouse04_Temp4_1().postValue(0xff & bytes[15]);
-                                    viewModel.getHouse04_Temp4_2().postValue(0xff & bytes[16]);
-                                    viewModel.getHouse04_Humi4_1().postValue(0xff & bytes[17]);
-                                    viewModel.getHouse04_Humi4_2().postValue(0xff & bytes[18]);
+                                    viewModel.getHouse04_Temp1_1().postValue(temp1);
+                                    viewModel.getHouse04_Humi1_1().postValue(humi1);
+                                    viewModel.getHouse04_Temp2_1().postValue(temp2);
+                                    viewModel.getHouse04_Humi2_1().postValue(humi2);
+                                    viewModel.getHouse04_Temp3_1().postValue(temp3);
+                                    viewModel.getHouse04_Humi3_1().postValue(humi3);
+                                    viewModel.getHouse04_Temp4_1().postValue(temp4);
+                                    viewModel.getHouse04_Humi4_1().postValue(humi4);
+                                    viewModel.getHouse04_Temp5_1().postValue(temp5);
+                                    viewModel.getHouse04_Humi5_1().postValue(humi5);
+                                    viewModel.getHouse04_Temp6_1().postValue(temp6);
+                                    viewModel.getHouse04_Humi6_1().postValue(humi6);
 
                                     if(Boolean.TRUE.equals(viewModel.getHouse04_Nozzle_Auto().getValue())){
-                                        if((0xff & bytes[3])< th_min || (0xff & bytes[4])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_1,(byte)1);
-                                        }else if((((0xff & bytes[3])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[4])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_1,(byte)2);
-                                        }else if((0xff & bytes[3])>= th_max || (0xff & bytes[4])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_1,(byte)3);
-                                        }
-
-
-                                        if((0xff & bytes[7])< th_min || (0xff & bytes[8])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_2,(byte)1);
-                                        }else if((((0xff & bytes[7])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[8])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_2,(byte)2);
-                                        }else if((0xff & bytes[7])>= th_max || (0xff & bytes[8])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_2,(byte)3);
-                                        }
-
-                                        if((0xff & bytes[11])< th_min || (0xff & bytes[12])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_3,(byte)1);
-                                        }else if((((0xff & bytes[11])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[12])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_3,(byte)2);
-                                        }else if((0xff & bytes[11])>= th_max || (0xff & bytes[12])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_3,(byte)3);
-                                        }
-
-                                        if((0xff & bytes[15])< th_min || (0xff & bytes[16])< th_min){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_4,(byte)1);
-                                        }else if((((0xff & bytes[15])>= th_min)&&((0xff & bytes[3])<th_max)) || (((0xff & bytes[16])>= th_min)&&((0xff & bytes[4])<th_max))){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_4,(byte)2);
-                                        }else if((0xff & bytes[15])>= th_max || (0xff & bytes[16])>= th_max){
-                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.House_04_Nozzle_4,(byte)3);
-                                        }
+                                        TH_Set_Command(Th_main,Deviation,temp1,SerialModel.House_04_Nozzle_1);
+                                        TH_Set_Command(Th_main,Deviation,temp2,SerialModel.House_04_Nozzle_2);
+                                        TH_Set_Command(Th_main,Deviation,temp3,SerialModel.House_04_Nozzle_3);
+                                        TH_Set_Command(Th_main,Deviation,temp4,SerialModel.House_04_Nozzle_4);
+                                        TH_Set_Command(Th_main,Deviation,temp5,SerialModel.House_04_Nozzle_5);
+                                        TH_Set_Command(Th_main,Deviation,temp6,SerialModel.House_04_Nozzle_6);
                                     }
 
                                     if(temp_humi_cnt == -1 || temp_humi_cnt == temp_humi_logging_cnt){
-                                        Logger.i("House04 = 1("+(0xff & bytes[3])+"/"+(0xff & bytes[4])+","+KeyControl.getHouse04_Nozzle01()+
-                                                ")  2("+(0xff & bytes[7])+"/"+(0xff & bytes[8])+","+KeyControl.getHouse04_Nozzle02()+
-                                                ")  3("+(0xff & bytes[11])+"/"+(0xff & bytes[12])+","+KeyControl.getHouse04_Nozzle03()+
-                                                ")  4("+(0xff & bytes[15])+"/"+(0xff & bytes[16])+","+KeyControl.getHouse04_Nozzle04()+")");
+                                        Logger.i(String.format(getString(R.string.TH_log),temp1,humi1,KeyControl.getHouse01_Nozzle01(),
+                                                temp2,humi2,KeyControl.getHouse01_Nozzle02(),
+                                                temp3,humi3,KeyControl.getHouse01_Nozzle03(),
+                                                temp4,humi4,KeyControl.getHouse01_Nozzle04(),
+                                                temp5,humi5,KeyControl.getHouse01_Nozzle05(),
+                                                temp6,humi6,KeyControl.getHouse01_Nozzle06(),"House01"));
                                     }
 
 
@@ -1083,14 +1149,87 @@ public class MainActivity extends AppCompatActivity{
                             if(CRC16Util.receiveData(data,crc)){
                                 if(bytes[3]==0x00 && bytes[4]== 0x00){      // 중지
 
-                                    if(!Pause_End){
-                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Air_Pump_Start,null);
-                                    }else{
-                                        Pause_End = false;
-                                        Intent intent2 = new Intent("Page");
-                                        intent2.putExtra("index",0);
-                                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
-                                    }
+//                                    if(!Pause_End){
+
+                                        // 다음시퀀스시간이 0일경우
+                                        if(viewModel.getAirCompressor03and04_RunningTime().getValue()==0){
+//                                            if(!Pause_End){
+                                                // 현재 상태가 Houst_Stop의 식을 실행 - air comp만 실행
+                                                viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_Stop);
+                                                viewModel.getCleanning_Running_Situation_2().postValue(3);
+//                                            }else{
+//                                                Pause_End = false;
+//                                                ToZeroPage();
+//                                            }
+
+                                            try {
+                                                Thread.sleep(1000);
+                                            }catch (Exception e){
+                                                e.printStackTrace();
+                                            }
+
+                                            if(KeyControl.getRepeat_PauseTime()>0){     // 정시 시간이 0보다 크면 실행. 아니면 바로 HOUSE01방제 실행
+                                                Log.d(TAG, "종류：" + "SerialModel.House01and02_Com_Aire_Pump_Receive case 1");
+                                                Start_AirCompressor_time();
+                                            }else{
+                                                Log.d(TAG, "종류：" + "SerialModel.House01and02_Com_Aire_Pump_Receive case 2");
+
+
+                                                if(viewModel.getRepeat_Cycle().getValue()>0){
+
+                                                    viewModel.getRepeat_Cycle().postValue(viewModel.getRepeat_Cycle().getValue()-1);
+                                                    viewModel.getRepeat_PauseTime().postValue(KeyControl.getRepeat_PauseTime());
+                                                    viewModel.getAirCompressor01and02_RunningTime().postValue(KeyControl.getAirCompressor01and02_RunningTime());
+                                                    viewModel.getPump01and02_RunningTime().postValue(KeyControl.getPump01and02_RunningTime());
+                                                    viewModel.getAirCompressor03and04_RunningTime().postValue(KeyControl.getAirCompressor03and04_RunningTime());
+                                                    viewModel.getPump03and04_RunningTime().postValue(KeyControl.getPump03and04_RunningTime());
+
+
+                                                    if(KeyControl.getAirCompressor03and04_RunningTime()>0){
+                                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Air_Pump_Start,null);
+                                                    }else if(KeyControl.getAirCompressor01and02_RunningTime()>0){
+                                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Air_Pump_Start,null);
+                                                    }
+
+                                                }else{
+                                                    // 다음시퀀스시간이 0일경우
+                                                    if(viewModel.getHouse01and02_Cleaning01_Time().getValue()!=0){
+                                                        if(viewModel.getHouse01and02_Cleaning01_Time().getValue()>2){
+                                                            // 콤프 펌프 둘다 0x01
+                                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Start,null);
+                                                        }else{
+                                                            // 콤프만 0x01 펌프는 0x00
+                                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Air_Start,null);
+                                                        }
+                                                    }else if(viewModel.getHouse03and04_Cleaning01_Time().getValue()!=0){
+                                                        if(viewModel.getHouse03and04_Cleaning01_Time().getValue()>2){
+                                                            // 콤프 펌프 둘다 0x01
+                                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Start,null);
+                                                        }else{
+                                                            // 콤프만 0x01 펌프는 0x00
+                                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Air_Start,null);
+                                                        }
+                                                    }else if(viewModel.getHouse01and02_Cleaning02_Time().getValue()!=0){
+                                                        CleannerType = true;
+                                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner02_Start,null);
+                                                    }else if(viewModel.getHouse03and04_Cleaning02_Time().getValue()!=0){
+                                                        CleannerType = true;
+                                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Start,null);
+                                                    }else{
+                                                        ToZeroPage();
+                                                    }
+                                                }
+
+
+                                            }
+
+                                        }else{
+                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Air_Pump_Start,null);
+                                        }
+//                                    }else{
+//                                        Pause_End = false;
+//                                        ToZeroPage();
+//                                    }
 
 
                                 }else if(bytes[3]==0x01 && bytes[4]== 0x01){    // 시작
@@ -1103,7 +1242,10 @@ public class MainActivity extends AppCompatActivity{
                                         e.printStackTrace();
                                     }
 
-                                    Start_Pump_time();
+                                    if( viewModel.getPump01and02_RunningTime().getValue()>0){
+                                        Start_Pump_time();
+                                    }
+
                                     Start_AirCompressor_time();
                                 }
                             }
@@ -1123,16 +1265,14 @@ public class MainActivity extends AppCompatActivity{
                             if(CRC16Util.receiveData(data,crc)){
                                 if(bytes[3]==0x00 && bytes[4]== 0x00){      // 중지
 
-                                    if(!Pause_End){
+//                                    if(!Pause_End){
                                         // 현재 상태가 Houst_Stop의 식을 실행 - air comp만 실행
                                         viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_Stop);
                                         viewModel.getCleanning_Running_Situation_2().postValue(3);
-                                    }else{
-                                        Pause_End = false;
-                                        Intent intent2 = new Intent("Page");
-                                        intent2.putExtra("index",0);
-                                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
-                                    }
+//                                    }else{
+//                                        Pause_End = false;
+//                                        ToZeroPage();
+//                                    }
 
                                     try {
                                         Thread.sleep(1000);
@@ -1146,14 +1286,64 @@ public class MainActivity extends AppCompatActivity{
                                     }else{
                                         Log.d(TAG, "종류：" + "SerialModel.House03and04_Com_Aire_Pump_Receive case 2");
 
-                                        viewModel.getRepeat_PauseTime().postValue(KeyControl.getRepeat_PauseTime());
-                                        viewModel.getRepeat_Cycle().postValue(viewModel.getRepeat_Cycle().getValue()-1);
-                                        viewModel.getAirCompressor01and02_RunningTime().postValue(KeyControl.getAirCompressor01and02_RunningTime());
-                                        viewModel.getPump01and02_RunningTime().postValue(KeyControl.getPump01and02_RunningTime());
-                                        viewModel.getAirCompressor03and04_RunningTime().postValue(KeyControl.getAirCompressor03and04_RunningTime());
-                                        viewModel.getPump03and04_RunningTime().postValue(KeyControl.getPump03and04_RunningTime());
 
-                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Air_Pump_Start,null);
+
+                                        if(viewModel.getRepeat_Cycle().getValue()>0){
+
+
+                                            viewModel.getRepeat_PauseTime().postValue(KeyControl.getRepeat_PauseTime());
+                                            viewModel.getRepeat_Cycle().postValue(viewModel.getRepeat_Cycle().getValue()-1);
+                                            viewModel.getAirCompressor01and02_RunningTime().postValue(KeyControl.getAirCompressor01and02_RunningTime());
+                                            viewModel.getPump01and02_RunningTime().postValue(KeyControl.getPump01and02_RunningTime());
+                                            viewModel.getAirCompressor03and04_RunningTime().postValue(KeyControl.getAirCompressor03and04_RunningTime());
+                                            viewModel.getPump03and04_RunningTime().postValue(KeyControl.getPump03and04_RunningTime());
+
+
+                                            if(KeyControl.getAirCompressor01and02_RunningTime()>0){
+                                                SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Air_Pump_Start,null);
+                                            }else if(KeyControl.getAirCompressor03and04_RunningTime()>0){
+                                                SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Air_Pump_Start,null);
+                                            }
+
+                                        }else{
+                                            // 다음시퀀스시간이 0일경우
+
+
+                                            if(viewModel.getHouse01and02_Cleaning01_Time().getValue()!=0){
+                                                if(viewModel.getHouse01and02_Cleaning01_Time().getValue()>2){
+                                                    // 콤프 펌프 둘다 0x01
+                                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Start,null);
+                                                }else{
+                                                    // 콤프만 0x01 펌프는 0x00
+                                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Air_Start,null);
+                                                }
+                                            }else if(viewModel.getHouse03and04_Cleaning01_Time().getValue()!=0){
+                                                if(viewModel.getHouse03and04_Cleaning01_Time().getValue()>2){
+                                                    // 콤프 펌프 둘다 0x01
+                                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Start,null);
+                                                }else{
+                                                    // 콤프만 0x01 펌프는 0x00
+                                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Air_Start,null);
+                                                }
+                                            }else if(viewModel.getHouse01and02_Cleaning02_Time().getValue()!=0){
+                                                CleannerType = true;
+                                                SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner02_Start,null);
+                                            }else if(viewModel.getHouse03and04_Cleaning02_Time().getValue()!=0){
+                                                CleannerType = true;
+                                                SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Start,null);
+                                            }else{
+                                                ToZeroPage();
+                                            }
+                                        }
+
+//                                        viewModel.getRepeat_PauseTime().postValue(KeyControl.getRepeat_PauseTime());
+//                                        viewModel.getRepeat_Cycle().postValue(viewModel.getRepeat_Cycle().getValue()-1);
+//                                        viewModel.getAirCompressor01and02_RunningTime().postValue(KeyControl.getAirCompressor01and02_RunningTime());
+//                                        viewModel.getPump01and02_RunningTime().postValue(KeyControl.getPump01and02_RunningTime());
+//                                        viewModel.getAirCompressor03and04_RunningTime().postValue(KeyControl.getAirCompressor03and04_RunningTime());
+//                                        viewModel.getPump03and04_RunningTime().postValue(KeyControl.getPump03and04_RunningTime());
+//
+//                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Air_Pump_Start,null);
                                     }
                                 }else if(bytes[3]==0x01 && bytes[4]== 0x01){    // 시작
                                     viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
@@ -1164,7 +1354,9 @@ public class MainActivity extends AppCompatActivity{
                                         e.printStackTrace();
                                     }
 
-                                    Start_Pump_time();
+                                    if( viewModel.getPump03and04_RunningTime().getValue()>0){
+                                        Start_Pump_time();
+                                    }
                                     Start_AirCompressor_time();
                                 }
                             }
@@ -1183,14 +1375,33 @@ public class MainActivity extends AppCompatActivity{
                             if(CRC16Util.receiveData(data,crc)){
                                 if(bytes[3]==0x00){      // 중지
 
-                                    if(!Pause_End){
-                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Start,null);
-                                    }else{
-                                        Pause_End = false;
-                                        Intent intent2 = new Intent("Page");
-                                        intent2.putExtra("index",0);
-                                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
-                                    }
+//                                    if(!Pause_End){
+
+
+                                         if(viewModel.getHouse03and04_Cleaning01_Time().getValue()!=0){
+                                            if(viewModel.getHouse03and04_Cleaning01_Time().getValue()>2){
+                                                // 콤프 펌프 둘다 0x01
+                                                SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Start,null);
+                                            }else{
+                                                // 콤프만 0x01 펌프는 0x00
+                                                SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Air_Start,null);
+                                            }
+                                        }else if(viewModel.getHouse01and02_Cleaning02_Time().getValue()!=0){
+                                             CleannerType = true;
+                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner02_Start,null);
+                                        }else if(viewModel.getHouse03and04_Cleaning02_Time().getValue()!=0){
+                                             CleannerType = true;
+                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Start,null);
+                                        }else{
+                                            ToZeroPage();
+                                        }
+
+
+
+//                                    }else{
+//                                        Pause_End = false;
+//                                        ToZeroPage();
+//                                    }
 
                                 }else if(bytes[3]==0x01){    // 시작
                                     viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
@@ -1220,14 +1431,24 @@ public class MainActivity extends AppCompatActivity{
                             if(CRC16Util.receiveData(data,crc)){
                                 if(bytes[3]==0x00){      // 중지
 
-                                    if(!Pause_End){
-                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner02_Start,null);
-                                    }else{
-                                        Pause_End = false;
-                                        Intent intent2 = new Intent("Page");
-                                        intent2.putExtra("index",0);
-                                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
-                                    }
+//                                    if(!Pause_End){
+
+                                        if(viewModel.getHouse01and02_Cleaning02_Time().getValue()>0){
+                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner02_Start,null);
+                                        }else{
+                                            if(viewModel.getHouse03and04_Cleaning02_Time().getValue()>0){
+                                                SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Start,null);
+                                            }else{
+//                                                Pause_End = false;
+                                                ToZeroPage();
+                                            }
+                                        }
+
+
+//                                    }else{
+//                                        Pause_End = false;
+//                                        ToZeroPage();
+//                                    }
                                 }else if(bytes[3]==0x01){    // 시작
 
                                     viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
@@ -1256,9 +1477,19 @@ public class MainActivity extends AppCompatActivity{
 
                             if(CRC16Util.receiveData(data,crc)){
                                 if(bytes[3]==0x01){ // 시작시
-                                    if(viewModel.getHouse01and02_Cleaning02_Time().getValue()==0){
-                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Start,null);
-                                    }else{
+//                                    if(viewModel.getHouse01and02_Cleaning02_Time().getValue()==0){
+//
+//                                        if(viewModel.getHouse03and04_Cleaning02_Time().getValue()>0){
+//                                            SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Start,null);
+//                                        }else{
+//                                            Pause_End = false;
+//                                            Intent intent2 = new Intent("Page");
+//                                            intent2.putExtra("index",0);
+//                                            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
+//                                        }
+
+
+//                                    }else{
                                         viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
                                         viewModel.getCleanning_Running_Situation_2().postValue(2);
 
@@ -1269,17 +1500,17 @@ public class MainActivity extends AppCompatActivity{
                                         }
 
                                         Start_Cleanner_time();
-                                    }
+//                                    }
                                 }else{  // 정지시
 
-                                    if(!Pause_End){
+//                                    if(!Pause_End && viewModel.getHouse03and04_Cleaning02_Time().getValue()>0){
+
                                         SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Start,null);
-                                    }else{
-                                        Pause_End = false;
-                                        Intent intent2 = new Intent("Page");
-                                        intent2.putExtra("index",0);
-                                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
-                                    }
+
+//                                    }else{
+//                                        Pause_End = false;
+//                                        ToZeroPage();
+//                                    }
 
                                 }
                             }
@@ -1296,12 +1527,12 @@ public class MainActivity extends AppCompatActivity{
 
                             if(CRC16Util.receiveData(data,crc)){
                                 if(bytes[3]==0x01){ // 시작시
-                                    if(viewModel.getHouse03and04_Cleaning02_Time().getValue()==0){
-
-                                        Intent intent = new Intent("Page");
-                                        intent.putExtra("index",0);
-                                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
-                                    }else{
+//                                    if(viewModel.getHouse03and04_Cleaning02_Time().getValue()==0){
+//
+//                                        Intent intent = new Intent("Page");
+//                                        intent.putExtra("index",0);
+//                                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+//                                    }else{
                                         viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
                                         viewModel.getCleanning_Running_Situation_2().postValue(2);
 
@@ -1312,17 +1543,15 @@ public class MainActivity extends AppCompatActivity{
                                         }
 
                                         Start_Cleanner_time();
-                                    }
+//                                    }
                                 }else{  // 정지시
 
-                                    if(Pause_End){
-                                        Pause_End = false;
-                                    }
+//                                    if(Pause_End){
+//                                        Pause_End = false;
+//                                    }
 
                                     viewModel.getCleanning_Running_Situation_2().postValue(0);
-                                    Intent intent = new Intent("Page");
-                                    intent.putExtra("index",0);
-                                    LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+                                    ToZeroPage();
                                 }
                             }
                         }catch (Exception e){
@@ -1350,7 +1579,20 @@ public class MainActivity extends AppCompatActivity{
                         }catch (Exception e){
                             e.printStackTrace();
                         }
+                    }else if(bytes[1]==SerialModel.House_All_Stop_Receive){     // 중단 멈춤
+                        try {
+                            byte[] data = new byte[]{bytes[3]};
+                            byte[] crc = new byte[]{bytes[4],bytes[5]};
+
+                            if(CRC16Util.receiveData(data,crc)){
+                                ToZeroPage();
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
+
+
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -1365,228 +1607,53 @@ public class MainActivity extends AppCompatActivity{
                 Log.d(TAG, "직렬 데이터 전송：" + byteArrayToHex(bytes));
 
 
-                switch (bytes[0]){
-
-                    // 시작전 상태 물어보기
-//                    case 0x27:
-//                        Log.d(TAG,"data type : 27");
-//
-//                        AlarmDialogShow("물부족","물이 부족하여 시작이 불가능합니다.");
-//
-//                        break;
-
-
-
-                        // 하우스1-2 시작
-//                    case 0x01:
-//
-//                        Log.d(TAG,"data type : 1");
-//                        viewModel.getCleanning_Running_Situation_2().postValue(0);
-//                        viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
-//
-//                        try {
-//                            Thread.sleep(1000);
-//                        }catch (Exception e){
-//                            e.printStackTrace();
-//                        }
-//
-//                        Start_Pump_time();
-//                        Start_AirCompressor_time();
-//                        break;
-
-                        // 하우스3-4 시작
-//                    case 0x03:
-//                        Log.d(TAG,"data type : 3");
-//
-//                        viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
-//
-//                        try {
-//                            Thread.sleep(1000);
-//                        }catch (Exception e){
-//                            e.printStackTrace();
-//                        }
-//
-//                        Start_Pump_time();
-//                        Start_AirCompressor_time();
-//                        break;
-
-
-                    // 하우스1-2 중지
-//                    case 0x05:
-//                        Log.d(TAG,"data type : 5");
-//                        SerialPortManager.getInstance().sendBytes(new byte[]{0x03});
-//                        break;
-
-                    // 하우스3-4 중지
-//                    case 0x07:
-//                        Log.d(TAG,"data type : 7");
-//
-//                        // 현재 상태가 Houst_Stop의 식을 실행 - air comp만 실행
-//                        viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_Stop);
-//                        viewModel.getCleanning_Running_Situation_2().postValue(3);
-//
-//                        try {
-//                            Thread.sleep(1000);
-//                        }catch (Exception e){
-//                            e.printStackTrace();
-//                        }
-//
-//                        if(KeyControl.getRepeat_PauseTime()>0){     // 정시 시간이 0보다 크면 실행. 아니면 바로 HOUSE01방제 실행
-//                            Start_AirCompressor_time();
-//                        }else{
-//                            SerialPortManager.getInstance().sendBytes(new byte[]{0x01});
-//                        }
-//
-//                        break;
-
-
-                    // 하우스1-2 청소01
-//                    case 0x09:
-//                        Log.d(TAG,"data type : 9");
-//                        viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
-//                        viewModel.getCleanning_Running_Situation_2().postValue(1);
-//
-//                        try {
-//                            Thread.sleep(1000);
-//                        }catch (Exception e){
-//                            e.printStackTrace();
-//                        }
-//                        viewModel.getRepeat_PauseTime().postValue(0);       // 휴지시간 0설정
-//                        Start_Cleanner_time();
-//                        break;
-                    // 하우스1-2 청소02
-//                    case 0x10:
-//                        Log.d(TAG,"data type : 10");
-//
-//                        if(viewModel.getHouse01and02_Cleaning02_Time().getValue()==0){
-//                            SerialPortManager.getInstance().sendBytes(new byte[]{0x14});
-//                        }else{
-//                            viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
-//                            viewModel.getCleanning_Running_Situation_2().postValue(2);
-//
-//                            try {
-//                                Thread.sleep(1000);
-//                            }catch (Exception e){
-//                                e.printStackTrace();
-//                            }
-//
-//                            Start_Cleanner_time();
-//                        }
-//
-//
-//                        break;
-
-                    // 하우스3-4 청소01
-//                    case 0x13:
-//                        Log.d(TAG,"data type : 13");
-//
-//
-//                        viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
-//                        viewModel.getCleanning_Running_Situation_2().postValue(1);
-//
-//                        try {
-//                            Thread.sleep(1000);
-//                        }catch (Exception e){
-//                            e.printStackTrace();
-//                        }
-//
-//                        Start_Cleanner_time();
-//                        break;
-                    // 하우스3-4 청소02
-//                    case 0x14:
-//
-//
-//                        if(viewModel.getHouse03and04_Cleaning02_Time().getValue()==0){
-//
-//                            Intent intent = new Intent("Page");
-//                            intent.putExtra("index",0);
-//                            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
-//                        }else{
-//                            Log.d(TAG,"data type : 14");
-//                            viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
-//                            viewModel.getCleanning_Running_Situation_2().postValue(2);
-//
-//                            try {
-//                                Thread.sleep(1000);
-//                            }catch (Exception e){
-//                                e.printStackTrace();
-//                            }
-//
-//                            Start_Cleanner_time();
-//                        }
-//
-//
-//                        break;
-
-
-
-                    // 하우스1-2 청소01 중지
-//                    case 0x17:
-//                        Log.d(TAG,"data type : 17");
-//                        SerialPortManager.getInstance().sendBytes(new byte[]{0x13});
-//                        break;
-                    // 하우스1-2 청소02 중지
-//                    case 0x18:
-//                        Log.d(TAG,"data type : 18");
-//                        SerialPortManager.getInstance().sendBytes(new byte[]{0x14});
-//                        break;
-
-                    // 하우스3-4 청소01 중지
-//                    case 0x21:
-//                        Log.d(TAG,"data type : 21");
-//                        SerialPortManager.getInstance().sendBytes(new byte[]{0x10});
-//                        break;
-                    // 하우스3-4 청소02 중지
-//                    case 0x22:
-//                        Log.d(TAG,"data type : 22");
-//                        viewModel.getCleanning_Running_Situation_2().postValue(0);
-//                        Intent intent = new Intent("Page");
-//                        intent.putExtra("index",0);
-//                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
-//                        break;
-
-
-//                    // 온습도 가져오기
-//                    case 0x25:
-//                        Log.d(TAG,"data type : 25");
-//                        Log.d(TAG,"get Temp, Humi");
-//
-//                        if(Boolean.TRUE.equals(viewModel.getHouse01_Nozzle_Auto().getValue())){
-//
-//                        }
-//
-//                        if(Boolean.TRUE.equals(viewModel.getHouse02_Nozzle_Auto().getValue())){
-//
-//                        }
-//
-//                        if(Boolean.TRUE.equals(viewModel.getHouse03_Nozzle_Auto().getValue())){
-//
-//                        }
-//
-//                        if(Boolean.TRUE.equals(viewModel.getHouse04_Nozzle_Auto().getValue())){
-//
-//                        }
-//
-//                        break;
-
-                    // 물부족
-//                    case 0x26:
-//
-//                        viewModel.getWater_Shortage().postValue(true);
-//
-//
-//                        AlarmDialogShow("물부족","진행 도중 물이 부족하여 상태가 초기화됩니다.");
-//
-//
-//                        Log.d(TAG,"data type : 26");
-//                        Log.d(TAG,"물부족");
-//                        Intent intent2 = new Intent("Page");
-//                        intent2.putExtra("index",0);
-//                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent2);
-//                        break;
-
-
+                // 상태정보 변환
+                try {
+                    if (bytes[1] == SerialModel.House01and02_Com_Aire_Pump_Send) {
+                        viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
+                        viewModel.getCleanning_Running_Situation_2().postValue(0);
+                    }else if(bytes[1] == SerialModel.House03and04_Com_Aire_Pump_Send){
+                        viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
+                        viewModel.getCleanning_Running_Situation_2().postValue(0);
+                    }else if(bytes[1] == SerialModel.House01and02_Cleanner01_Send){
+                        viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
+                        viewModel.getCleanning_Running_Situation_2().postValue(1);
+                    }else if(bytes[1] == SerialModel.House03and04_Cleanner01_Send){
+                        viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
+                        viewModel.getCleanning_Running_Situation_2().postValue(1);
+                    }else if(bytes[1] == SerialModel.House01and02_Cleanner02_Send){
+                        viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
+                        viewModel.getCleanning_Running_Situation_2().postValue(2);
+                    }else if(bytes[1] == SerialModel.House03and04_Cleanner02_Send){
+                        viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
+                        viewModel.getCleanning_Running_Situation_2().postValue(2);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
+
+
+
+
+
+//                switch (bytes[1]){
+//
+//                }
+
+//                if(bytes[1] == 0x50){
+//                    if(bytes[3] == 0x01){
+//
+//                    }else if(bytes[3] == 0x02){
+//
+//                    }else if(bytes[3] == 0x03){
+//
+//                    }else if(bytes[3] == 0x04){
+//
+//                    }else if(bytes[3] == 0x05){
+//
+//                    }
+//
+//                }
             }
         });
 
@@ -1611,8 +1678,20 @@ public class MainActivity extends AppCompatActivity{
         // 온습도 읽어오기
         Start_TempHumi_time();
 
+        SerialPortManager.getInstance().SendSerialCom(SerialModel.Require_Info,null);
 
         Logger.i("Device Start");
+
+
+
+
+
+        KeyControl.setHouse01_Nozzle01(2);
+        KeyControl.setHouse01_Nozzle02(2);
+        KeyControl.setHouse01_Nozzle03(2);
+        KeyControl.setHouse01_Nozzle04(2);
+        KeyControl.setHouse01_Nozzle05(2);
+        KeyControl.setHouse01_Nozzle06(150);
 
     }
     public static final int MULTIPLE_PERMISSIONS = 1801;
@@ -1832,14 +1911,34 @@ public class MainActivity extends AppCompatActivity{
                             }else{
                                 // 청소동작으로 넘어가야하는데..
                                 viewModel.getRepeat_Cycle().postValue(0);
-
-                                if(viewModel.getHouse01and02_Cleaning01_Time().getValue()>2){
-                                    // 콤프 펌프 둘다 0x01
-                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Start,null);
+                                
+                                // 청소시간이 0일경우
+                                if(viewModel.getHouse01and02_Cleaning01_Time().getValue()!=0) {
+                                    if(viewModel.getHouse01and02_Cleaning01_Time().getValue()>2){
+                                        // 콤프 펌프 둘다 0x01
+                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Start,null);
+                                    }else{
+                                        // 콤프만 0x01 펌프는 0x00
+                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Air_Start,null);
+                                    }
+                                }else  if(viewModel.getHouse03and04_Cleaning01_Time().getValue()!=0){
+                                    if(viewModel.getHouse03and04_Cleaning01_Time().getValue()>2){
+                                        // 콤프 펌프 둘다 0x01
+                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Start,null);
+                                    }else{
+                                        // 콤프만 0x01 펌프는 0x00
+                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Air_Start,null);
+                                    }
+                                }else if(viewModel.getHouse01and02_Cleaning02_Time().getValue()!=0){
+                                    CleannerType = true;
+                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner02_Start,null);
+                                }else if(viewModel.getHouse03and04_Cleaning02_Time().getValue()!=0){
+                                    CleannerType = true;
+                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Start,null);
                                 }else{
-                                    // 콤프만 0x01 펌프는 0x00
-                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Air_Start,null);
+                                    ToZeroPage();
                                 }
+
 //                                SerialPortManager.getInstance().sendBytes(new byte[]{0x09});
                             }
 
@@ -1879,7 +1978,52 @@ public class MainActivity extends AppCompatActivity{
                             viewModel.getRepeat_Cycle().postValue(viewModel.getRepeat_Cycle().getValue()-1);
 //                            SerialPortManager.getInstance().sendBytes(new byte[]{0x01});
 
-                            SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Air_Pump_Start,null);
+                            // 반복이 남이있을경우
+                            if(viewModel.getRepeat_Cycle().getValue()>0){
+                                if(viewModel.getAirCompressor01and02_RunningTime().getValue()!=0){
+                                    viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
+                                    viewModel.getCleanning_Running_Situation_2().postValue(0);
+                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Air_Pump_Start,null);
+                                }else if(viewModel.getAirCompressor03and04_RunningTime().getValue()!=0){
+                                    viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
+                                    viewModel.getCleanning_Running_Situation_2().postValue(0);
+                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Air_Pump_Start,null);
+                                }
+                            }else{  // 반복이 없을경우
+                                if(viewModel.getHouse01and02_Cleaning01_Time().getValue()!=0){
+                                    viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
+                                    viewModel.getCleanning_Running_Situation_2().postValue(1);
+                                    if(viewModel.getHouse01and02_Cleaning01_Time().getValue()>2){
+                                        // 콤프 펌프 둘다 0x01
+                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Start,null);
+                                    }else{
+                                        // 콤프만 0x01 펌프는 0x00
+                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner01_Air_Start,null);
+                                    }
+                                }else if(viewModel.getHouse03and04_Cleaning01_Time().getValue()!=0){
+                                    viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
+                                    viewModel.getCleanning_Running_Situation_2().postValue(1);
+                                    if(viewModel.getHouse03and04_Cleaning01_Time().getValue()>2){
+                                        // 콤프 펌프 둘다 0x01
+                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Start,null);
+                                    }else{
+                                        // 콤프만 0x01 펌프는 0x00
+                                        SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner01_Air_Start,null);
+                                    }
+                                }else if(viewModel.getHouse01and02_Cleaning02_Time().getValue()!=0){
+                                    viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
+                                    viewModel.getCleanning_Running_Situation_2().postValue(2);
+                                    CleannerType = true;
+                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_01_02_Cleanner02_Start,null);
+                                }else if(viewModel.getHouse03and04_Cleaning02_Time().getValue()!=0){
+                                    viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_03_04);
+                                    viewModel.getCleanning_Running_Situation_2().postValue(2);
+                                    CleannerType = true;
+                                    SerialPortManager.getInstance().SendSerialCom(SerialModel.Com_House_03_04_Cleanner02_Start,null);
+                                }else{
+                                    ToZeroPage();
+                                }
+                            }
 
 
                         }else{
@@ -1908,7 +2052,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void Start_Pump_time(){
-        if(Pump_timer != null){
+        if(Pump_timer != null ){
             return;
         }
 
@@ -2138,7 +2282,15 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    private void ToZeroPage(){
+        Intent intent = new Intent("Page");
+        intent.putExtra("index",0);
+        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+    }
+
     private void EndCleaning(){
+        viewModel.getIsRunning().postValue(false);
+
         CleannerType = false;
 
         viewModel.getCleanning_Running_Situation_1().postValue(DeviceModel.House_01_02);
@@ -2201,6 +2353,26 @@ public class MainActivity extends AppCompatActivity{
             sb.append(String.format("%02x ", b&0xff));
         return sb.toString();
     }
+    
+    private void TH_Set_Command(int Th_main,int Deviation,int temp ,SerialModel nozzle){
+
+        if(temp == 150){
+            return;
+        }
+
+        if(temp< Th_main - (Deviation*3)){
+            SerialPortManager.getInstance().SendSerialCom(nozzle,(byte)1);
+        }else if((temp >= Th_main - (Deviation*3))&&(temp<Th_main - Deviation)){
+            SerialPortManager.getInstance().SendSerialCom(nozzle,(byte)2);
+        }else if((temp >= Th_main - Deviation)&&(temp< Th_main + Deviation)){
+            SerialPortManager.getInstance().SendSerialCom(nozzle,(byte)3);
+        }else if((temp >= Th_main + Deviation)&&(temp<Th_main + (Deviation*3))){
+            SerialPortManager.getInstance().SendSerialCom(nozzle,(byte)4);
+        }else if(temp >= Th_main + (Deviation*3)){
+            SerialPortManager.getInstance().SendSerialCom(nozzle,(byte)5);
+        }
+    }
+
 
 
 }

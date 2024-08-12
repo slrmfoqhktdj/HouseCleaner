@@ -14,73 +14,93 @@ public class MainViewModel extends ViewModel {
 
     private MutableLiveData<String> main_time_tv;     //메인 시간
     private MutableLiveData<Integer> House01_Temp1_1;  //하우스 1 - 온도
-    private MutableLiveData<Integer> House01_Temp1_2;  //하우스 1 - 온도
+//    private MutableLiveData<Integer> House01_Temp1_2;  //하우스 1 - 온도
     private MutableLiveData<Integer> House01_Temp2_1;  //하우스 1 - 온도
-    private MutableLiveData<Integer> House01_Temp2_2;  //하우스 1 - 온도
+//    private MutableLiveData<Integer> House01_Temp2_2;  //하우스 1 - 온도
     private MutableLiveData<Integer> House01_Temp3_1;  //하우스 1 - 온도
-    private MutableLiveData<Integer> House01_Temp3_2;  //하우스 1 - 온도
+//    private MutableLiveData<Integer> House01_Temp3_2;  //하우스 1 - 온도
     private MutableLiveData<Integer> House01_Temp4_1;  //하우스 1 - 온도
-    private MutableLiveData<Integer> House01_Temp4_2;  //하우스 1 - 온도
+//    private MutableLiveData<Integer> House01_Temp4_2;  //하우스 1 - 온도
+    private MutableLiveData<Integer> House01_Temp5_1;  //하우스 1 - 온도
+    private MutableLiveData<Integer> House01_Temp6_1;  //하우스 1 - 온도
+    
     private MutableLiveData<Integer> House01_Humi1_1;  //하우스 1 - 습도
-    private MutableLiveData<Integer> House01_Humi1_2;  //하우스 1 - 습도
+//    private MutableLiveData<Integer> House01_Humi1_2;  //하우스 1 - 습도
     private MutableLiveData<Integer> House01_Humi2_1;  //하우스 1 - 습도
-    private MutableLiveData<Integer> House01_Humi2_2;  //하우스 1 - 습도
+//    private MutableLiveData<Integer> House01_Humi2_2;  //하우스 1 - 습도
     private MutableLiveData<Integer> House01_Humi3_1;  //하우스 1 - 습도
-    private MutableLiveData<Integer> House01_Humi3_2;  //하우스 1 - 습도
+//    private MutableLiveData<Integer> House01_Humi3_2;  //하우스 1 - 습도
     private MutableLiveData<Integer> House01_Humi4_1;  //하우스 1 - 습도
-    private MutableLiveData<Integer> House01_Humi4_2;  //하우스 1 - 습도
+//    private MutableLiveData<Integer> House01_Humi4_2;  //하우스 1 - 습도
+    private MutableLiveData<Integer> House01_Humi5_1;  //하우스 1 - 습도
+    private MutableLiveData<Integer> House01_Humi6_1;  //하우스 1 - 습도
+
 
     private MutableLiveData<Integer> House02_Temp1_1;  //하우스 2 - 온도
-    private MutableLiveData<Integer> House02_Temp1_2;  //하우스 2 - 온도
+//    private MutableLiveData<Integer> House02_Temp1_2;  //하우스 2 - 온도
     private MutableLiveData<Integer> House02_Temp2_1;  //하우스 2 - 온도
-    private MutableLiveData<Integer> House02_Temp2_2;  //하우스 2 - 온도
+//    private MutableLiveData<Integer> House02_Temp2_2;  //하우스 2 - 온도
     private MutableLiveData<Integer> House02_Temp3_1;  //하우스 2 - 온도
-    private MutableLiveData<Integer> House02_Temp3_2;  //하우스 2 - 온도
+//    private MutableLiveData<Integer> House02_Temp3_2;  //하우스 2 - 온도
     private MutableLiveData<Integer> House02_Temp4_1;  //하우스 2 - 온도
-    private MutableLiveData<Integer> House02_Temp4_2;  //하우스 2 - 온도
+//    private MutableLiveData<Integer> House02_Temp4_2;  //하우스 2 - 온도
+    private MutableLiveData<Integer> House02_Temp5_1;  //하우스 2 - 온도
+    private MutableLiveData<Integer> House02_Temp6_1;  //하우스 2 - 온도
+    
     private MutableLiveData<Integer> House02_Humi1_1;  //하우스 2 - 습도
-    private MutableLiveData<Integer> House02_Humi1_2;  //하우스 2 - 습도
+//    private MutableLiveData<Integer> House02_Humi1_2;  //하우스 2 - 습도
     private MutableLiveData<Integer> House02_Humi2_1;  //하우스 2 - 습도
-    private MutableLiveData<Integer> House02_Humi2_2;  //하우스 2 - 습도
+//    private MutableLiveData<Integer> House02_Humi2_2;  //하우스 2 - 습도
     private MutableLiveData<Integer> House02_Humi3_1;  //하우스 2 - 습도
-    private MutableLiveData<Integer> House02_Humi3_2;  //하우스 2 - 습도
+//    private MutableLiveData<Integer> House02_Humi3_2;  //하우스 2 - 습도
     private MutableLiveData<Integer> House02_Humi4_1;  //하우스 2 - 습도
-    private MutableLiveData<Integer> House02_Humi4_2;  //하우스 2 - 습도
-
+//    private MutableLiveData<Integer> House02_Humi4_2;  //하우스 2 - 습도
+    private MutableLiveData<Integer> House02_Humi5_1;  //하우스 2 - 습도
+    private MutableLiveData<Integer> House02_Humi6_1;  //하우스 2 - 습도
+    
     private MutableLiveData<Integer> House03_Temp1_1;  //하우스 3 - 온도
-    private MutableLiveData<Integer> House03_Temp1_2;  //하우스 3 - 온도
+//    private MutableLiveData<Integer> House03_Temp1_2;  //하우스 3 - 온도
     private MutableLiveData<Integer> House03_Temp2_1;  //하우스 3 - 온도
-    private MutableLiveData<Integer> House03_Temp2_2;  //하우스 3 - 온도
+//    private MutableLiveData<Integer> House03_Temp2_2;  //하우스 3 - 온도
     private MutableLiveData<Integer> House03_Temp3_1;  //하우스 3 - 온도
-    private MutableLiveData<Integer> House03_Temp3_2;  //하우스 3 - 온도
+//    private MutableLiveData<Integer> House03_Temp3_2;  //하우스 3 - 온도
     private MutableLiveData<Integer> House03_Temp4_1;  //하우스 3 - 온도
-    private MutableLiveData<Integer> House03_Temp4_2;  //하우스 3 - 온도
+//    private MutableLiveData<Integer> House03_Temp4_2;  //하우스 3 - 온도
+    private MutableLiveData<Integer> House03_Temp5_1;  //하우스 3 - 온도
+    private MutableLiveData<Integer> House03_Temp6_1;  //하우스 3 - 온도
+    
     private MutableLiveData<Integer> House03_Humi1_1;  //하우스 3 - 습도
-    private MutableLiveData<Integer> House03_Humi1_2;  //하우스 3 - 습도
+//    private MutableLiveData<Integer> House03_Humi1_2;  //하우스 3 - 습도
     private MutableLiveData<Integer> House03_Humi2_1;  //하우스 3 - 습도
-    private MutableLiveData<Integer> House03_Humi2_2;  //하우스 3 - 습도
+//    private MutableLiveData<Integer> House03_Humi2_2;  //하우스 3 - 습도
     private MutableLiveData<Integer> House03_Humi3_1;  //하우스 3 - 습도
-    private MutableLiveData<Integer> House03_Humi3_2;  //하우스 3 - 습도
+//    private MutableLiveData<Integer> House03_Humi3_2;  //하우스 3 - 습도
     private MutableLiveData<Integer> House03_Humi4_1;  //하우스 3 - 습도
-    private MutableLiveData<Integer> House03_Humi4_2;  //하우스 3 - 습도
-
+//    private MutableLiveData<Integer> House03_Humi4_2;  //하우스 3 - 습도
+    private MutableLiveData<Integer> House03_Humi5_1;  //하우스 3 - 습도
+    private MutableLiveData<Integer> House03_Humi6_1;  //하우스 3 - 습도
+    
     private MutableLiveData<Integer> House04_Temp1_1;  //하우스 4 - 온도
-    private MutableLiveData<Integer> House04_Temp1_2;  //하우스 4 - 온도
+//    private MutableLiveData<Integer> House04_Temp1_2;  //하우스 4 - 온도
     private MutableLiveData<Integer> House04_Temp2_1;  //하우스 4 - 온도
-    private MutableLiveData<Integer> House04_Temp2_2;  //하우스 4 - 온도
+//    private MutableLiveData<Integer> House04_Temp2_2;  //하우스 4 - 온도
     private MutableLiveData<Integer> House04_Temp3_1;  //하우스 4 - 온도
-    private MutableLiveData<Integer> House04_Temp3_2;  //하우스 4 - 온도
+//    private MutableLiveData<Integer> House04_Temp3_2;  //하우스 4 - 온도
     private MutableLiveData<Integer> House04_Temp4_1;  //하우스 4 - 온도
-    private MutableLiveData<Integer> House04_Temp4_2;  //하우스 4 - 온도
+//    private MutableLiveData<Integer> House04_Temp4_2;  //하우스 4 - 온도
+    private MutableLiveData<Integer> House04_Temp5_1;  //하우스 4 - 온도
+    private MutableLiveData<Integer> House04_Temp6_1;  //하우스 4 - 온도
+    
     private MutableLiveData<Integer> House04_Humi1_1;  //하우스 4 - 습도
-    private MutableLiveData<Integer> House04_Humi1_2;  //하우스 4 - 습도
+//    private MutableLiveData<Integer> House04_Humi1_2;  //하우스 4 - 습도
     private MutableLiveData<Integer> House04_Humi2_1;  //하우스 4 - 습도
-    private MutableLiveData<Integer> House04_Humi2_2;  //하우스 4 - 습도
+//    private MutableLiveData<Integer> House04_Humi2_2;  //하우스 4 - 습도
     private MutableLiveData<Integer> House04_Humi3_1;  //하우스 4 - 습도
-    private MutableLiveData<Integer> House04_Humi3_2;  //하우스 4 - 습도
+//    private MutableLiveData<Integer> House04_Humi3_2;  //하우스 4 - 습도
     private MutableLiveData<Integer> House04_Humi4_1;  //하우스 4 - 습도
-    private MutableLiveData<Integer> House04_Humi4_2;  //하우스 4 - 습도
-
+//    private MutableLiveData<Integer> House04_Humi4_2;  //하우스 4 - 습도
+    private MutableLiveData<Integer> House04_Humi5_1;  //하우스 4 - 습도
+    private MutableLiveData<Integer> House04_Humi6_1;  //하우스 4 - 습도
 
     private MutableLiveData<Boolean> Water_Shortage;    // 물부족
 
@@ -146,47 +166,61 @@ public class MainViewModel extends ViewModel {
             House01_Temp1_1 = new MutableLiveData<>(0);
         return House01_Temp1_1;
     }
-    public MutableLiveData<Integer> getHouse01_Temp1_2()
-    {
-        if(House01_Temp1_2 == null)
-            House01_Temp1_2 = new MutableLiveData<>(0);
-        return House01_Temp1_2;
-    }
+//    public MutableLiveData<Integer> getHouse01_Temp1_2()
+//    {
+//        if(House01_Temp1_2 == null)
+//            House01_Temp1_2 = new MutableLiveData<>(0);
+//        return House01_Temp1_2;
+//    }
     public MutableLiveData<Integer> getHouse01_Temp2_1()
     {
         if(House01_Temp2_1 == null)
             House01_Temp2_1 = new MutableLiveData<>(0);
         return House01_Temp2_1;
     }
-    public MutableLiveData<Integer> getHouse01_Temp2_2()
-    {
-        if(House01_Temp2_2 == null)
-            House01_Temp2_2 = new MutableLiveData<>(0);
-        return House01_Temp2_2;
-    }
+//    public MutableLiveData<Integer> getHouse01_Temp2_2()
+//    {
+//        if(House01_Temp2_2 == null)
+//            House01_Temp2_2 = new MutableLiveData<>(0);
+//        return House01_Temp2_2;
+//    }
     public MutableLiveData<Integer> getHouse01_Temp3_1()
     {
         if(House01_Temp3_1 == null)
             House01_Temp3_1 = new MutableLiveData<>(0);
         return House01_Temp3_1;
     }
-    public MutableLiveData<Integer> getHouse01_Temp3_2()
-    {
-        if(House01_Temp3_2 == null)
-            House01_Temp3_2 = new MutableLiveData<>(0);
-        return House01_Temp3_2;
-    }
+//    public MutableLiveData<Integer> getHouse01_Temp3_2()
+//    {
+//        if(House01_Temp3_2 == null)
+//            House01_Temp3_2 = new MutableLiveData<>(0);
+//        return House01_Temp3_2;
+//    }
     public MutableLiveData<Integer> getHouse01_Temp4_1()
     {
         if(House01_Temp4_1 == null)
             House01_Temp4_1 = new MutableLiveData<>(0);
         return House01_Temp4_1;
     }
-    public MutableLiveData<Integer> getHouse01_Temp4_2()
+//    public MutableLiveData<Integer> getHouse01_Temp4_2()
+//    {
+//        if(House01_Temp4_2 == null)
+//            House01_Temp4_2 = new MutableLiveData<>(0);
+//        return House01_Temp4_2;
+//    }
+
+    public MutableLiveData<Integer> getHouse01_Temp5_1()
     {
-        if(House01_Temp4_2 == null)
-            House01_Temp4_2 = new MutableLiveData<>(0);
-        return House01_Temp4_2;
+        if(House01_Temp5_1 == null)
+            House01_Temp5_1 = new MutableLiveData<>(0);
+        return House01_Temp5_1;
+    }
+
+    public MutableLiveData<Integer> getHouse01_Temp6_1()
+    {
+        if(House01_Temp6_1 == null)
+            House01_Temp6_1 = new MutableLiveData<>(0);
+        return House01_Temp6_1;
     }
 
 
@@ -196,47 +230,59 @@ public class MainViewModel extends ViewModel {
             House01_Humi1_1 = new MutableLiveData<>(0);
         return House01_Humi1_1;
     }
-    public MutableLiveData<Integer> getHouse01_Humi1_2()
-    {
-        if(House01_Humi1_2 == null)
-            House01_Humi1_2 = new MutableLiveData<>(0);
-        return House01_Humi1_2;
-    }
+//    public MutableLiveData<Integer> getHouse01_Humi1_2()
+//    {
+//        if(House01_Humi1_2 == null)
+//            House01_Humi1_2 = new MutableLiveData<>(0);
+//        return House01_Humi1_2;
+//    }
     public MutableLiveData<Integer> getHouse01_Humi2_1()
     {
         if(House01_Humi2_1 == null)
             House01_Humi2_1 = new MutableLiveData<>(0);
         return House01_Humi2_1;
     }
-    public MutableLiveData<Integer> getHouse01_Humi2_2()
-    {
-        if(House01_Humi2_2 == null)
-            House01_Humi2_2 = new MutableLiveData<>(0);
-        return House01_Humi2_2;
-    }
+//    public MutableLiveData<Integer> getHouse01_Humi2_2()
+//    {
+//        if(House01_Humi2_2 == null)
+//            House01_Humi2_2 = new MutableLiveData<>(0);
+//        return House01_Humi2_2;
+//    }
     public MutableLiveData<Integer> getHouse01_Humi3_1()
     {
         if(House01_Humi3_1 == null)
             House01_Humi3_1 = new MutableLiveData<>(0);
         return House01_Humi3_1;
     }
-    public MutableLiveData<Integer> getHouse01_Humi3_2()
-    {
-        if(House01_Humi3_2 == null)
-            House01_Humi3_2 = new MutableLiveData<>(0);
-        return House01_Humi3_2;
-    }
+//    public MutableLiveData<Integer> getHouse01_Humi3_2()
+//    {
+//        if(House01_Humi3_2 == null)
+//            House01_Humi3_2 = new MutableLiveData<>(0);
+//        return House01_Humi3_2;
+//    }
     public MutableLiveData<Integer> getHouse01_Humi4_1()
     {
         if(House01_Humi4_1 == null)
             House01_Humi4_1 = new MutableLiveData<>(0);
         return House01_Humi4_1;
     }
-    public MutableLiveData<Integer> getHouse01_Humi4_2()
+//    public MutableLiveData<Integer> getHouse01_Humi4_2()
+//    {
+//        if(House01_Humi4_2 == null)
+//            House01_Humi4_2 = new MutableLiveData<>(0);
+//        return House01_Humi4_2;
+//    }
+    public MutableLiveData<Integer> getHouse01_Humi5_1()
     {
-        if(House01_Humi4_2 == null)
-            House01_Humi4_2 = new MutableLiveData<>(0);
-        return House01_Humi4_2;
+        if(House01_Humi5_1 == null)
+            House01_Humi5_1 = new MutableLiveData<>(0);
+        return House01_Humi5_1;
+    }
+    public MutableLiveData<Integer> getHouse01_Humi6_1()
+    {
+        if(House01_Humi6_1 == null)
+            House01_Humi6_1 = new MutableLiveData<>(0);
+        return House01_Humi6_1;
     }
 
 
@@ -246,49 +292,62 @@ public class MainViewModel extends ViewModel {
             House02_Temp1_1 = new MutableLiveData<>(0);
         return House02_Temp1_1;
     }
-    public MutableLiveData<Integer> getHouse02_Temp1_2()
-    {
-        if(House02_Temp1_2 == null)
-            House02_Temp1_2 = new MutableLiveData<>(0);
-        return House02_Temp1_2;
-    }
+//    public MutableLiveData<Integer> getHouse02_Temp1_2()
+//    {
+//        if(House02_Temp1_2 == null)
+//            House02_Temp1_2 = new MutableLiveData<>(0);
+//        return House02_Temp1_2;
+//    }
     public MutableLiveData<Integer> getHouse02_Temp2_1()
     {
         if(House02_Temp2_1 == null)
             House02_Temp2_1 = new MutableLiveData<>(0);
         return House02_Temp2_1;
     }
-    public MutableLiveData<Integer> getHouse02_Temp2_2()
-    {
-        if(House02_Temp2_2 == null)
-            House02_Temp2_2 = new MutableLiveData<>(0);
-        return House02_Temp2_2;
-    }
+//    public MutableLiveData<Integer> getHouse02_Temp2_2()
+//    {
+//        if(House02_Temp2_2 == null)
+//            House02_Temp2_2 = new MutableLiveData<>(0);
+//        return House02_Temp2_2;
+//    }
     public MutableLiveData<Integer> getHouse02_Temp3_1()
     {
         if(House02_Temp3_1 == null)
             House02_Temp3_1 = new MutableLiveData<>(0);
         return House02_Temp3_1;
     }
-    public MutableLiveData<Integer> getHouse02_Temp3_2()
-    {
-        if(House02_Temp3_2 == null)
-            House02_Temp3_2 = new MutableLiveData<>(0);
-        return House02_Temp3_2;
-    }
+//    public MutableLiveData<Integer> getHouse02_Temp3_2()
+//    {
+//        if(House02_Temp3_2 == null)
+//            House02_Temp3_2 = new MutableLiveData<>(0);
+//        return House02_Temp3_2;
+//    }
     public MutableLiveData<Integer> getHouse02_Temp4_1()
     {
         if(House02_Temp4_1 == null)
             House02_Temp4_1 = new MutableLiveData<>(0);
         return House02_Temp4_1;
     }
-    public MutableLiveData<Integer> getHouse02_Temp4_2()
-    {
-        if(House02_Temp4_2 == null)
-            House02_Temp4_2 = new MutableLiveData<>(0);
-        return House02_Temp4_2;
+//    public MutableLiveData<Integer> getHouse02_Temp4_2()
+//    {
+//        if(House02_Temp4_2 == null)
+//            House02_Temp4_2 = new MutableLiveData<>(0);
+//        return House02_Temp4_2;
+//    }
+    public MutableLiveData<Integer> getHouse02_Temp5_1()
+    {   
+        if(House02_Temp5_1 == null)
+            House02_Temp5_1 = new MutableLiveData<>(0);
+        return House02_Temp5_1;
     }
 
+    public MutableLiveData<Integer> getHouse02_Temp6_1()
+    {
+        if(House02_Temp6_1 == null)
+            House02_Temp6_1 = new MutableLiveData<>(0);
+        return House02_Temp6_1;
+    }
+    
 
     public MutableLiveData<Integer> getHouse02_Humi1_1()
     {
@@ -296,49 +355,60 @@ public class MainViewModel extends ViewModel {
             House02_Humi1_1 = new MutableLiveData<>(0);
         return House02_Humi1_1;
     }
-    public MutableLiveData<Integer> getHouse02_Humi1_2()
-    {
-        if(House02_Humi1_2 == null)
-            House02_Humi1_2 = new MutableLiveData<>(0);
-        return House02_Humi1_2;
-    }
+//    public MutableLiveData<Integer> getHouse02_Humi1_2()
+//    {
+//        if(House02_Humi1_2 == null)
+//            House02_Humi1_2 = new MutableLiveData<>(0);
+//        return House02_Humi1_2;
+//    }
     public MutableLiveData<Integer> getHouse02_Humi2_1()
     {
         if(House02_Humi2_1 == null)
             House02_Humi2_1 = new MutableLiveData<>(0);
         return House02_Humi2_1;
     }
-    public MutableLiveData<Integer> getHouse02_Humi2_2()
-    {
-        if(House02_Humi2_2 == null)
-            House02_Humi2_2 = new MutableLiveData<>(0);
-        return House02_Humi2_2;
-    }
+//    public MutableLiveData<Integer> getHouse02_Humi2_2()
+//    {
+//        if(House02_Humi2_2 == null)
+//            House02_Humi2_2 = new MutableLiveData<>(0);
+//        return House02_Humi2_2;
+//    }
     public MutableLiveData<Integer> getHouse02_Humi3_1()
     {
         if(House02_Humi3_1 == null)
             House02_Humi3_1 = new MutableLiveData<>(0);
         return House02_Humi3_1;
     }
-    public MutableLiveData<Integer> getHouse02_Humi3_2()
-    {
-        if(House02_Humi3_2 == null)
-            House02_Humi3_2 = new MutableLiveData<>(0);
-        return House02_Humi3_2;
-    }
+//    public MutableLiveData<Integer> getHouse02_Humi3_2()
+//    {
+//        if(House02_Humi3_2 == null)
+//            House02_Humi3_2 = new MutableLiveData<>(0);
+//        return House02_Humi3_2;
+//    }
     public MutableLiveData<Integer> getHouse02_Humi4_1()
     {
         if(House02_Humi4_1 == null)
             House02_Humi4_1 = new MutableLiveData<>(0);
         return House02_Humi4_1;
     }
-    public MutableLiveData<Integer> getHouse02_Humi4_2()
+//    public MutableLiveData<Integer> getHouse02_Humi4_2()
+//    {
+//        if(House02_Humi4_2 == null)
+//            House02_Humi4_2 = new MutableLiveData<>(0);
+//        return House02_Humi4_2;
+//    }
+    public MutableLiveData<Integer> getHouse02_Humi5_1()
     {
-        if(House02_Humi4_2 == null)
-            House02_Humi4_2 = new MutableLiveData<>(0);
-        return House02_Humi4_2;
+        if(House02_Humi5_1 == null)
+            House02_Humi5_1 = new MutableLiveData<>(0);
+        return House02_Humi5_1;
     }
-
+    public MutableLiveData<Integer> getHouse02_Humi6_1()
+    {
+        if(House02_Humi6_1 == null)
+            House02_Humi6_1 = new MutableLiveData<>(0);
+        return House02_Humi6_1;
+    }
 
 
     public MutableLiveData<Integer> getHouse03_Temp1_1()
@@ -347,47 +417,60 @@ public class MainViewModel extends ViewModel {
             House03_Temp1_1 = new MutableLiveData<>(0);
         return House03_Temp1_1;
     }
-    public MutableLiveData<Integer> getHouse03_Temp1_2()
-    {
-        if(House03_Temp1_2 == null)
-            House03_Temp1_2 = new MutableLiveData<>(0);
-        return House03_Temp1_2;
-    }
+//    public MutableLiveData<Integer> getHouse03_Temp1_2()
+//    {
+//        if(House03_Temp1_2 == null)
+//            House03_Temp1_2 = new MutableLiveData<>(0);
+//        return House03_Temp1_2;
+//    }
     public MutableLiveData<Integer> getHouse03_Temp2_1()
     {
         if(House03_Temp2_1 == null)
             House03_Temp2_1 = new MutableLiveData<>(0);
         return House03_Temp2_1;
     }
-    public MutableLiveData<Integer> getHouse03_Temp2_2()
-    {
-        if(House03_Temp2_2 == null)
-            House03_Temp2_2 = new MutableLiveData<>(0);
-        return House03_Temp2_2;
-    }
+//    public MutableLiveData<Integer> getHouse03_Temp2_2()
+//    {
+//        if(House03_Temp2_2 == null)
+//            House03_Temp2_2 = new MutableLiveData<>(0);
+//        return House03_Temp2_2;
+//    }
     public MutableLiveData<Integer> getHouse03_Temp3_1()
     {
         if(House03_Temp3_1 == null)
             House03_Temp3_1 = new MutableLiveData<>(0);
         return House03_Temp3_1;
     }
-    public MutableLiveData<Integer> getHouse03_Temp3_2()
-    {
-        if(House03_Temp3_2 == null)
-            House03_Temp3_2 = new MutableLiveData<>(0);
-        return House03_Temp3_2;
-    }
+//    public MutableLiveData<Integer> getHouse03_Temp3_2()
+//    {
+//        if(House03_Temp3_2 == null)
+//            House03_Temp3_2 = new MutableLiveData<>(0);
+//        return House03_Temp3_2;
+//    }
     public MutableLiveData<Integer> getHouse03_Temp4_1()
     {
         if(House03_Temp4_1 == null)
             House03_Temp4_1 = new MutableLiveData<>(0);
         return House03_Temp4_1;
     }
-    public MutableLiveData<Integer> getHouse03_Temp4_2()
+//    public MutableLiveData<Integer> getHouse03_Temp4_2()
+//    {
+//        if(House03_Temp4_2 == null)
+//            House03_Temp4_2 = new MutableLiveData<>(0);
+//        return House03_Temp4_2;
+//    }
+    public MutableLiveData<Integer> getHouse03_Temp5_1()
     {
-        if(House03_Temp4_2 == null)
-            House03_Temp4_2 = new MutableLiveData<>(0);
-        return House03_Temp4_2;
+        if(House03_Temp5_1 == null)
+            House03_Temp5_1 = new MutableLiveData<>(0);
+        return House03_Temp5_1;
+    }
+
+    public MutableLiveData<Integer> getHouse03_Temp6_1()
+    {
+        if(House03_Temp6_1 == null)
+            House03_Temp6_1 = new MutableLiveData<>(0);
+        return House03_Temp6_1;
     }
 
 
@@ -397,49 +480,60 @@ public class MainViewModel extends ViewModel {
             House03_Humi1_1 = new MutableLiveData<>(0);
         return House03_Humi1_1;
     }
-    public MutableLiveData<Integer> getHouse03_Humi1_2()
-    {
-        if(House03_Humi1_2 == null)
-            House03_Humi1_2 = new MutableLiveData<>(0);
-        return House03_Humi1_2;
-    }
+//    public MutableLiveData<Integer> getHouse03_Humi1_2()
+//    {
+//        if(House03_Humi1_2 == null)
+//            House03_Humi1_2 = new MutableLiveData<>(0);
+//        return House03_Humi1_2;
+//    }
     public MutableLiveData<Integer> getHouse03_Humi2_1()
     {
         if(House03_Humi2_1 == null)
             House03_Humi2_1 = new MutableLiveData<>(0);
         return House03_Humi2_1;
     }
-    public MutableLiveData<Integer> getHouse03_Humi2_2()
-    {
-        if(House03_Humi2_2 == null)
-            House03_Humi2_2 = new MutableLiveData<>(0);
-        return House03_Humi2_2;
-    }
+//    public MutableLiveData<Integer> getHouse03_Humi2_2()
+//    {
+//        if(House03_Humi2_2 == null)
+//            House03_Humi2_2 = new MutableLiveData<>(0);
+//        return House03_Humi2_2;
+//    }
     public MutableLiveData<Integer> getHouse03_Humi3_1()
     {
         if(House03_Humi3_1 == null)
             House03_Humi3_1 = new MutableLiveData<>(0);
         return House03_Humi3_1;
     }
-    public MutableLiveData<Integer> getHouse03_Humi3_2()
-    {
-        if(House03_Humi3_2 == null)
-            House03_Humi3_2 = new MutableLiveData<>(0);
-        return House03_Humi3_2;
-    }
+//    public MutableLiveData<Integer> getHouse03_Humi3_2()
+//    {
+//        if(House03_Humi3_2 == null)
+//            House03_Humi3_2 = new MutableLiveData<>(0);
+//        return House03_Humi3_2;
+//    }
     public MutableLiveData<Integer> getHouse03_Humi4_1()
     {
         if(House03_Humi4_1 == null)
             House03_Humi4_1 = new MutableLiveData<>(0);
         return House03_Humi4_1;
     }
-    public MutableLiveData<Integer> getHouse03_Humi4_2()
+//    public MutableLiveData<Integer> getHouse03_Humi4_2()
+//    {
+//        if(House03_Humi4_2 == null)
+//            House03_Humi4_2 = new MutableLiveData<>(0);
+//        return House03_Humi4_2;
+//    }
+    public MutableLiveData<Integer> getHouse03_Humi5_1()
     {
-        if(House03_Humi4_2 == null)
-            House03_Humi4_2 = new MutableLiveData<>(0);
-        return House03_Humi4_2;
+        if(House03_Humi5_1 == null)
+            House03_Humi5_1 = new MutableLiveData<>(0);
+        return House03_Humi5_1;
     }
-
+    public MutableLiveData<Integer> getHouse03_Humi6_1()
+    {
+        if(House03_Humi6_1 == null)
+            House03_Humi6_1 = new MutableLiveData<>(0);
+        return House03_Humi6_1;
+    }
 
 
     public MutableLiveData<Integer> getHouse04_Temp1_1()
@@ -448,49 +542,61 @@ public class MainViewModel extends ViewModel {
             House04_Temp1_1 = new MutableLiveData<>(0);
         return House04_Temp1_1;
     }
-    public MutableLiveData<Integer> getHouse04_Temp1_2()
-    {
-        if(House04_Temp1_2 == null)
-            House04_Temp1_2 = new MutableLiveData<>(0);
-        return House04_Temp1_2;
-    }
+//    public MutableLiveData<Integer> getHouse04_Temp1_2()
+//    {
+//        if(House04_Temp1_2 == null)
+//            House04_Temp1_2 = new MutableLiveData<>(0);
+//        return House04_Temp1_2;
+//    }
     public MutableLiveData<Integer> getHouse04_Temp2_1()
     {
         if(House04_Temp2_1 == null)
             House04_Temp2_1 = new MutableLiveData<>(0);
         return House04_Temp2_1;
     }
-    public MutableLiveData<Integer> getHouse04_Temp2_2()
-    {
-        if(House04_Temp2_2 == null)
-            House04_Temp2_2 = new MutableLiveData<>(0);
-        return House04_Temp2_2;
-    }
+//    public MutableLiveData<Integer> getHouse04_Temp2_2()
+//    {
+//        if(House04_Temp2_2 == null)
+//            House04_Temp2_2 = new MutableLiveData<>(0);
+//        return House04_Temp2_2;
+//    }
     public MutableLiveData<Integer> getHouse04_Temp3_1()
     {
         if(House04_Temp3_1 == null)
             House04_Temp3_1 = new MutableLiveData<>(0);
         return House04_Temp3_1;
     }
-    public MutableLiveData<Integer> getHouse04_Temp3_2()
-    {
-        if(House04_Temp3_2 == null)
-            House04_Temp3_2 = new MutableLiveData<>(0);
-        return House04_Temp3_2;
-    }
+//    public MutableLiveData<Integer> getHouse04_Temp3_2()
+//    {
+//        if(House04_Temp3_2 == null)
+//            House04_Temp3_2 = new MutableLiveData<>(0);
+//        return House04_Temp3_2;
+//    }
     public MutableLiveData<Integer> getHouse04_Temp4_1()
     {
         if(House04_Temp4_1 == null)
             House04_Temp4_1 = new MutableLiveData<>(0);
         return House04_Temp4_1;
     }
-    public MutableLiveData<Integer> getHouse04_Temp4_2()
+//    public MutableLiveData<Integer> getHouse04_Temp4_2()
+//    {
+//        if(House04_Temp4_2 == null)
+//            House04_Temp4_2 = new MutableLiveData<>(0);
+//        return House04_Temp4_2;
+//    }
+    public MutableLiveData<Integer> getHouse04_Temp5_1()
     {
-        if(House04_Temp4_2 == null)
-            House04_Temp4_2 = new MutableLiveData<>(0);
-        return House04_Temp4_2;
+        if(House04_Temp5_1 == null)
+            House04_Temp5_1 = new MutableLiveData<>(0);
+        return House04_Temp5_1;
     }
 
+    public MutableLiveData<Integer> getHouse04_Temp6_1()
+    {
+        if(House04_Temp6_1 == null)
+            House04_Temp6_1 = new MutableLiveData<>(0);
+        return House04_Temp6_1;
+    }
 
     public MutableLiveData<Integer> getHouse04_Humi1_1()
     {
@@ -498,47 +604,59 @@ public class MainViewModel extends ViewModel {
             House04_Humi1_1 = new MutableLiveData<>(0);
         return House04_Humi1_1;
     }
-    public MutableLiveData<Integer> getHouse04_Humi1_2()
-    {
-        if(House04_Humi1_2 == null)
-            House04_Humi1_2 = new MutableLiveData<>(0);
-        return House04_Humi1_2;
-    }
+//    public MutableLiveData<Integer> getHouse04_Humi1_2()
+//    {
+//        if(House04_Humi1_2 == null)
+//            House04_Humi1_2 = new MutableLiveData<>(0);
+//        return House04_Humi1_2;
+//    }
     public MutableLiveData<Integer> getHouse04_Humi2_1()
     {
         if(House04_Humi2_1 == null)
             House04_Humi2_1 = new MutableLiveData<>(0);
         return House04_Humi2_1;
     }
-    public MutableLiveData<Integer> getHouse04_Humi2_2()
-    {
-        if(House04_Humi2_2 == null)
-            House04_Humi2_2 = new MutableLiveData<>(0);
-        return House04_Humi2_2;
-    }
+//    public MutableLiveData<Integer> getHouse04_Humi2_2()
+//    {
+//        if(House04_Humi2_2 == null)
+//            House04_Humi2_2 = new MutableLiveData<>(0);
+//        return House04_Humi2_2;
+//    }
     public MutableLiveData<Integer> getHouse04_Humi3_1()
     {
         if(House04_Humi3_1 == null)
             House04_Humi3_1 = new MutableLiveData<>(0);
         return House04_Humi3_1;
     }
-    public MutableLiveData<Integer> getHouse04_Humi3_2()
-    {
-        if(House04_Humi3_2 == null)
-            House04_Humi3_2 = new MutableLiveData<>(0);
-        return House04_Humi3_2;
-    }
+//    public MutableLiveData<Integer> getHouse04_Humi3_2()
+//    {
+//        if(House04_Humi3_2 == null)
+//            House04_Humi3_2 = new MutableLiveData<>(0);
+//        return House04_Humi3_2;
+//    }
     public MutableLiveData<Integer> getHouse04_Humi4_1()
     {
         if(House04_Humi4_1 == null)
             House04_Humi4_1 = new MutableLiveData<>(0);
         return House04_Humi4_1;
     }
-    public MutableLiveData<Integer> getHouse04_Humi4_2()
+//    public MutableLiveData<Integer> getHouse04_Humi4_2()
+//    {
+//        if(House04_Humi4_2 == null)
+//            House04_Humi4_2 = new MutableLiveData<>(0);
+//        return House04_Humi4_2;
+//    }
+    public MutableLiveData<Integer> getHouse04_Humi5_1()
     {
-        if(House04_Humi4_2 == null)
-            House04_Humi4_2 = new MutableLiveData<>(0);
-        return House04_Humi4_2;
+        if(House04_Humi5_1 == null)
+            House04_Humi5_1 = new MutableLiveData<>(0);
+        return House04_Humi5_1;
+    }
+    public MutableLiveData<Integer> getHouse04_Humi6_1()
+    {
+        if(House04_Humi6_1 == null)
+            House04_Humi6_1 = new MutableLiveData<>(0);
+        return House04_Humi6_1;
     }
 
 

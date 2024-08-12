@@ -119,10 +119,10 @@ public class Fragment_03 extends Fragment {
                     Running_situation_2.setText("방제중");
                     break;
                 case 1:
-                    Running_situation_2.setText("에어청소");
+                    Running_situation_2.setText("물청소");
                     break;
                 case 2:
-                    Running_situation_2.setText("물청소");
+                    Running_situation_2.setText("에어청소");
                     break;
                 case 3:
                     Running_situation_2.setText("휴지중");

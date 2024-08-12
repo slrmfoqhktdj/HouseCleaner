@@ -584,8 +584,111 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:shadowColor="#011851"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="방제"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".1"
+                app:layout_constraintHorizontal_bias="0.458"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.06"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".3"
+                tools:ignore="SpeakableTextPresentCheck"
+
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:shadowColor="#011851"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="청소"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".1"
+                app:layout_constraintHorizontal_bias="0.958"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.06"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".3"
+                tools:ignore="SpeakableTextPresentCheck"
+
+                />
 
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".7"
+                app:layout_constraintHorizontal_bias="0.458"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".3"
+
+                android:background="@drawable/layout_main_corner"
+
+                />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".7"
+                app:layout_constraintHorizontal_bias="0.958"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".3"
+
+                android:background="@drawable/layout_main_corner"
+
+                />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
@@ -679,7 +782,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent=".5"
-                app:layout_constraintHorizontal_bias="0.575"
+                app:layout_constraintHorizontal_bias="0.565"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -754,6 +857,9 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -762,7 +868,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent=".5"
-                app:layout_constraintHorizontal_bias="0.77"
+                app:layout_constraintHorizontal_bias="0.79"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -810,7 +916,7 @@
                     android:shadowColor="#011851"
                     android:shadowDy="1"
                     android:shadowRadius="1"
-                    android:text="에어청소"
+                    android:text="물청소"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -893,7 +999,7 @@
                     android:shadowColor="#011851"
                     android:shadowDy="1"
                     android:shadowRadius="1"
-                    android:text="물청소"
+                    android:text="에어청소"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -1250,7 +1356,111 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:shadowColor="#011851"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="방제"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
 
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".1"
+                app:layout_constraintHorizontal_bias="0.458"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.06"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".3"
+                tools:ignore="SpeakableTextPresentCheck"
+
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:shadowColor="#011851"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="청소"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".1"
+                app:layout_constraintHorizontal_bias="0.958"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.06"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".3"
+                tools:ignore="SpeakableTextPresentCheck"
+
+                />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".7"
+                app:layout_constraintHorizontal_bias="0.458"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".3"
+
+                android:background="@drawable/layout_main_corner"
+
+                />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".7"
+                app:layout_constraintHorizontal_bias="0.958"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".3"
+
+                android:background="@drawable/layout_main_corner"
+
+                />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -1344,7 +1554,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent=".5"
-                app:layout_constraintHorizontal_bias="0.575"
+                app:layout_constraintHorizontal_bias="0.565"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -1428,7 +1638,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent=".5"
-                app:layout_constraintHorizontal_bias="0.77"
+                app:layout_constraintHorizontal_bias="0.79"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -1477,7 +1687,7 @@
                     android:shadowColor="#011851"
                     android:shadowDy="1"
                     android:shadowRadius="1"
-                    android:text="에어청소"
+                    android:text="물청소"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -1561,7 +1771,7 @@
                     android:shadowColor="#011851"
                     android:shadowDy="1"
                     android:shadowRadius="1"
-                    android:text="물청소"
+                    android:text="에어청소"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"

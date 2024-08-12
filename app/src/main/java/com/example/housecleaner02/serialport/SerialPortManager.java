@@ -446,6 +446,16 @@ public class SerialPortManager extends SerialPort {
                 senddata = new byte[]{0x02,0x57,0x01,0x04,NozzleStep,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
+            case       House_01_Nozzle_5: // house 01 노즐 5단계
+                crcdata = CRC16Util.sendData(new byte[]{0x05,NozzleStep});
+                senddata = new byte[]{0x02,0x57,0x01,0x05,NozzleStep,crcdata[1],crcdata[2],0x03};
+                sendBytes(senddata);
+                break;
+            case       House_01_Nozzle_6: // house 01 노즐 6단계
+                crcdata = CRC16Util.sendData(new byte[]{0x06,NozzleStep});
+                senddata = new byte[]{0x02,0x57,0x01,0x06,NozzleStep,crcdata[1],crcdata[2],0x03};
+                sendBytes(senddata);
+                break;
 
             case       House_02_Nozzle_1:  // house 02 노즐 1단계
                 crcdata = CRC16Util.sendData(new byte[]{0x01,NozzleStep});
@@ -465,6 +475,16 @@ public class SerialPortManager extends SerialPort {
             case       House_02_Nozzle_4: // house 02 노즐 4단계
                 crcdata = CRC16Util.sendData(new byte[]{0x04,NozzleStep});
                 senddata = new byte[]{0x02,0x58,0x01,0x04,NozzleStep,crcdata[1],crcdata[2],0x03};
+                sendBytes(senddata);
+                break;
+            case       House_02_Nozzle_5: // house 01 노즐 5단계
+                crcdata = CRC16Util.sendData(new byte[]{0x05,NozzleStep});
+                senddata = new byte[]{0x02,0x58,0x01,0x05,NozzleStep,crcdata[1],crcdata[2],0x03};
+                sendBytes(senddata);
+                break;
+            case       House_02_Nozzle_6: // house 01 노즐 6단계
+                crcdata = CRC16Util.sendData(new byte[]{0x06,NozzleStep});
+                senddata = new byte[]{0x02,0x58,0x01,0x06,NozzleStep,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
 
@@ -488,7 +508,16 @@ public class SerialPortManager extends SerialPort {
                 senddata = new byte[]{0x02,0x59,0x01,0x04,NozzleStep,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
-
+            case       House_03_Nozzle_5: // house 01 노즐 5단계
+                crcdata = CRC16Util.sendData(new byte[]{0x05,NozzleStep});
+                senddata = new byte[]{0x02,0x59,0x01,0x05,NozzleStep,crcdata[1],crcdata[2],0x03};
+                sendBytes(senddata);
+                break;
+            case       House_03_Nozzle_6: // house 01 노즐 6단계
+                crcdata = CRC16Util.sendData(new byte[]{0x06,NozzleStep});
+                senddata = new byte[]{0x02,0x59,0x01,0x06,NozzleStep,crcdata[1],crcdata[2],0x03};
+                sendBytes(senddata);
+                break;
             case        House_04_Nozzle_1:  // house 04 노즐 1단계
                 crcdata = CRC16Util.sendData(new byte[]{0x01,NozzleStep});
                 senddata = new byte[]{0x02,0x5A,0x01,0x01,NozzleStep,crcdata[1],crcdata[2],0x03};
@@ -507,6 +536,21 @@ public class SerialPortManager extends SerialPort {
             case        House_04_Nozzle_4: // house 04 노즐 4단계
                 crcdata = CRC16Util.sendData(new byte[]{0x04,NozzleStep});
                 senddata = new byte[]{0x02,0x5A,0x01,0x04,NozzleStep,crcdata[1],crcdata[2],0x03};
+                sendBytes(senddata);
+                break;
+            case       House_04_Nozzle_5: // house 01 노즐 5단계
+                crcdata = CRC16Util.sendData(new byte[]{0x05,NozzleStep});
+                senddata = new byte[]{0x02,0x5A,0x01,0x05,NozzleStep,crcdata[1],crcdata[2],0x03};
+                sendBytes(senddata);
+                break;
+            case       House_04_Nozzle_6: // house 01 노즐 6단계
+                crcdata = CRC16Util.sendData(new byte[]{0x06,NozzleStep});
+                senddata = new byte[]{0x02,0x5A,0x01,0x06,NozzleStep,crcdata[1],crcdata[2],0x03};
+                sendBytes(senddata);
+                break;
+            case House_All_Stop:
+                crcdata = CRC16Util.sendData(new byte[]{0x00,0x00});
+                senddata = new byte[]{0x02, (byte) 0x80,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
         }

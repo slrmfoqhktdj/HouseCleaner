@@ -44,7 +44,19 @@ public enum KeyModel {
     House03and04_Cleaning02,
 
 
-    TH_Auto_Min,
-    TH_Auto_Max,
+    Deviation,
+    th_main,
+
+    House01_Nozzle05,
+    House01_Nozzle06,
+
+    House02_Nozzle05,
+    House02_Nozzle06,
+
+    House03_Nozzle05,
+    House03_Nozzle06,
+
+    House04_Nozzle05,
+    House04_Nozzle06,
 
 }

@@ -17,4 +17,6 @@
     <color name="water_shartage_shadow">#878787</color>
     <color name="water_shartage_alarm">#FF3636</color>
     <color name="water_shartage_alarm_shadow">#DB0000</color>
+    <color name="th_setting_gray">#e0e0e0</color>
+
 </resources>
