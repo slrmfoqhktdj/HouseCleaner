@@ -1,6 +1,7 @@
 package com.example.housecleaner02.filemanage;
 
 import android.os.Environment;
+import android.util.Log;
 
 import com.example.housecleaner02.model.DeviceModel;
 import com.orhanobut.logger.LogStrategy;
@@ -32,6 +33,7 @@ public class DiskLogStrategy implements LogStrategy {
         this.FileNamedateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
 //        File folder = new File(DeviceModel.getDeviceLogFilePath());
 
+//        Log.d("DiskLogStragy","path = "+logpathfile[0]);
         File folder = new File(logpathfile[1]+DeviceModel.getDeviceLogFilePath()); // 외부저장소
         if(!folder.exists()){
             folder.mkdir();
@@ -52,7 +54,7 @@ public class DiskLogStrategy implements LogStrategy {
                 origin_filename = FileName;
                 File_cnt = 0;
             }
-
+//            Log.d("DiskLogStragy","path = "+logpathfile[0]);
 //            File logFile = new File(DeviceModel.getDeviceLogFilePath()+"/", FileName +".txt");
             File logFile = new File(logpathfile[1]+DeviceModel.getDeviceLogFilePath(),FileName +"_"+File_cnt+".txt");
 

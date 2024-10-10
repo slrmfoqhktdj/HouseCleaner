@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/transparency_black"
-    >
+    android:background="@color/transparency_black">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -52,11 +51,12 @@
             />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
+
             android:layout_height="0dp"
 
             android:background="@drawable/layout_bg_corner"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_default="percent"
@@ -66,8 +66,8 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.02"
 
+            app:layout_constraintVertical_bias="0.02"
             app:layout_constraintWidth_default="percent"
             app:layout_constraintWidth_percent=".4">
 
@@ -75,26 +75,25 @@
                 android:id="@+id/nozzle_sw"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginEnd="30sp"
                 android:gravity="center|center_horizontal"
                 android:shadowColor="#011851"
                 android:shadowDy="1"
                 android:shadowRadius="1"
                 android:text="노즐 자동"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="24sp"
+                android:textOff=""
 
-                android:layout_marginEnd="30sp"
+                android:textOn=""
+
+                android:textSize="24sp"
+                android:textStyle="bold"
 
                 android:thumb="@drawable/switch_thumb"
                 android:track="@drawable/switch_track"
-
-                app:switchMinWidth="0dp"
-                android:textOff=""
-                android:textOn=""
-
-
                 app:layout_constraintBottom_toBottomOf="parent"
+
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent="1"
@@ -104,9 +103,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias=".5"
-
                 app:layout_constraintWidth_default="percent"
+
                 app:layout_constraintWidth_percent="1"
+                app:switchMinWidth="0dp"
                 tools:ignore="UseSwitchCompatOrMaterialXml"
 
                 />
@@ -115,37 +115,32 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
             android:layout_width="0dp"
+
+
             android:layout_height="0dp"
-
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_default="percent"
             app:layout_constraintHeight_percent=".55"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
 
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.45"
             app:layout_constraintWidth_default="percent"
-            app:layout_constraintWidth_percent="1"
 
 
-
-            >
-
-
-
-
+            app:layout_constraintWidth_percent="1">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout5"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
 
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
@@ -155,22 +150,21 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
 
+                app:layout_constraintVertical_bias="0.5"
                 app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent=".15"
-                >
+                app:layout_constraintWidth_percent=".11">
 
                 <ImageButton
                     android:id="@+id/Nozzle01_up_btn"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:gravity="center"
-                    android:src="@drawable/chevron_up"
                     android:background="@drawable/layout_bg_corner"
-
+                    android:gravity="center"
                     android:scaleType="fitCenter"
-                    
+
+                    android:src="@drawable/chevron_up"
+
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -185,8 +179,7 @@
                     app:layout_constraintVertical_bias="0"
 
                     app:layout_constraintWidth_default="percent"
-                    app:layout_constraintWidth_percent="1"
-                    />
+                    app:layout_constraintWidth_percent="1" />
 
 
                 <TextView
@@ -217,10 +210,10 @@
 
                     app:layout_constraintWidth_default="percent"
                     app:layout_constraintWidth_percent="1"
-                    tools:ignore="SpeakableTextPresentCheck"
-                    />
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:gravity="center"
@@ -230,39 +223,38 @@
                     android:text="1번 노즐"
                     android:textColor="@color/black"
                     android:textSize="20sp"
+
+
                     android:textStyle="bold"
-
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_default="percent"
                     app:layout_constraintHeight_percent=".25"
-                    app:layout_constraintHorizontal_bias="0"
 
+                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.285"
 
+                    app:layout_constraintVertical_bias="0.285"
                     app:layout_constraintWidth_default="percent"
                     app:layout_constraintWidth_percent="1"
-                    tools:ignore="SpeakableTextPresentCheck"
 
 
-                    />
+                    tools:ignore="SpeakableTextPresentCheck" />
 
 
                 <ImageButton
                     android:id="@+id/Nozzle01_down_btn"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:gravity="center"
-                    android:src="@drawable/chevron_down"
                     android:background="@drawable/layout_bg_corner"
-
+                    android:gravity="center"
                     android:scaleType="fitCenter"
-                   
+
+                    android:src="@drawable/chevron_down"
+
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -277,43 +269,41 @@
                     app:layout_constraintVertical_bias="1"
 
                     app:layout_constraintWidth_default="percent"
-                    app:layout_constraintWidth_percent="1"
-                    />
-
+                    app:layout_constraintWidth_percent="1" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout6"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
 
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent="1"
-                app:layout_constraintHorizontal_bias="0.205"
+                app:layout_constraintHorizontal_bias="0.15"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
 
+                app:layout_constraintVertical_bias="0.5"
                 app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent=".15"
-                >
+                app:layout_constraintWidth_percent=".11">
 
 
                 <ImageButton
                     android:id="@+id/Nozzle02_up_btn"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:gravity="center"
-                    android:src="@drawable/chevron_up"
                     android:background="@drawable/layout_bg_corner"
-
+                    android:gravity="center"
                     android:scaleType="fitCenter"
-                   
+
+                    android:src="@drawable/chevron_up"
+
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -328,9 +318,7 @@
                     app:layout_constraintVertical_bias="0"
 
                     app:layout_constraintWidth_default="percent"
-                    app:layout_constraintWidth_percent="1"
-                    />
-
+                    app:layout_constraintWidth_percent="1" />
 
 
                 <TextView
@@ -365,6 +353,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/textView2"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:gravity="center"
@@ -374,40 +363,37 @@
                     android:text="2번 노즐"
                     android:textColor="@color/black"
                     android:textSize="20sp"
+
+
                     android:textStyle="bold"
-
-
-
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_default="percent"
                     app:layout_constraintHeight_percent=".25"
-                    app:layout_constraintHorizontal_bias="0"
 
+                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.285"
 
+                    app:layout_constraintVertical_bias="0.285"
                     app:layout_constraintWidth_default="percent"
                     app:layout_constraintWidth_percent="1"
-                    tools:ignore="SpeakableTextPresentCheck"
 
-                    />
+                    tools:ignore="SpeakableTextPresentCheck" />
 
 
                 <ImageButton
                     android:id="@+id/Nozzle02_down_btn"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:gravity="center"
-                    android:src="@drawable/chevron_down"
                     android:background="@drawable/layout_bg_corner"
-
+                    android:gravity="center"
                     android:scaleType="fitCenter"
-                   
+
+                    android:src="@drawable/chevron_down"
+
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -422,41 +408,40 @@
                     app:layout_constraintVertical_bias="1"
 
                     app:layout_constraintWidth_default="percent"
-                    app:layout_constraintWidth_percent="1"
-                    />
+                    app:layout_constraintWidth_percent="1" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout7"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
 
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent="1"
-                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintHorizontal_bias="0.29"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
 
+                app:layout_constraintVertical_bias="0.5"
                 app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent=".15"
-                >
+                app:layout_constraintWidth_percent=".11">
 
                 <ImageButton
                     android:id="@+id/Nozzle03_up_btn"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:gravity="center"
-                    android:src="@drawable/chevron_up"
                     android:background="@drawable/layout_bg_corner"
-
+                    android:gravity="center"
                     android:scaleType="fitCenter"
-                    
+
+                    android:src="@drawable/chevron_up"
+
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -471,8 +456,7 @@
                     app:layout_constraintVertical_bias="0"
 
                     app:layout_constraintWidth_default="percent"
-                    app:layout_constraintWidth_percent="1"
-                    />
+                    app:layout_constraintWidth_percent="1" />
 
 
                 <TextView
@@ -507,6 +491,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:gravity="center"
@@ -516,37 +501,36 @@
                     android:text="3번 노즐"
                     android:textColor="@color/black"
                     android:textSize="20sp"
+
+
                     android:textStyle="bold"
-
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_default="percent"
                     app:layout_constraintHeight_percent=".25"
-                    app:layout_constraintHorizontal_bias="0"
 
+                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.285"
 
+                    app:layout_constraintVertical_bias="0.285"
                     app:layout_constraintWidth_default="percent"
                     app:layout_constraintWidth_percent="1"
-                    tools:ignore="SpeakableTextPresentCheck"
 
-                    />
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
                     android:id="@+id/Nozzle03_down_btn"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:gravity="center"
-                    android:src="@drawable/chevron_down"
                     android:background="@drawable/layout_bg_corner"
-
+                    android:gravity="center"
                     android:scaleType="fitCenter"
-                   
+
+                    android:src="@drawable/chevron_down"
+
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -561,41 +545,40 @@
                     app:layout_constraintVertical_bias="1"
 
                     app:layout_constraintWidth_default="percent"
-                    app:layout_constraintWidth_percent="1"
-                    />
+                    app:layout_constraintWidth_percent="1" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout8"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
 
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent="1"
-                app:layout_constraintHorizontal_bias="0.59"
+                app:layout_constraintHorizontal_bias="0.43"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
 
+                app:layout_constraintVertical_bias="0.5"
                 app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent=".15"
-                >
+                app:layout_constraintWidth_percent=".11">
 
                 <ImageButton
                     android:id="@+id/Nozzle04_up_btn"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:gravity="center"
-                    android:src="@drawable/chevron_up"
                     android:background="@drawable/layout_bg_corner"
-
+                    android:gravity="center"
                     android:scaleType="fitCenter"
-                   
+
+                    android:src="@drawable/chevron_up"
+
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -610,8 +593,7 @@
                     app:layout_constraintVertical_bias="0"
 
                     app:layout_constraintWidth_default="percent"
-                    app:layout_constraintWidth_percent="1"
-                    />
+                    app:layout_constraintWidth_percent="1" />
 
 
                 <TextView
@@ -646,6 +628,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/textView4"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:gravity="center"
@@ -655,38 +638,36 @@
                     android:text="4번 노즐"
                     android:textColor="@color/black"
                     android:textSize="20sp"
+
+
                     android:textStyle="bold"
-
-
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_default="percent"
                     app:layout_constraintHeight_percent=".25"
-                    app:layout_constraintHorizontal_bias="0"
 
+                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.285"
 
+                    app:layout_constraintVertical_bias="0.285"
                     app:layout_constraintWidth_default="percent"
                     app:layout_constraintWidth_percent="1"
-                    tools:ignore="SpeakableTextPresentCheck"
 
-                    />
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
                     android:id="@+id/Nozzle04_down_btn"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:gravity="center"
-                    android:src="@drawable/chevron_down"
                     android:background="@drawable/layout_bg_corner"
-
+                    android:gravity="center"
                     android:scaleType="fitCenter"
-                   
+
+                    android:src="@drawable/chevron_down"
+
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -701,42 +682,40 @@
                     app:layout_constraintVertical_bias="1"
 
                     app:layout_constraintWidth_default="percent"
-                    app:layout_constraintWidth_percent="1"
-                    />
-
+                    app:layout_constraintWidth_percent="1" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout9"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
 
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent="1"
-                app:layout_constraintHorizontal_bias="0.79"
+                app:layout_constraintHorizontal_bias="0.575"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
 
+                app:layout_constraintVertical_bias="0.5"
                 app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent=".15"
-                >
+                app:layout_constraintWidth_percent=".11">
 
                 <ImageButton
                     android:id="@+id/Nozzle05_up_btn"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:gravity="center"
-                    android:src="@drawable/chevron_up"
                     android:background="@drawable/layout_bg_corner"
-
+                    android:gravity="center"
                     android:scaleType="fitCenter"
+
+                    android:src="@drawable/chevron_up"
 
 
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -752,8 +731,7 @@
                     app:layout_constraintVertical_bias="0"
 
                     app:layout_constraintWidth_default="percent"
-                    app:layout_constraintWidth_percent="1"
-                    />
+                    app:layout_constraintWidth_percent="1" />
 
 
                 <TextView
@@ -788,6 +766,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/textView5"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:gravity="center"
@@ -797,37 +776,35 @@
                     android:text="5번 노즐"
                     android:textColor="@color/black"
                     android:textSize="20sp"
+
+
                     android:textStyle="bold"
-
-
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_default="percent"
                     app:layout_constraintHeight_percent=".25"
-                    app:layout_constraintHorizontal_bias="0"
 
+                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.285"
 
+                    app:layout_constraintVertical_bias="0.285"
                     app:layout_constraintWidth_default="percent"
                     app:layout_constraintWidth_percent="1"
-                    tools:ignore="SpeakableTextPresentCheck"
 
-                    />
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
                     android:id="@+id/Nozzle05_down_btn"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:gravity="center"
-                    android:src="@drawable/chevron_down"
                     android:background="@drawable/layout_bg_corner"
-
+                    android:gravity="center"
                     android:scaleType="fitCenter"
+
+                    android:src="@drawable/chevron_down"
 
 
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -843,42 +820,40 @@
                     app:layout_constraintVertical_bias="1"
 
                     app:layout_constraintWidth_default="percent"
-                    app:layout_constraintWidth_percent="1"
-                    />
-
+                    app:layout_constraintWidth_percent="1" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout10"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
 
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent="1"
-                app:layout_constraintHorizontal_bias="0.98"
+                app:layout_constraintHorizontal_bias="0.715"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
 
+                app:layout_constraintVertical_bias="0.5"
                 app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent=".15"
-                >
+                app:layout_constraintWidth_percent=".11">
 
                 <ImageButton
                     android:id="@+id/Nozzle06_up_btn"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:gravity="center"
-                    android:src="@drawable/chevron_up"
                     android:background="@drawable/layout_bg_corner"
-
+                    android:gravity="center"
                     android:scaleType="fitCenter"
+
+                    android:src="@drawable/chevron_up"
 
 
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -894,8 +869,7 @@
                     app:layout_constraintVertical_bias="0"
 
                     app:layout_constraintWidth_default="percent"
-                    app:layout_constraintWidth_percent="1"
-                    />
+                    app:layout_constraintWidth_percent="1" />
 
 
                 <TextView
@@ -930,6 +904,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/textView6"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:gravity="center"
@@ -939,37 +914,35 @@
                     android:text="6번 노즐"
                     android:textColor="@color/black"
                     android:textSize="20sp"
+
+
                     android:textStyle="bold"
-
-
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_default="percent"
                     app:layout_constraintHeight_percent=".25"
-                    app:layout_constraintHorizontal_bias="0"
 
+                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.285"
 
+                    app:layout_constraintVertical_bias="0.285"
                     app:layout_constraintWidth_default="percent"
                     app:layout_constraintWidth_percent="1"
-                    tools:ignore="SpeakableTextPresentCheck"
 
-                    />
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
                     android:id="@+id/Nozzle06_down_btn"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:gravity="center"
-                    android:src="@drawable/chevron_down"
                     android:background="@drawable/layout_bg_corner"
-
+                    android:gravity="center"
                     android:scaleType="fitCenter"
+
+                    android:src="@drawable/chevron_down"
 
 
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -985,23 +958,296 @@
                     app:layout_constraintVertical_bias="1"
 
                     app:layout_constraintWidth_default="percent"
-                    app:layout_constraintWidth_percent="1"
-                    />
-
+                    app:layout_constraintWidth_percent="1" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout11"
+                android:layout_width="0dp"
+
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="1"
+                app:layout_constraintHorizontal_bias="0.85"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                app:layout_constraintVertical_bias="0.5"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".11">
+
+                <ImageButton
+                    android:id="@+id/Nozzle07_up_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/layout_bg_corner"
+                    android:gravity="center"
+                    android:scaleType="fitCenter"
+
+                    android:src="@drawable/chevron_up"
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".2"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1" />
+
+
+                <TextView
+                    android:id="@+id/Nozzle07_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".3"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias=".69"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    tools:ignore="SpeakableTextPresentCheck"
+
+                    />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="7번 노즐"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+
+
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".25"
+
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    app:layout_constraintVertical_bias="0.285"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/Nozzle07_down_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/layout_bg_corner"
+                    android:gravity="center"
+                    android:scaleType="fitCenter"
+
+                    android:src="@drawable/chevron_down"
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".2"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout12"
+                android:layout_width="0dp"
+
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="1"
+                app:layout_constraintHorizontal_bias="0.99"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                app:layout_constraintVertical_bias="0.5"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".11">
+
+                <ImageButton
+                    android:id="@+id/Nozzle08_up_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/layout_bg_corner"
+                    android:gravity="center"
+                    android:scaleType="fitCenter"
+
+                    android:src="@drawable/chevron_up"
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".2"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1" />
+
+
+                <TextView
+                    android:id="@+id/Nozzle08_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".3"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias=".69"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    tools:ignore="SpeakableTextPresentCheck"
+
+                    />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="8번 노즐"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+
+
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".25"
+
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    app:layout_constraintVertical_bias="0.285"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/Nozzle08_down_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/layout_bg_corner"
+                    android:gravity="center"
+                    android:scaleType="fitCenter"
+
+                    android:src="@drawable/chevron_down"
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".2"
+                    app:layout_constraintHorizontal_bias="0"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
             android:layout_width="0dp"
+
+
             android:layout_height="0dp"
-
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_default="percent"
@@ -1011,23 +1257,22 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1"
 
+            app:layout_constraintVertical_bias="1"
             app:layout_constraintWidth_default="percent"
             app:layout_constraintWidth_percent="1"
-            tools:ignore="SpeakableTextPresentCheck"
 
-            >
+            tools:ignore="SpeakableTextPresentCheck">
 
             <Button
                 android:id="@+id/negative_botton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:text="취소"
-                android:textSize="20sp"
-
-                android:textStyle="bold"
                 android:backgroundTint="@color/progress_end"
+                android:text="취소"
+
+                android:textSize="20sp"
+                android:textStyle="bold"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -1048,12 +1293,12 @@
                 android:id="@+id/positive_botton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:backgroundTint="@color/progress_end"
                 android:text="확인"
+
                 android:textSize="20sp"
 
                 android:textStyle="bold"
-
-                android:backgroundTint="@color/progress_end"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -1068,8 +1313,7 @@
 
                 app:layout_constraintWidth_default="percent"
                 app:layout_constraintWidth_percent="0.2"
-                tools:ignore="SmallSp"
-                />
+                tools:ignore="SmallSp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

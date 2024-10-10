@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.housecleaner02.R;
 import com.example.housecleaner02.callback.THSettingDialogCallback;
 import com.example.housecleaner02.model.DeviceModel;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 
@@ -71,63 +72,73 @@ public class THSettingDialog extends AlertDialog {
         negative_botton = findViewById(R.id.negative_botton);
 
 
-        th_1_step.setText(String.valueOf(th_main-(Deviation*2)));
-        th_2_step.setText(String.valueOf(th_main-(Deviation)));
+        th_1_step.setText(String.valueOf(th_main-(Deviation*4)));
+        th_2_step.setText(String.valueOf(th_main-(Deviation*2)));
         th_3_step.setText(String.valueOf(th_main));
-        th_4_step.setText(String.valueOf(th_main+(Deviation)));
-        th_5_step.setText(String.valueOf(th_main+(Deviation*2)));
+        th_4_step.setText(String.valueOf(th_main+(Deviation*2)));
+        th_5_step.setText(String.valueOf(th_main+(Deviation*4)));
 
         th_deviation_tv.setText(String.valueOf(Deviation));
 
 
 
         Main_up_btn.setOnClickListener(v -> {
-            if(Integer.parseInt((String) th_5_step.getText())<50 && th_main<50){
+//            if(Integer.parseInt((String) th_5_step.getText())<50 && th_main<50){
                 th_main = th_main+1;
                 th_1_step.setText(String.valueOf(Integer.parseInt((String) th_1_step.getText())+1));
                 th_2_step.setText(String.valueOf(Integer.parseInt((String) th_2_step.getText())+1));
                 th_3_step.setText(String.valueOf(Integer.parseInt((String) th_3_step.getText())+1));
                 th_4_step.setText(String.valueOf(Integer.parseInt((String) th_4_step.getText())+1));
                 th_5_step.setText(String.valueOf(Integer.parseInt((String) th_5_step.getText())+1));
-            }
+
+                Log.d("THSettingDialog","Main_up_btn , th_main = "+th_main);
+//            }
         });
 
         Main_down_btn.setOnClickListener(v -> {
-            if(Integer.parseInt((String) th_1_step.getText()) >0 && th_main>0){
+//            if(Integer.parseInt((String) th_1_step.getText()) >0 && th_main>0){
                 th_main = th_main-1;
                 th_1_step.setText(String.valueOf(Integer.parseInt((String) th_1_step.getText())-1));
                 th_2_step.setText(String.valueOf(Integer.parseInt((String) th_2_step.getText())-1));
                 th_3_step.setText(String.valueOf(Integer.parseInt((String) th_3_step.getText())-1));
                 th_4_step.setText(String.valueOf(Integer.parseInt((String) th_4_step.getText())-1));
                 th_5_step.setText(String.valueOf(Integer.parseInt((String) th_5_step.getText())-1));
-            }
+
+            Log.d("THSettingDialog","Main_down_btn , th_main = "+th_main);
+//            }
         });
 
         Deviation_up_btn.setOnClickListener(v -> {
-            if(Integer.parseInt((String) th_3_step.getText())+(Deviation*4)<50 && Deviation<10){
+//            if(Integer.parseInt((String) th_3_step.getText())+(Deviation*4)<50 && Deviation<10){
                 Deviation = Deviation+1;
                 th_deviation_tv.setText(String.valueOf(Deviation));
                 th_1_step.setText(String.valueOf(th_main-(Deviation*4)));
                 th_2_step.setText(String.valueOf(th_main-(Deviation*2)));
                 th_4_step.setText(String.valueOf(th_main+(Deviation*2)));
                 th_5_step.setText(String.valueOf(th_main+(Deviation*4)));
-            }
+
+            Log.d("THSettingDialog","Deviation_up_btn , Deviation = "+Deviation);
+//            }
         });
 
         Deviation_down_btn.setOnClickListener(v -> {
-            if(Integer.parseInt((String) th_3_step.getText())-(Deviation*4) > 0 && Deviation>1){
+//            if(Integer.parseInt((String) th_3_step.getText())-(Deviation*4) > 0 && Deviation>1){
                 Deviation = Deviation-1;
                 th_deviation_tv.setText(String.valueOf(Deviation));
                 th_1_step.setText(String.valueOf(th_main-(Deviation*4)));
                 th_2_step.setText(String.valueOf(th_main-(Deviation*2)));
                 th_4_step.setText(String.valueOf(th_main+(Deviation*2)));
                 th_5_step.setText(String.valueOf(th_main+(Deviation*4)));
-            }
+
+            Log.d("THSettingDialog","Deviation_down_btn , Deviation = "+Deviation);
+//            }
         });
 
 
 
         positive_botton.setOnClickListener(v -> {
+
+            Logger.i("자동노즐온도설정: 3단계 = "+ th_main+" , 편차 = "+ Deviation);
 
             for (int i = 0; i < callbacksList.size(); i++) {
                 THSettingDialogCallback callbackListener = callbacksList.get(i);

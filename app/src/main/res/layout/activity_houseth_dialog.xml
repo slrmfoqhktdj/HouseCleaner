@@ -95,7 +95,7 @@
                 app:layout_constraintVertical_bias="0.5"
 
                 app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent=".15"
+                app:layout_constraintWidth_percent=".11"
                 >
 
 
@@ -339,7 +339,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent="1"
-                app:layout_constraintHorizontal_bias="0.21"
+                app:layout_constraintHorizontal_bias="0.15"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -347,7 +347,7 @@
                 app:layout_constraintVertical_bias="0.5"
 
                 app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent=".15"
+                app:layout_constraintWidth_percent=".11"
                 >
 
 
@@ -592,7 +592,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent="1"
-                app:layout_constraintHorizontal_bias="0.405"
+                app:layout_constraintHorizontal_bias="0.29"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -600,7 +600,7 @@
                 app:layout_constraintVertical_bias="0.5"
 
                 app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent=".15"
+                app:layout_constraintWidth_percent=".11"
                 >
 
 
@@ -839,7 +839,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent="1"
-                app:layout_constraintHorizontal_bias="0.598"
+                app:layout_constraintHorizontal_bias="0.43"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -847,7 +847,7 @@
                 app:layout_constraintVertical_bias="0.5"
 
                 app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent=".15"
+                app:layout_constraintWidth_percent=".11"
                 >
 
 
@@ -1086,7 +1086,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent="1"
-                app:layout_constraintHorizontal_bias="0.792"
+                app:layout_constraintHorizontal_bias="0.575"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -1094,7 +1094,7 @@
                 app:layout_constraintVertical_bias="0.5"
 
                 app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent=".15"
+                app:layout_constraintWidth_percent=".11"
                 >
 
 
@@ -1333,7 +1333,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent="1"
-                app:layout_constraintHorizontal_bias="0.99"
+                app:layout_constraintHorizontal_bias="0.715"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -1341,7 +1341,7 @@
                 app:layout_constraintVertical_bias="0.5"
 
                 app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent=".15"
+                app:layout_constraintWidth_percent=".11"
                 >
 
 
@@ -1568,6 +1568,280 @@
 <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="1"
+                app:layout_constraintHorizontal_bias="0.85"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".11"
+                >
+
+
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="0.5"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    >
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+
+                        android:background="@drawable/layout_bg_corner"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHeight_default="percent"
+                        app:layout_constraintHeight_percent="0.7"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.5"
+
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent="1"
+                        >
+
+
+                        <TextView
+                            android:id="@+id/Temp_7_1"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:gravity="center"
+                            android:shadowColor="#011851"
+                            android:shadowDy="1"
+                            android:shadowRadius="1"
+                            android:text="0 °C"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHeight_default="percent"
+                            app:layout_constraintHeight_percent=".45"
+                            app:layout_constraintHorizontal_bias="0"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.05"
+
+                            app:layout_constraintWidth_default="percent"
+                            app:layout_constraintWidth_percent="1"
+                            tools:ignore="SpeakableTextPresentCheck"
+
+                            />
+
+
+                        <TextView
+                            android:id="@+id/Humi_7_1"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:gravity="center"
+                            android:shadowColor="#011851"
+                            android:shadowDy="1"
+                            android:shadowRadius="1"
+                            android:text="0 %"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHeight_default="percent"
+                            app:layout_constraintHeight_percent=".45"
+                            app:layout_constraintHorizontal_bias="0"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias=".95"
+
+                            app:layout_constraintWidth_default="percent"
+                            app:layout_constraintWidth_percent="1"
+                            tools:ignore="SpeakableTextPresentCheck"
+
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="1"
+                app:layout_constraintHorizontal_bias="0.99"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".11"
+                >
+
+
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="0.5"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    >
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+
+                        android:background="@drawable/layout_bg_corner"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHeight_default="percent"
+                        app:layout_constraintHeight_percent="0.7"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.5"
+
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent="1"
+                        >
+
+
+                        <TextView
+                            android:id="@+id/Temp_8_1"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:gravity="center"
+                            android:shadowColor="#011851"
+                            android:shadowDy="1"
+                            android:shadowRadius="1"
+                            android:text="0 °C"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHeight_default="percent"
+                            app:layout_constraintHeight_percent=".45"
+                            app:layout_constraintHorizontal_bias="0"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.05"
+
+                            app:layout_constraintWidth_default="percent"
+                            app:layout_constraintWidth_percent="1"
+                            tools:ignore="SpeakableTextPresentCheck"
+
+                            />
+
+
+                        <TextView
+                            android:id="@+id/Humi_8_1"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:gravity="center"
+                            android:shadowColor="#011851"
+                            android:shadowDy="1"
+                            android:shadowRadius="1"
+                            android:text="0 %"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHeight_default="percent"
+                            app:layout_constraintHeight_percent=".45"
+                            app:layout_constraintHorizontal_bias="0"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias=".95"
+
+                            app:layout_constraintWidth_default="percent"
+                            app:layout_constraintWidth_percent="1"
+                            tools:ignore="SpeakableTextPresentCheck"
+
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

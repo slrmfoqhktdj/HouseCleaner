@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import com.example.housecleaner02.listener.OnOpenSerialPortListener;
 import com.example.housecleaner02.listener.OnSerialPortDataListener;
 import com.example.housecleaner02.serialport.model.SerialModel;
+import com.example.housecleaner02.sharedpreferences.KeyControl;
 
 import java.io.File;
 import java.io.FileDescriptor;
@@ -305,256 +306,414 @@ public class SerialPortManager extends SerialPort {
         byte[] senddata;
         byte[] crcdata;
 
+//        byte[] senddata2;
+//        byte[] crcdata2;
+
         switch (type){
             case   Require_Info:   // 정보요청
                 crcdata = CRC16Util.sendData(new byte[]{0x01,0x00});
-                senddata = new byte[]{0x02,0x50,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.InfoReceive_Send,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                  break;
             case   Require_House_01_TH:    //하우스 01 온습도
                 crcdata = CRC16Util.sendData(new byte[]{0x02,0x00});
-                senddata = new byte[]{0x02,0x50,0x01,0x02,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.THReceive_Send,0x01,0x02,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
             case   Require_House_02_TH:    //하우스 02 온습도
                 crcdata = CRC16Util.sendData(new byte[]{0x03,0x00});
-                senddata = new byte[]{0x02,0x50,0x01,0x03,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.THReceive_Send,0x01,0x03,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
             case   Require_House_03_TH:    //하우스 03 온습도
                 crcdata = CRC16Util.sendData(new byte[]{0x04,0x00});
-                senddata = new byte[]{0x02,0x50,0x01,0x04,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.THReceive_Send,0x01,0x04,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
             case   Require_House_04_TH:    //하우스 04 온습도
                 crcdata = CRC16Util.sendData(new byte[]{0x05,0x00});
-                senddata = new byte[]{0x02,0x50,0x01,0x05,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.THReceive_Send,0x01,0x05,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;     // 1,2 온도
                     // 3,4 습도
 
             case     Com_House_01_02_Air_Pump_Start:  // house 01,02 콤 펌프 시작
+                House_01_02_Nozzle_Open();
+                //// 34 구역과 같이 돌리기
+                House_03_04_Nozzle_Open();
+
+
                 crcdata = CRC16Util.sendData(new byte[]{0x01,0x01});
-                senddata = new byte[]{0x02,0x51,0x01,0x01,0x01,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House01and02_Com_Aire_Pump_Send,0x01,0x01,0x01,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
             case      Com_House_01_02_Air_Stop:
+
                 crcdata = CRC16Util.sendData(new byte[]{0x00,0x00});
-                senddata = new byte[]{0x02,0x51,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House01and02_Com_Aire_Pump_Send,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
+
+                House_01_02_Nozzle_Close();
+                //// 34 구역과 같이 돌리기
+                House_03_04_Nozzle_Close();
+
                 break;
             case      Com_House_01_02_Pump_Stop:
                 crcdata = CRC16Util.sendData(new byte[]{0x01,0x00});
-                senddata = new byte[]{0x02,0x51,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House01and02_Com_Aire_Pump_Send,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
 
             case      Com_House_03_04_Air_Pump_Start:  // house 03,04 콤 펌프 시작
+                House_03_04_Nozzle_Open();
+
                 crcdata = CRC16Util.sendData(new byte[]{0x01,0x01});
-                senddata = new byte[]{0x02,0x52,0x01,0x01,0x01,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House03and04_Com_Aire_Pump_Send,0x01,0x01,0x01,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
             case      Com_House_03_04_Air_Stop:
                 crcdata = CRC16Util.sendData(new byte[]{0x00,0x00});
-                senddata = new byte[]{0x02,0x52,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House03and04_Com_Aire_Pump_Send,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
+
+                House_03_04_Nozzle_Close();
                 break;
             case      Com_House_03_04_Pump_Stop:
                 crcdata = CRC16Util.sendData(new byte[]{0x01,0x00});
-                senddata = new byte[]{0x02,0x52,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House03and04_Com_Aire_Pump_Send,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
 
             case        Com_House_01_02_Cleanner01_Start:   // house 01,02 에어청소 시작
+
                 crcdata = CRC16Util.sendData(new byte[]{0x01,0x01});
-                senddata = new byte[]{0x02,0x53,0x01,0x01,0x01,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House01and02_Cleanner01_Send,0x01,0x01,0x01,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
+
+
                 break;
             case        Com_House_01_02_Cleanner01_Air_Start:
+
                 crcdata = CRC16Util.sendData(new byte[]{0x01,0x00});
-                senddata = new byte[]{0x02,0x53,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House01and02_Cleanner01_Send,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
+
                 break;
             case        Com_House_01_02_Cleanner01_Air_Stop:
+
                 crcdata = CRC16Util.sendData(new byte[]{0x00,0x00});
-                senddata = new byte[]{0x02,0x53,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House01and02_Cleanner01_Send,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
+
                 break;
             case        Com_House_01_02_Cleanner01_Pump_Stop:
+
                 crcdata = CRC16Util.sendData(new byte[]{0x01,0x00});
-                senddata = new byte[]{0x02,0x53,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House01and02_Cleanner01_Send,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
+
+
                 break;
             case       Com_House_03_04_Cleanner01_Start:   // house 03,04 에어청소 시작
                 crcdata = CRC16Util.sendData(new byte[]{0x01,0x01});
-                senddata = new byte[]{0x02,0x54,0x01,0x01,0x01,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House03and04_Cleanner01_Send,0x01,0x01,0x01,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
             case        Com_House_03_04_Cleanner01_Air_Start:
                 crcdata = CRC16Util.sendData(new byte[]{0x01,0x00});
-                senddata = new byte[]{0x02,0x54,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House03and04_Cleanner01_Send,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
             case        Com_House_03_04_Cleanner01_Air_Stop:
                 crcdata = CRC16Util.sendData(new byte[]{0x00,0x00});
-                senddata = new byte[]{0x02,0x54,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House03and04_Cleanner01_Send,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
             case        Com_House_03_04_Cleanner01_Pump_Stop:
                 crcdata = CRC16Util.sendData(new byte[]{0x01,0x00});
-                senddata = new byte[]{0x02,0x54,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House03and04_Cleanner01_Send,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
             case       Com_House_01_02_Cleanner02_Start:   // house 01,02 물청소 시작
+                //// 34 구역과 같이 돌리기
+
                 crcdata = CRC16Util.sendData(new byte[]{0x01,0x00});
-                senddata = new byte[]{0x02,0x55,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House01and02_Cleanner02_Send,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
+
                 break;
             case       Com_House_01_02_Cleanner02_Stop:   // house 01,02 물청소 시작
+                //// 34 구역과 같이 돌리기
+
                 crcdata = CRC16Util.sendData(new byte[]{0x00,0x00});
-                senddata = new byte[]{0x02,0x55,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House01and02_Cleanner02_Send,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
+
                 break;
             case       Com_House_03_04_Cleanner02_Start:   // house 03,04 물청소 시작
                 crcdata = CRC16Util.sendData(new byte[]{0x01,0x00});
-                senddata = new byte[]{0x02,0x56,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House03and04_Cleanner02_Send,0x01,0x01,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
             case       Com_House_03_04_Cleanner02_Stop:   // house 03,04 물청소 시작
                 crcdata = CRC16Util.sendData(new byte[]{0x00,0x00});
-                senddata = new byte[]{0x02,0x56,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02,SerialModel.House03and04_Cleanner02_Send,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
                 break;
 
             case        House_01_Nozzle_1:  // house 01 노즐 1단계
-                crcdata = CRC16Util.sendData(new byte[]{0x01,NozzleStep});
-                senddata = new byte[]{0x02,0x57,0x01,0x01,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_01_Nozzle_1_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_01_Nozzle_1_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_01_Nozzle_Send,0x01,SerialModel.House_01_Nozzle_1_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case       House_01_Nozzle_2: // house 01 노즐 2단계
-                crcdata = CRC16Util.sendData(new byte[]{0x02,NozzleStep});
-                senddata = new byte[]{0x02,0x57,0x01,0x02,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_01_Nozzle_2_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_01_Nozzle_2_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_01_Nozzle_Send,0x01,SerialModel.House_01_Nozzle_2_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case       House_01_Nozzle_3: // house 01 노즐 3단계
-                crcdata = CRC16Util.sendData(new byte[]{0x03,NozzleStep});
-                senddata = new byte[]{0x02,0x57,0x01,0x03,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_01_Nozzle_3_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_01_Nozzle_3_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_01_Nozzle_Send,0x01,SerialModel.House_01_Nozzle_3_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case       House_01_Nozzle_4: // house 01 노즐 4단계
-                crcdata = CRC16Util.sendData(new byte[]{0x04,NozzleStep});
-                senddata = new byte[]{0x02,0x57,0x01,0x04,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_01_Nozzle_4_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_01_Nozzle_4_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_01_Nozzle_Send,0x01,SerialModel.House_01_Nozzle_4_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case       House_01_Nozzle_5: // house 01 노즐 5단계
-                crcdata = CRC16Util.sendData(new byte[]{0x05,NozzleStep});
-                senddata = new byte[]{0x02,0x57,0x01,0x05,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_01_Nozzle_5_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_01_Nozzle_5_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_01_Nozzle_Send,0x01,SerialModel.House_01_Nozzle_5_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case       House_01_Nozzle_6: // house 01 노즐 6단계
-                crcdata = CRC16Util.sendData(new byte[]{0x06,NozzleStep});
-                senddata = new byte[]{0x02,0x57,0x01,0x06,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_01_Nozzle_6_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_01_Nozzle_6_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_01_Nozzle_Send,0x01,SerialModel.House_01_Nozzle_6_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
+                break;
+            case       House_01_Nozzle_7: // house 01 노즐 7단계
+                for(int i = 0 ; i < SerialModel.House_01_Nozzle_7_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_01_Nozzle_7_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_01_Nozzle_Send,0x01,SerialModel.House_01_Nozzle_7_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
+                break;
+            case       House_01_Nozzle_8: // house 01 노즐 8단계
+                for(int i = 0 ; i < SerialModel.House_01_Nozzle_8_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_01_Nozzle_8_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_01_Nozzle_Send,0x01,SerialModel.House_01_Nozzle_8_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
 
             case       House_02_Nozzle_1:  // house 02 노즐 1단계
-                crcdata = CRC16Util.sendData(new byte[]{0x01,NozzleStep});
-                senddata = new byte[]{0x02,0x58,0x01,0x01,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_02_Nozzle_1_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_02_Nozzle_1_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_02_Nozzle_Send,0x01,SerialModel.House_02_Nozzle_1_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case       House_02_Nozzle_2: // house 02 노즐 2단계
-                crcdata = CRC16Util.sendData(new byte[]{0x02,NozzleStep});
-                senddata = new byte[]{0x02,0x58,0x01,0x02,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_02_Nozzle_2_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_02_Nozzle_2_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_02_Nozzle_Send,0x01,SerialModel.House_02_Nozzle_2_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case       House_02_Nozzle_3: // house 02 노즐 3단계
-                crcdata = CRC16Util.sendData(new byte[]{0x03,NozzleStep});
-                senddata = new byte[]{0x02,0x58,0x01,0x03,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_02_Nozzle_3_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_02_Nozzle_3_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_02_Nozzle_Send,0x01,SerialModel.House_02_Nozzle_3_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case       House_02_Nozzle_4: // house 02 노즐 4단계
-                crcdata = CRC16Util.sendData(new byte[]{0x04,NozzleStep});
-                senddata = new byte[]{0x02,0x58,0x01,0x04,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
-                break;
-            case       House_02_Nozzle_5: // house 01 노즐 5단계
-                crcdata = CRC16Util.sendData(new byte[]{0x05,NozzleStep});
-                senddata = new byte[]{0x02,0x58,0x01,0x05,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
-                break;
-            case       House_02_Nozzle_6: // house 01 노즐 6단계
-                crcdata = CRC16Util.sendData(new byte[]{0x06,NozzleStep});
-                senddata = new byte[]{0x02,0x58,0x01,0x06,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_02_Nozzle_4_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_02_Nozzle_4_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_02_Nozzle_Send,0x01,SerialModel.House_02_Nozzle_4_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
 
+            case       House_02_Nozzle_5: // house 02 노즐 5단계
+                for(int i = 0 ; i < SerialModel.House_02_Nozzle_5_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_02_Nozzle_5_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_02_Nozzle_Send,0x01,SerialModel.House_02_Nozzle_5_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
+                break;
+            case       House_02_Nozzle_6: // house 02 노즐 6단계
+                for(int i = 0 ; i < SerialModel.House_02_Nozzle_6_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_02_Nozzle_6_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_02_Nozzle_Send,0x01,SerialModel.House_02_Nozzle_6_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
+                break;
+            case       House_02_Nozzle_7: // house 02 노즐 7단계
+                for(int i = 0 ; i < SerialModel.House_02_Nozzle_7_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_02_Nozzle_7_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_02_Nozzle_Send,0x01,SerialModel.House_02_Nozzle_7_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
+                break;
+            case       House_02_Nozzle_8: // house 02 노즐 8단계
+                for(int i = 0 ; i < SerialModel.House_02_Nozzle_8_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_02_Nozzle_8_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_02_Nozzle_Send,0x01,SerialModel.House_02_Nozzle_8_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
+                break;
             case       House_03_Nozzle_1:  // house 03 노즐 1단계
-                crcdata = CRC16Util.sendData(new byte[]{0x01,NozzleStep});
-                senddata = new byte[]{0x02,0x59,0x01,0x01,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_03_Nozzle_1_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_03_Nozzle_1_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_03_Nozzle_Send,0x01,SerialModel.House_03_Nozzle_1_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case        House_03_Nozzle_2: // house 03 노즐 2단계
-                crcdata = CRC16Util.sendData(new byte[]{0x02,NozzleStep});
-                senddata = new byte[]{0x02,0x59,0x01,0x02,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_03_Nozzle_2_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_03_Nozzle_2_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_03_Nozzle_Send,0x01,SerialModel.House_03_Nozzle_2_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case        House_03_Nozzle_3: // house 03 노즐 3단계
-                crcdata = CRC16Util.sendData(new byte[]{0x03,NozzleStep});
-                senddata = new byte[]{0x02,0x59,0x01,0x03,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_03_Nozzle_3_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_03_Nozzle_3_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_03_Nozzle_Send,0x01,SerialModel.House_03_Nozzle_3_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case        House_03_Nozzle_4: // house 03 노즐 4단계
-                crcdata = CRC16Util.sendData(new byte[]{0x04,NozzleStep});
-                senddata = new byte[]{0x02,0x59,0x01,0x04,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_03_Nozzle_4_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_03_Nozzle_4_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_03_Nozzle_Send,0x01,SerialModel.House_03_Nozzle_4_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
-            case       House_03_Nozzle_5: // house 01 노즐 5단계
-                crcdata = CRC16Util.sendData(new byte[]{0x05,NozzleStep});
-                senddata = new byte[]{0x02,0x59,0x01,0x05,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+            case       House_03_Nozzle_5: // house 03 노즐 5단계
+                for(int i = 0 ; i < SerialModel.House_03_Nozzle_5_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_03_Nozzle_5_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_03_Nozzle_Send,0x01,SerialModel.House_03_Nozzle_5_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
-            case       House_03_Nozzle_6: // house 01 노즐 6단계
-                crcdata = CRC16Util.sendData(new byte[]{0x06,NozzleStep});
-                senddata = new byte[]{0x02,0x59,0x01,0x06,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+            case       House_03_Nozzle_6: // house 03 노즐 6단계
+                for(int i = 0 ; i < SerialModel.House_03_Nozzle_6_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_03_Nozzle_6_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_03_Nozzle_Send,0x01,SerialModel.House_03_Nozzle_6_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
+                break;
+            case       House_03_Nozzle_7: // house 03 노즐 7단계
+                for(int i = 0 ; i < SerialModel.House_03_Nozzle_7_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_03_Nozzle_7_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_03_Nozzle_Send,0x01,SerialModel.House_03_Nozzle_7_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
+                break;
+            case       House_03_Nozzle_8: // house 03 노즐 8단계
+                for(int i = 0 ; i < SerialModel.House_03_Nozzle_8_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_03_Nozzle_8_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_03_Nozzle_Send,0x01,SerialModel.House_03_Nozzle_8_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case        House_04_Nozzle_1:  // house 04 노즐 1단계
-                crcdata = CRC16Util.sendData(new byte[]{0x01,NozzleStep});
-                senddata = new byte[]{0x02,0x5A,0x01,0x01,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_04_Nozzle_1_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_04_Nozzle_1_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_04_Nozzle_Send,0x01,SerialModel.House_04_Nozzle_1_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case        House_04_Nozzle_2: // house 04 노즐 2단계
-                crcdata = CRC16Util.sendData(new byte[]{0x02,NozzleStep});
-                senddata = new byte[]{0x02,0x5A,0x01,0x02,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_04_Nozzle_2_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_04_Nozzle_2_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_04_Nozzle_Send,0x01,SerialModel.House_04_Nozzle_2_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case        House_04_Nozzle_3: // house 04 노즐 3단계
-                crcdata = CRC16Util.sendData(new byte[]{0x03,NozzleStep});
-                senddata = new byte[]{0x02,0x5A,0x01,0x03,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_04_Nozzle_3_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_04_Nozzle_3_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_04_Nozzle_Send,0x01,SerialModel.House_04_Nozzle_3_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
             case        House_04_Nozzle_4: // house 04 노즐 4단계
-                crcdata = CRC16Util.sendData(new byte[]{0x04,NozzleStep});
-                senddata = new byte[]{0x02,0x5A,0x01,0x04,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+                for(int i = 0 ; i < SerialModel.House_04_Nozzle_4_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_04_Nozzle_4_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_04_Nozzle_Send,0x01,SerialModel.House_04_Nozzle_4_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
-            case       House_04_Nozzle_5: // house 01 노즐 5단계
-                crcdata = CRC16Util.sendData(new byte[]{0x05,NozzleStep});
-                senddata = new byte[]{0x02,0x5A,0x01,0x05,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+            case       House_04_Nozzle_5: // house 04 노즐 5단계
+                for(int i = 0 ; i < SerialModel.House_04_Nozzle_5_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_04_Nozzle_5_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_04_Nozzle_Send,0x01,SerialModel.House_04_Nozzle_5_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
-            case       House_04_Nozzle_6: // house 01 노즐 6단계
-                crcdata = CRC16Util.sendData(new byte[]{0x06,NozzleStep});
-                senddata = new byte[]{0x02,0x5A,0x01,0x06,NozzleStep,crcdata[1],crcdata[2],0x03};
-                sendBytes(senddata);
+            case       House_04_Nozzle_6: // house 04 노즐 6단계
+                for(int i = 0 ; i < SerialModel.House_04_Nozzle_6_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_04_Nozzle_6_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_04_Nozzle_Send,0x01,SerialModel.House_04_Nozzle_6_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
                 break;
+            case       House_04_Nozzle_7: // house 04 노즐 7단계
+                for(int i = 0 ; i < SerialModel.House_04_Nozzle_7_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_04_Nozzle_7_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_04_Nozzle_Send,0x01,SerialModel.House_04_Nozzle_7_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
+                break;
+            case       House_04_Nozzle_8: // house 04 노즐 8단계
+                for(int i = 0 ; i < SerialModel.House_04_Nozzle_8_port.length; i ++){
+                    crcdata = CRC16Util.sendData(new byte[]{SerialModel.House_04_Nozzle_8_port[i],NozzleStep});
+                    senddata = new byte[]{0x02,SerialModel.House_04_Nozzle_Send,0x01,SerialModel.House_04_Nozzle_8_port[i],NozzleStep,crcdata[1],crcdata[2],0x03};
+                    sendBytes(senddata);
+                }
+                break;
+
+
             case House_All_Stop:
+
                 crcdata = CRC16Util.sendData(new byte[]{0x00,0x00});
-                senddata = new byte[]{0x02, (byte) 0x80,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
+                senddata = new byte[]{0x02, SerialModel.House_All_Stop_Send,0x01,0x00,0x00,crcdata[1],crcdata[2],0x03};
                 sendBytes(senddata);
+
+                House_01_02_Nozzle_Close();
+                House_03_04_Nozzle_Close();
                 break;
         }
 
+    }
+
+
+
+
+    public void SendSerialCom_Adjustment(byte houstStep,byte Nozzle, byte NozzleStep){
+        Log.d(TAG,"SendSerialCom_Adjustment : "+ houstStep);
+
+        byte[] senddata;
+        byte[] crcdata;
+
+        crcdata = CRC16Util.sendData(new byte[]{Nozzle,NozzleStep});
+        senddata = new byte[]{0x02,houstStep,0x01,Nozzle,NozzleStep,crcdata[1],crcdata[2],0x03};
+        sendBytes(senddata);
     }
 
     /**
@@ -573,4 +732,85 @@ public class SerialPortManager extends SerialPort {
         }
         return false;
     }
+
+    public void House_01_02_Nozzle_Open(){
+        SendSerialCom(SerialModel.House_01_Nozzle_1, KeyControl.getHouse01_Nozzle01().byteValue());
+        SendSerialCom(SerialModel.House_01_Nozzle_2,KeyControl.getHouse01_Nozzle02().byteValue());
+        SendSerialCom(SerialModel.House_01_Nozzle_3,KeyControl.getHouse01_Nozzle03().byteValue());
+        SendSerialCom(SerialModel.House_01_Nozzle_4,KeyControl.getHouse01_Nozzle04().byteValue());
+        SendSerialCom(SerialModel.House_01_Nozzle_5,KeyControl.getHouse01_Nozzle05().byteValue());
+        SendSerialCom(SerialModel.House_01_Nozzle_6,KeyControl.getHouse01_Nozzle06().byteValue());
+        SendSerialCom(SerialModel.House_01_Nozzle_7,KeyControl.getHouse01_Nozzle07().byteValue());
+        SendSerialCom(SerialModel.House_01_Nozzle_8,KeyControl.getHouse01_Nozzle08().byteValue());
+
+        SendSerialCom(SerialModel.House_02_Nozzle_1,KeyControl.getHouse02_Nozzle01().byteValue());
+        SendSerialCom(SerialModel.House_02_Nozzle_2,KeyControl.getHouse02_Nozzle02().byteValue());
+        SendSerialCom(SerialModel.House_02_Nozzle_3,KeyControl.getHouse02_Nozzle03().byteValue());
+        SendSerialCom(SerialModel.House_02_Nozzle_4,KeyControl.getHouse02_Nozzle04().byteValue());
+        SendSerialCom(SerialModel.House_02_Nozzle_5,KeyControl.getHouse02_Nozzle05().byteValue());
+        SendSerialCom(SerialModel.House_02_Nozzle_6,KeyControl.getHouse02_Nozzle06().byteValue());
+        SendSerialCom(SerialModel.House_02_Nozzle_7,KeyControl.getHouse02_Nozzle07().byteValue());
+        SendSerialCom(SerialModel.House_02_Nozzle_8,KeyControl.getHouse02_Nozzle08().byteValue());
+    }
+
+    public void House_03_04_Nozzle_Open(){
+        SendSerialCom(SerialModel.House_03_Nozzle_1,KeyControl.getHouse03_Nozzle01().byteValue());
+        SendSerialCom(SerialModel.House_03_Nozzle_2,KeyControl.getHouse03_Nozzle02().byteValue());
+        SendSerialCom(SerialModel.House_03_Nozzle_3,KeyControl.getHouse03_Nozzle03().byteValue());
+        SendSerialCom(SerialModel.House_03_Nozzle_4,KeyControl.getHouse03_Nozzle04().byteValue());
+        SendSerialCom(SerialModel.House_03_Nozzle_5,KeyControl.getHouse03_Nozzle05().byteValue());
+        SendSerialCom(SerialModel.House_03_Nozzle_6,KeyControl.getHouse03_Nozzle06().byteValue());
+        SendSerialCom(SerialModel.House_03_Nozzle_7,KeyControl.getHouse03_Nozzle07().byteValue());
+        SendSerialCom(SerialModel.House_03_Nozzle_8,KeyControl.getHouse03_Nozzle08().byteValue());
+
+        SendSerialCom(SerialModel.House_04_Nozzle_1,KeyControl.getHouse04_Nozzle01().byteValue());
+        SendSerialCom(SerialModel.House_04_Nozzle_2,KeyControl.getHouse04_Nozzle02().byteValue());
+        SendSerialCom(SerialModel.House_04_Nozzle_3,KeyControl.getHouse04_Nozzle03().byteValue());
+        SendSerialCom(SerialModel.House_04_Nozzle_4,KeyControl.getHouse04_Nozzle04().byteValue());
+        SendSerialCom(SerialModel.House_04_Nozzle_5,KeyControl.getHouse04_Nozzle05().byteValue());
+        SendSerialCom(SerialModel.House_04_Nozzle_6,KeyControl.getHouse04_Nozzle06().byteValue());
+        SendSerialCom(SerialModel.House_04_Nozzle_7,KeyControl.getHouse04_Nozzle07().byteValue());
+        SendSerialCom(SerialModel.House_04_Nozzle_8,KeyControl.getHouse04_Nozzle08().byteValue());
+    }
+
+    public void House_01_02_Nozzle_Close(){
+        SendSerialCom(SerialModel.House_01_Nozzle_1,(byte)0);
+        SendSerialCom(SerialModel.House_01_Nozzle_2,(byte)0);
+        SendSerialCom(SerialModel.House_01_Nozzle_3,(byte)0);
+        SendSerialCom(SerialModel.House_01_Nozzle_4,(byte)0);
+        SendSerialCom(SerialModel.House_01_Nozzle_5,(byte)0);
+        SendSerialCom(SerialModel.House_01_Nozzle_6,(byte)0);
+        SendSerialCom(SerialModel.House_01_Nozzle_7,(byte)0);
+        SendSerialCom(SerialModel.House_01_Nozzle_8,(byte)0);
+
+        SendSerialCom(SerialModel.House_02_Nozzle_1,(byte)0);
+        SendSerialCom(SerialModel.House_02_Nozzle_2,(byte)0);
+        SendSerialCom(SerialModel.House_02_Nozzle_3,(byte)0);
+        SendSerialCom(SerialModel.House_02_Nozzle_4,(byte)0);
+        SendSerialCom(SerialModel.House_02_Nozzle_5,(byte)0);
+        SendSerialCom(SerialModel.House_02_Nozzle_6,(byte)0);
+        SendSerialCom(SerialModel.House_02_Nozzle_7,(byte)0);
+        SendSerialCom(SerialModel.House_02_Nozzle_8,(byte)0);
+    }
+
+    public void House_03_04_Nozzle_Close(){
+        SendSerialCom(SerialModel.House_03_Nozzle_1,(byte)0);
+        SendSerialCom(SerialModel.House_03_Nozzle_2,(byte)0);
+        SendSerialCom(SerialModel.House_03_Nozzle_3,(byte)0);
+        SendSerialCom(SerialModel.House_03_Nozzle_4,(byte)0);
+        SendSerialCom(SerialModel.House_03_Nozzle_5,(byte)0);
+        SendSerialCom(SerialModel.House_03_Nozzle_6,(byte)0);
+        SendSerialCom(SerialModel.House_03_Nozzle_7,(byte)0);
+        SendSerialCom(SerialModel.House_03_Nozzle_8,(byte)0);
+
+        SendSerialCom(SerialModel.House_04_Nozzle_1,(byte)0);
+        SendSerialCom(SerialModel.House_04_Nozzle_2,(byte)0);
+        SendSerialCom(SerialModel.House_04_Nozzle_3,(byte)0);
+        SendSerialCom(SerialModel.House_04_Nozzle_4,(byte)0);
+        SendSerialCom(SerialModel.House_04_Nozzle_5,(byte)0);
+        SendSerialCom(SerialModel.House_04_Nozzle_6,(byte)0);
+        SendSerialCom(SerialModel.House_04_Nozzle_7,(byte)0);
+        SendSerialCom(SerialModel.House_04_Nozzle_8,(byte)0);
+    }
+
 }

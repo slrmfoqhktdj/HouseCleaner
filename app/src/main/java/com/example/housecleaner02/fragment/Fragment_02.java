@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.example.housecleaner02.R;
 import com.example.housecleaner02.model.MainViewModel;
@@ -39,6 +41,9 @@ public class Fragment_02 extends Fragment {
     private ImageButton Repeat_number_up_btn,Repeat_number_down_btn,Pause_Time_up_btn,Pause_Time_down_btn;
 
     private Button positive_botton,negative_botton;
+
+    private Switch end_time_sw;
+
 
     public Fragment_02() {
         // Required empty public constructor
@@ -74,6 +79,8 @@ public class Fragment_02 extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_02, container, false);
 
+        end_time_sw = view.findViewById(R.id.end_time_sw);
+
         Repeat_number_tv = view.findViewById(R.id.Repeat_number);
         Pause_Time_tv = view.findViewById(R.id.Pause_Time);
 
@@ -85,10 +92,15 @@ public class Fragment_02 extends Fragment {
         positive_botton = view.findViewById(R.id.positive_botton);
         negative_botton = view.findViewById(R.id.negative_botton);
 
+        end_time_sw.setChecked(KeyControl.getEnd_Time_Sw());
+
+
+
+
         Repeat_number_up_btn.setOnClickListener(v -> {
             int num = Integer.parseInt((String) Repeat_number_tv.getText());
 
-            if(num == 0){
+            if(num == 1){
                 Pause_Time_up_btn.setEnabled(true);
                 Pause_Time_down_btn.setEnabled(true);
                 Pause_Time_up_btn.setImageResource(R.drawable.chevron_up);
@@ -101,11 +113,11 @@ public class Fragment_02 extends Fragment {
         Repeat_number_down_btn.setOnClickListener(v -> {
             int num = Integer.parseInt((String) Repeat_number_tv.getText());
 
-            if(num>0){
+            if(num>1){
                 Repeat_number_tv.setText(String.valueOf(num-1));
             }
 
-            if(Integer.parseInt((String) Repeat_number_tv.getText()) <= 0){
+            if(Integer.parseInt((String) Repeat_number_tv.getText()) <= 1){
                 Pause_Time_up_btn.setEnabled(false);
                 Pause_Time_down_btn.setEnabled(false);
                 Pause_Time_up_btn.setImageResource(R.drawable.chevron_up_un);
@@ -116,7 +128,7 @@ public class Fragment_02 extends Fragment {
 
         Pause_Time_up_btn.setOnClickListener(v -> {
 
-            if(Integer.parseInt((String) Repeat_number_tv.getText())!= 0){
+            if(Integer.parseInt((String) Repeat_number_tv.getText())> 1){
                 Pause_Time_tv.setText(String.valueOf(Integer.parseInt((String) Pause_Time_tv.getText())+1));
             }
         });
@@ -138,7 +150,8 @@ public class Fragment_02 extends Fragment {
             KeyControl.setRepeat_Cycle(Repeat_Cycle);
             KeyControl.setRepeat_PauseTime(Repeat_PauseTime);
 
-            viewModel.getIsRunning().postValue(true);
+
+            viewModel.setEnd_Time_Sw(end_time_sw.isChecked());
 
             Intent intent = new Intent("Page");
             intent.putExtra("index",2);
@@ -162,7 +175,7 @@ public class Fragment_02 extends Fragment {
 
         final Observer<Integer>  repeat_cycle_number_ob = b -> {
             Repeat_number_tv.setText(String.valueOf(b));
-            if(b==0){
+            if(b<=1){
                 Pause_Time_up_btn.setImageResource(R.drawable.chevron_up_un);
                 Pause_Time_down_btn.setImageResource(R.drawable.chevron_down_un);
             }else{

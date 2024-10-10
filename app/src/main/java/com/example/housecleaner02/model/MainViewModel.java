@@ -23,6 +23,8 @@ public class MainViewModel extends ViewModel {
 //    private MutableLiveData<Integer> House01_Temp4_2;  //하우스 1 - 온도
     private MutableLiveData<Integer> House01_Temp5_1;  //하우스 1 - 온도
     private MutableLiveData<Integer> House01_Temp6_1;  //하우스 1 - 온도
+    private MutableLiveData<Integer> House01_Temp7_1;  //하우스 1 - 온도
+    private MutableLiveData<Integer> House01_Temp8_1;  //하우스 1 - 온도
     
     private MutableLiveData<Integer> House01_Humi1_1;  //하우스 1 - 습도
 //    private MutableLiveData<Integer> House01_Humi1_2;  //하우스 1 - 습도
@@ -34,7 +36,8 @@ public class MainViewModel extends ViewModel {
 //    private MutableLiveData<Integer> House01_Humi4_2;  //하우스 1 - 습도
     private MutableLiveData<Integer> House01_Humi5_1;  //하우스 1 - 습도
     private MutableLiveData<Integer> House01_Humi6_1;  //하우스 1 - 습도
-
+    private MutableLiveData<Integer> House01_Humi7_1;  //하우스 1 - 습도
+    private MutableLiveData<Integer> House01_Humi8_1;  //하우스 1 - 습도
 
     private MutableLiveData<Integer> House02_Temp1_1;  //하우스 2 - 온도
 //    private MutableLiveData<Integer> House02_Temp1_2;  //하우스 2 - 온도
@@ -46,6 +49,8 @@ public class MainViewModel extends ViewModel {
 //    private MutableLiveData<Integer> House02_Temp4_2;  //하우스 2 - 온도
     private MutableLiveData<Integer> House02_Temp5_1;  //하우스 2 - 온도
     private MutableLiveData<Integer> House02_Temp6_1;  //하우스 2 - 온도
+    private MutableLiveData<Integer> House02_Temp7_1;  //하우스 2 - 온도
+    private MutableLiveData<Integer> House02_Temp8_1;  //하우스 2 - 온도
     
     private MutableLiveData<Integer> House02_Humi1_1;  //하우스 2 - 습도
 //    private MutableLiveData<Integer> House02_Humi1_2;  //하우스 2 - 습도
@@ -57,6 +62,8 @@ public class MainViewModel extends ViewModel {
 //    private MutableLiveData<Integer> House02_Humi4_2;  //하우스 2 - 습도
     private MutableLiveData<Integer> House02_Humi5_1;  //하우스 2 - 습도
     private MutableLiveData<Integer> House02_Humi6_1;  //하우스 2 - 습도
+    private MutableLiveData<Integer> House02_Humi7_1;  //하우스 2 - 습도
+    private MutableLiveData<Integer> House02_Humi8_1;  //하우스 2 - 습도
     
     private MutableLiveData<Integer> House03_Temp1_1;  //하우스 3 - 온도
 //    private MutableLiveData<Integer> House03_Temp1_2;  //하우스 3 - 온도
@@ -68,6 +75,8 @@ public class MainViewModel extends ViewModel {
 //    private MutableLiveData<Integer> House03_Temp4_2;  //하우스 3 - 온도
     private MutableLiveData<Integer> House03_Temp5_1;  //하우스 3 - 온도
     private MutableLiveData<Integer> House03_Temp6_1;  //하우스 3 - 온도
+    private MutableLiveData<Integer> House03_Temp7_1;  //하우스 3 - 온도
+    private MutableLiveData<Integer> House03_Temp8_1;  //하우스 3 - 온도
     
     private MutableLiveData<Integer> House03_Humi1_1;  //하우스 3 - 습도
 //    private MutableLiveData<Integer> House03_Humi1_2;  //하우스 3 - 습도
@@ -79,7 +88,8 @@ public class MainViewModel extends ViewModel {
 //    private MutableLiveData<Integer> House03_Humi4_2;  //하우스 3 - 습도
     private MutableLiveData<Integer> House03_Humi5_1;  //하우스 3 - 습도
     private MutableLiveData<Integer> House03_Humi6_1;  //하우스 3 - 습도
-    
+    private MutableLiveData<Integer> House03_Humi7_1;  //하우스 3 - 습도
+    private MutableLiveData<Integer> House03_Humi8_1;  //하우스 3 - 습도
     private MutableLiveData<Integer> House04_Temp1_1;  //하우스 4 - 온도
 //    private MutableLiveData<Integer> House04_Temp1_2;  //하우스 4 - 온도
     private MutableLiveData<Integer> House04_Temp2_1;  //하우스 4 - 온도
@@ -90,6 +100,8 @@ public class MainViewModel extends ViewModel {
 //    private MutableLiveData<Integer> House04_Temp4_2;  //하우스 4 - 온도
     private MutableLiveData<Integer> House04_Temp5_1;  //하우스 4 - 온도
     private MutableLiveData<Integer> House04_Temp6_1;  //하우스 4 - 온도
+    private MutableLiveData<Integer> House04_Temp7_1;  //하우스 4 - 온도
+    private MutableLiveData<Integer> House04_Temp8_1;  //하우스 4 - 온도
     
     private MutableLiveData<Integer> House04_Humi1_1;  //하우스 4 - 습도
 //    private MutableLiveData<Integer> House04_Humi1_2;  //하우스 4 - 습도
@@ -101,6 +113,8 @@ public class MainViewModel extends ViewModel {
 //    private MutableLiveData<Integer> House04_Humi4_2;  //하우스 4 - 습도
     private MutableLiveData<Integer> House04_Humi5_1;  //하우스 4 - 습도
     private MutableLiveData<Integer> House04_Humi6_1;  //하우스 4 - 습도
+    private MutableLiveData<Integer> House04_Humi7_1;  //하우스 4 - 습도
+    private MutableLiveData<Integer> House04_Humi8_1;  //하우스 4 - 습도
 
     private MutableLiveData<Boolean> Water_Shortage;    // 물부족
 
@@ -118,6 +132,13 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<Integer> House03and04_Cleaning02_Time;  // 하우스 3 - 청소2시간
     private MutableLiveData<Boolean> House03_Nozzle_Auto;  // 하우스 3 - 노즐자동
     private MutableLiveData<Boolean> House04_Nozzle_Auto;  // 하우스 4 - 노즐자동
+    
+    private MutableLiveData<Boolean> End_Time_Sw;   // 종료시간 설정여부
+
+    private MutableLiveData<Integer> Start_Time_Picker_Hour;  // 시작시간 시각
+    private MutableLiveData<Integer> Start_Time_Picker_Min;   // 시작시간 분
+    private MutableLiveData<Integer> End_Time_Picker_Hour;  // 종료시간 시각
+    private MutableLiveData<Integer> End_Time_Picker_Min;   // 종료시간 분
 
 
 
@@ -223,6 +244,22 @@ public class MainViewModel extends ViewModel {
         return House01_Temp6_1;
     }
 
+    public MutableLiveData<Integer> getHouse01_Temp7_1()
+    {
+        if(House01_Temp7_1 == null)
+            House01_Temp7_1 = new MutableLiveData<>(0);
+        return House01_Temp7_1;
+    }
+
+
+    public MutableLiveData<Integer> getHouse01_Temp8_1()
+    {
+        if(House01_Temp8_1 == null)
+            House01_Temp8_1 = new MutableLiveData<>(0);
+        return House01_Temp8_1;
+    }
+
+
 
     public MutableLiveData<Integer> getHouse01_Humi1_1()
     {
@@ -283,6 +320,20 @@ public class MainViewModel extends ViewModel {
         if(House01_Humi6_1 == null)
             House01_Humi6_1 = new MutableLiveData<>(0);
         return House01_Humi6_1;
+    }
+
+    public MutableLiveData<Integer> getHouse01_Humi7_1()
+    {
+        if(House01_Humi7_1 == null)
+            House01_Humi7_1 = new MutableLiveData<>(0);
+        return House01_Humi7_1;
+    }
+
+    public MutableLiveData<Integer> getHouse01_Humi8_1()
+    {
+        if(House01_Humi8_1 == null)
+            House01_Humi8_1 = new MutableLiveData<>(0);
+        return House01_Humi8_1;
     }
 
 
@@ -347,7 +398,20 @@ public class MainViewModel extends ViewModel {
             House02_Temp6_1 = new MutableLiveData<>(0);
         return House02_Temp6_1;
     }
-    
+
+    public MutableLiveData<Integer> getHouse02_Temp7_1()
+    {
+        if(House02_Temp7_1 == null)
+            House02_Temp7_1 = new MutableLiveData<>(0);
+        return House02_Temp7_1;
+    }
+
+    public MutableLiveData<Integer> getHouse02_Temp8_1()
+    {
+        if(House02_Temp8_1 == null)
+            House02_Temp8_1 = new MutableLiveData<>(0);
+        return House02_Temp8_1;
+    }
 
     public MutableLiveData<Integer> getHouse02_Humi1_1()
     {
@@ -408,6 +472,20 @@ public class MainViewModel extends ViewModel {
         if(House02_Humi6_1 == null)
             House02_Humi6_1 = new MutableLiveData<>(0);
         return House02_Humi6_1;
+    }
+
+    public MutableLiveData<Integer> getHouse02_Humi7_1()
+    {
+        if(House02_Humi7_1 == null)
+            House02_Humi7_1 = new MutableLiveData<>(0);
+        return House02_Humi7_1;
+    }
+
+    public MutableLiveData<Integer> getHouse02_Humi8_1()
+    {
+        if(House02_Humi8_1 == null)
+            House02_Humi8_1 = new MutableLiveData<>(0);
+        return House02_Humi8_1;
     }
 
 
@@ -473,6 +551,20 @@ public class MainViewModel extends ViewModel {
         return House03_Temp6_1;
     }
 
+    public MutableLiveData<Integer> getHouse03_Temp7_1()
+    {
+        if(House03_Temp7_1 == null)
+            House03_Temp7_1 = new MutableLiveData<>(0);
+        return House03_Temp7_1;
+    }
+
+    public MutableLiveData<Integer> getHouse03_Temp8_1()
+    {
+        if(House03_Temp8_1 == null)
+            House03_Temp8_1 = new MutableLiveData<>(0);
+        return House03_Temp8_1;
+    }
+
 
     public MutableLiveData<Integer> getHouse03_Humi1_1()
     {
@@ -534,6 +626,20 @@ public class MainViewModel extends ViewModel {
             House03_Humi6_1 = new MutableLiveData<>(0);
         return House03_Humi6_1;
     }
+    public MutableLiveData<Integer> getHouse03_Humi7_1()
+    {
+        if(House03_Humi7_1 == null)
+            House03_Humi7_1 = new MutableLiveData<>(0);
+        return House03_Humi7_1;
+    }
+
+    public MutableLiveData<Integer> getHouse03_Humi8_1()
+    {
+        if(House03_Humi8_1 == null)
+            House03_Humi8_1 = new MutableLiveData<>(0);
+        return House03_Humi8_1;
+    }
+    
 
 
     public MutableLiveData<Integer> getHouse04_Temp1_1()
@@ -598,6 +704,20 @@ public class MainViewModel extends ViewModel {
         return House04_Temp6_1;
     }
 
+    public MutableLiveData<Integer> getHouse04_Temp7_1()
+    {
+        if(House04_Temp7_1 == null)
+            House04_Temp7_1 = new MutableLiveData<>(0);
+        return House04_Temp7_1;
+    }
+
+    public MutableLiveData<Integer> getHouse04_Temp8_1()
+    {
+        if(House04_Temp8_1 == null)
+            House04_Temp8_1 = new MutableLiveData<>(0);
+        return House04_Temp8_1;
+    }
+
     public MutableLiveData<Integer> getHouse04_Humi1_1()
     {
         if(House04_Humi1_1 == null)
@@ -659,6 +779,19 @@ public class MainViewModel extends ViewModel {
         return House04_Humi6_1;
     }
 
+    public MutableLiveData<Integer> getHouse04_Humi7_1()
+    {
+        if(House04_Humi7_1 == null)
+            House04_Humi7_1 = new MutableLiveData<>(0);
+        return House04_Humi7_1;
+    }
+
+    public MutableLiveData<Integer> getHouse04_Humi8_1()
+    {
+        if(House04_Humi8_1 == null)
+            House04_Humi8_1 = new MutableLiveData<>(0);
+        return House04_Humi8_1;
+    }
 
 
     public MutableLiveData<Boolean> getWater_Shortage()
@@ -748,6 +881,41 @@ public class MainViewModel extends ViewModel {
         return House04_Nozzle_Auto;
     }
 
+    public MutableLiveData<Boolean> getEnd_Time_Sw()
+    {
+        if(End_Time_Sw == null)
+            End_Time_Sw = new MutableLiveData<>(KeyControl.getEnd_Time_Sw());
+        return End_Time_Sw;
+    }
+
+    public MutableLiveData<Integer> getStart_Time_Picker_Hour()
+    {
+        if(Start_Time_Picker_Hour == null)
+            Start_Time_Picker_Hour = new MutableLiveData<>(KeyControl.getStart_Time_Picker_Hour());
+        return Start_Time_Picker_Hour;
+    }
+
+    public MutableLiveData<Integer> getStart_Time_Picker_Min()
+    {
+        if(Start_Time_Picker_Min == null)
+            Start_Time_Picker_Min = new MutableLiveData<>(KeyControl.getStart_Time_Picker_Min());
+        return Start_Time_Picker_Min;
+    }
+    
+    public MutableLiveData<Integer> getEnd_Time_Picker_Hour()
+    {
+        if(End_Time_Picker_Hour == null)
+            End_Time_Picker_Hour = new MutableLiveData<>(KeyControl.getEnd_Time_Picker_Hour());
+        return End_Time_Picker_Hour;
+    }
+
+    public MutableLiveData<Integer> getEnd_Time_Picker_Min()
+    {
+        if(End_Time_Picker_Min == null)
+            End_Time_Picker_Min = new MutableLiveData<>(KeyControl.getEnd_Time_Picker_Min());
+        return End_Time_Picker_Min;
+    }
+
 
 
 
@@ -779,5 +947,40 @@ public class MainViewModel extends ViewModel {
         this.House04_Nozzle_Auto.setValue(house04_nozzle_auto);
     }
 
+
+    public void setEnd_Time_Sw(Boolean endTimeSw) {
+        KeyControl.setEnd_Time_Sw(endTimeSw);
+        if(this.End_Time_Sw == null)
+            this.End_Time_Sw = new MutableLiveData<>(endTimeSw);
+        this.End_Time_Sw.setValue(endTimeSw);
+    }
+
+    public void setStart_Time_Picker_Hour(int StartTimePickerHour) {
+        KeyControl.setStart_Time_Picker_Hour(StartTimePickerHour);
+        if(this.Start_Time_Picker_Hour == null)
+            this.Start_Time_Picker_Hour = new MutableLiveData<>(StartTimePickerHour);
+        this.Start_Time_Picker_Hour.setValue(StartTimePickerHour);
+    }
+
+    public void setStart_Time_Picker_Min(int StartTimePickerMin) {
+        KeyControl.setStart_Time_Picker_Min(StartTimePickerMin);
+        if(this.Start_Time_Picker_Min == null)
+            this.Start_Time_Picker_Min = new MutableLiveData<>(StartTimePickerMin);
+        this.Start_Time_Picker_Min.setValue(StartTimePickerMin);
+    }
+
+    public void setEnd_Time_Picker_Hour(int endTimePickerHour) {
+        KeyControl.setEnd_Time_Picker_Hour(endTimePickerHour);
+        if(this.End_Time_Picker_Hour == null)
+            this.End_Time_Picker_Hour = new MutableLiveData<>(endTimePickerHour);
+        this.End_Time_Picker_Hour.setValue(endTimePickerHour);
+    }
+
+    public void setEnd_Time_Picker_Min(int endTimePickerMin) {
+        KeyControl.setEnd_Time_Picker_Min(endTimePickerMin);
+        if(this.End_Time_Picker_Min == null)
+            this.End_Time_Picker_Min = new MutableLiveData<>(endTimePickerMin);
+        this.End_Time_Picker_Min.setValue(endTimePickerMin);
+    }
 
 }

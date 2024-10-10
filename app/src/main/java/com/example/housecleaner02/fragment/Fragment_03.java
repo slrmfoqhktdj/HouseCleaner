@@ -2,6 +2,7 @@ package com.example.housecleaner02.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class Fragment_03 extends Fragment {
     private MainViewModel viewModel;
 
     private ImageView Running_situation_1_1,Running_situation_1_2;
-    private TextView Running_situation_2,Running_cycle_number,Running_pause_time;
+    private TextView Running_situation_2,Running_cycle_number,Running_pause_time,start_time_tv,end_time_tv;
 
     private Button pause_botton;
 
@@ -73,6 +74,8 @@ public class Fragment_03 extends Fragment {
         Running_situation_2 = view.findViewById(R.id.Running_situation_2);
         Running_cycle_number = view.findViewById(R.id.Running_cycle_number);
         Running_pause_time = view.findViewById(R.id.Running_pause_time);
+        start_time_tv = view.findViewById(R.id.start_time_tv);
+        end_time_tv = view.findViewById(R.id.end_time_tv);
 
         pause_botton = view.findViewById(R.id.pause_botton);
 
@@ -82,6 +85,7 @@ public class Fragment_03 extends Fragment {
             Intent intent = new Intent("End");
             LocalBroadcastManager.getInstance(requireActivity()).sendBroadcast(intent);
         });
+
 
 
 
@@ -132,6 +136,7 @@ public class Fragment_03 extends Fragment {
 
         };
 
+
         final Observer<Integer>  Running_cycle_number_ob = b -> {
             Running_cycle_number.setText(b+"번");
         };
@@ -141,10 +146,70 @@ public class Fragment_03 extends Fragment {
         };
 
 
+        final Observer<Boolean>  end_time_sw_ob = b -> {
+            if(!b){
+                start_time_tv.setText("OFF");
+                end_time_tv.setText("OFF");
+            }else{
+                start_time_tv.setText(viewModel.getStart_Time_Picker_Hour().getValue()+" : "+viewModel.getStart_Time_Picker_Min().getValue());
+                end_time_tv.setText(viewModel.getEnd_Time_Picker_Hour().getValue()+" : "+viewModel.getEnd_Time_Picker_Min().getValue());
+            }
+        };
+
+        final Observer<Integer> start_time_Hour = b -> {
+
+
+            if(b != -1&&viewModel.getEnd_Time_Sw().getValue()){
+
+                start_time_tv.setText(b+" : "+((String)start_time_tv.getText()).split(":")[1]);
+
+
+            }
+        };
+
+
+        final Observer<Integer> start_time_Min = b -> {
+            if(b != -1&&viewModel.getEnd_Time_Sw().getValue()){
+
+                start_time_tv.setText(((String)start_time_tv.getText()).split(":")[0]+" : "+b);
+
+
+            }
+        };
+
+        final Observer<Integer> end_time_Hour = b -> {
+
+            if(b != -1&&viewModel.getEnd_Time_Sw().getValue()){
+                end_time_tv.setText(b+" : "+((String)end_time_tv.getText()).split(":")[1]);
+            }
+
+
+        };
+
+
+        final Observer<Integer> end_time_Min = b -> {
+
+            if(b != -1&&viewModel.getEnd_Time_Sw().getValue()){
+                end_time_tv.setText(((String)end_time_tv.getText()).split(":")[0]+" : "+b);
+            }
+
+
+        };
+
+//        if(Boolean.TRUE.equals(viewModel.getEnd_Time_Sw().getValue())){
+//            end_time_tv.setText(viewModel.getEnd_Time_Picker_Hour().getValue()+":"+viewModel.getEnd_Time_Picker_Min().getValue());
+//        }
+
+
         viewModel.getCleanning_Running_Situation_1().observe(requireActivity(),Running_situation_01_ob);
         viewModel.getCleanning_Running_Situation_2().observe(requireActivity(),Running_situation_02_ob);
         viewModel.getRepeat_Cycle().observe(requireActivity(),Running_cycle_number_ob);
         viewModel.getRepeat_PauseTime().observe(requireActivity(),Running_pause_time_ob);
+        viewModel.getEnd_Time_Sw().observe(requireActivity(),end_time_sw_ob);
+        viewModel.getStart_Time_Picker_Hour().observe(requireActivity(),start_time_Hour);
+        viewModel.getStart_Time_Picker_Min().observe(requireActivity(),start_time_Min);
+        viewModel.getEnd_Time_Picker_Hour().observe(requireActivity(),end_time_Hour);
+        viewModel.getEnd_Time_Picker_Min().observe(requireActivity(),end_time_Min);
 
     }
 }

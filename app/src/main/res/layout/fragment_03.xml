@@ -39,12 +39,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
-                app:layout_constraintHeight_percent="0.65"
+                app:layout_constraintHeight_percent="0.8"
                 app:layout_constraintHorizontal_bias="0.5"
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.45"
+                app:layout_constraintVertical_bias="0.2"
                 app:layout_constraintWidth_default="percent"
                 app:layout_constraintWidth_percent="1"
                 tools:ignore="MissingConstraints">
@@ -58,7 +58,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_default="percent"
-                    app:layout_constraintHeight_percent="0.25"
+                    app:layout_constraintHeight_percent="0.2"
                     app:layout_constraintHorizontal_bias="0.5"
 
                     app:layout_constraintStart_toStartOf="parent"
@@ -191,12 +191,12 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_default="percent"
-                    app:layout_constraintHeight_percent="0.25"
+                    app:layout_constraintHeight_percent="0.2"
                     app:layout_constraintHorizontal_bias="0.5"
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.45"
+                    app:layout_constraintVertical_bias="0.3"
                     app:layout_constraintWidth_default="percent"
                     app:layout_constraintWidth_percent=".9"
                     tools:ignore="MissingConstraints">
@@ -273,12 +273,12 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_default="percent"
-                    app:layout_constraintHeight_percent="0.25"
+                    app:layout_constraintHeight_percent="0.2"
                     app:layout_constraintHorizontal_bias="0.5"
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.9"
+                    app:layout_constraintVertical_bias="0.6"
                     app:layout_constraintWidth_default="percent"
                     app:layout_constraintWidth_percent=".9"
                     tools:ignore="MissingConstraints">
@@ -338,6 +338,150 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0"
+
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent="0.45"
+                        tools:ignore="SpeakableTextPresentCheck"
+
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+
+                    android:background="@drawable/layout_bg_corner"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="0.2"
+                    app:layout_constraintHorizontal_bias="0.5"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.9"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent=".9"
+                    tools:ignore="MissingConstraints">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="end|center_vertical"
+                        android:shadowColor="#011851"
+                        android:shadowDy="1"
+                        android:shadowRadius="1"
+                        android:text="예약시작시간 : "
+                        android:textColor="@color/black"
+                        android:textSize="26sp"
+                        android:textStyle="bold"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHeight_default="percent"
+                        app:layout_constraintHeight_percent=".5"
+                        app:layout_constraintHorizontal_bias="0.05"
+
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0"
+
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent="0.45"
+                        tools:ignore="SpeakableTextPresentCheck"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="end|center_vertical"
+                        android:shadowColor="#011851"
+                        android:shadowDy="1"
+                        android:shadowRadius="1"
+                        android:text="예약종료시간 : "
+                        android:textColor="@color/black"
+                        android:textSize="26sp"
+                        android:textStyle="bold"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHeight_default="percent"
+                        app:layout_constraintHeight_percent=".5"
+                        app:layout_constraintHorizontal_bias="0.05"
+
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1"
+
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent="0.45"
+                        tools:ignore="SpeakableTextPresentCheck"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/start_time_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:shadowColor="#011851"
+                        android:shadowDy="1"
+                        android:shadowRadius="1"
+                        android:text="OFF"
+                        android:textColor="@color/black"
+                        android:textSize="26sp"
+                        android:textStyle="bold"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHeight_default="percent"
+                        app:layout_constraintHeight_percent=".5"
+                        app:layout_constraintHorizontal_bias="0.9"
+
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0"
+
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent="0.45"
+                        tools:ignore="SpeakableTextPresentCheck"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/end_time_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:shadowColor="#011851"
+                        android:shadowDy="1"
+                        android:shadowRadius="1"
+                        android:text="OFF"
+                        android:textColor="@color/black"
+                        android:textSize="26sp"
+                        android:textStyle="bold"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHeight_default="percent"
+                        app:layout_constraintHeight_percent=".5"
+                        app:layout_constraintHorizontal_bias="0.9"
+
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1"
 
                         app:layout_constraintWidth_default="percent"
                         app:layout_constraintWidth_percent="0.45"

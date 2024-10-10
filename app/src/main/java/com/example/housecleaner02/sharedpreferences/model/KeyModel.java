@@ -59,4 +59,23 @@ public enum KeyModel {
     House04_Nozzle05,
     House04_Nozzle06,
 
+    House01_Nozzle07,
+    House01_Nozzle08,
+
+    House02_Nozzle07,
+    House02_Nozzle08,
+
+    House03_Nozzle07,
+    House03_Nozzle08,
+
+    House04_Nozzle07,
+    House04_Nozzle08,
+
+    End_Time_Sw,
+    End_Time_Picker_Hour,
+    End_Time_Picker_Min,
+
+    Start_Time_Picker_Hour,
+    Start_Time_Picker_Min,
+
 }

@@ -38,12 +38,73 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="percent"
-                app:layout_constraintHeight_percent="0.55"
+                app:layout_constraintHeight_percent="0.15"
                 app:layout_constraintHorizontal_bias="0.5"
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.25"
+                app:layout_constraintVertical_bias="0.7"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent=".95"
+                tools:ignore="MissingConstraints">
+
+
+
+                <Switch
+                    android:id="@+id/end_time_sw"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center|center_horizontal"
+                    android:shadowColor="#011851"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="예약시작종료"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track"
+
+                    app:switchMinWidth="0dp"
+                    android:textOff=""
+                    android:textOn=""
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="1"
+                    app:layout_constraintHorizontal_bias=".5"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias=".5"
+
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="1"
+                    tools:ignore="UseSwitchCompatOrMaterialXml"
+
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="0.59"
+                app:layout_constraintHorizontal_bias="0.5"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0"
                 app:layout_constraintWidth_default="percent"
                 app:layout_constraintWidth_percent=".95"
                 tools:ignore="MissingConstraints">
@@ -294,6 +355,15 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"

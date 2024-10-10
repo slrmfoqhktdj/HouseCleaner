@@ -54,19 +54,35 @@ public enum SerialModel {
     House_01_Nozzle_5, // house 01 노즐 5단계
     House_01_Nozzle_6, // house 01 노즐 6단계
 
-    House_02_Nozzle_5, // house 02 노즐 3단계
-    House_02_Nozzle_6, // house 02 노즐 4단계
+    House_02_Nozzle_5, // house 02 노즐 5단계
+    House_02_Nozzle_6, // house 02 노즐 6단계
 
-    House_03_Nozzle_5, // house 03 노즐 3단계
-    House_03_Nozzle_6, // house 03 노즐 4단계
+    House_03_Nozzle_5, // house 03 노즐 5단계
+    House_03_Nozzle_6, // house 03 노즐 6단계
 
-    House_04_Nozzle_5, // house 04 노즐 3단계
-    House_04_Nozzle_6; // house 04 노즐 4단계
+    House_04_Nozzle_5, // house 04 노즐 5단계
+    House_04_Nozzle_6, // house 04 노즐 6단계
 
 
-    public final static byte InfoReceive_1 = 0x50;  //정보응답
-    public final static byte InfoReceive_2 = 0x51;  //정보응답
-    public final static byte THReceive = 0x52;  //정보응답
+    House_01_Nozzle_7, // house 01 노즐 7단계
+    House_01_Nozzle_8, // house 01 노즐 8단계
+
+    House_02_Nozzle_7, // house 02 노즐 7단계
+    House_02_Nozzle_8, // house 02 노즐 8단계
+
+    House_03_Nozzle_7, // house 03 노즐 7단계
+    House_03_Nozzle_8, // house 03 노즐 8단계
+
+    House_04_Nozzle_7, // house 04 노즐 7단계
+    House_04_Nozzle_8; // house 04 노즐 8단계
+
+
+
+    public final static byte InfoReceive_Send = 0x50;  //정보전송
+    public final static byte THReceive_Send = 0x50;  //정보전송
+
+    public final static byte InfoReceive_Receive = 0x50;  //정보응답
+    public final static byte THReceive_Receive = 0x52;  //정보응답
 
     public final static byte House01and02_Com_Aire_Pump_Send = 0x51;  // House01 02 콤 펌프 전송
     public final static byte House03and04_Com_Aire_Pump_Send = 0x52;  // House03 04 콤 펌프 전송
@@ -88,5 +104,51 @@ public enum SerialModel {
     
     public final static byte Stortage_Water = 0x69; // 물부족
 
+    public final static byte House_All_Stop_Send = (byte) 0x80;
     public final static byte House_All_Stop_Receive = (byte) 0x81;
+
+
+    public final static byte House_01_Nozzle_Send = 0x57;// house 01 노즐 전송
+    public final static byte House_02_Nozzle_Send = 0x58; // house 02 노즐 전송
+    public final static byte House_03_Nozzle_Send = 0x59; // house 03 노즐 전송
+    public final static byte House_04_Nozzle_Send = 0x5A; // house 04 노즐 전송
+
+
+    // 해당 노즐에 배당되어있는 노즐들 부여
+    public final static byte[] House_01_Nozzle_1_port = {0x01,0x02};
+    public final static byte[] House_01_Nozzle_2_port = {0x03};
+    public final static byte[] House_01_Nozzle_3_port = {0x04,0x05};
+    public final static byte[] House_01_Nozzle_4_port = {0x06,0x07};
+    public final static byte[] House_01_Nozzle_5_port = {0x08,0x09};
+    public final static byte[] House_01_Nozzle_6_port = {0x0A,0x0B};
+    public final static byte[] House_01_Nozzle_7_port = {0x0C,0x0D};
+    public final static byte[] House_01_Nozzle_8_port = {0x0E,0x0F};
+
+    public final static byte[] House_02_Nozzle_1_port = {0x01,0x02};
+    public final static byte[] House_02_Nozzle_2_port = {0x03};
+    public final static byte[] House_02_Nozzle_3_port = {0x04,0x05};
+    public final static byte[] House_02_Nozzle_4_port = {0x06,0x07};
+    public final static byte[] House_02_Nozzle_5_port = {0x08,0x09};
+    public final static byte[] House_02_Nozzle_6_port = {0x0A,0x0B};
+    public final static byte[] House_02_Nozzle_7_port = {0x0C,0x0D};
+    public final static byte[] House_02_Nozzle_8_port = {0x0E,0x0F};
+
+    public final static byte[] House_03_Nozzle_1_port = {0x01,0x02};
+    public final static byte[] House_03_Nozzle_2_port = {0x03};
+    public final static byte[] House_03_Nozzle_3_port = {0x04,0x05};
+    public final static byte[] House_03_Nozzle_4_port = {0x06,0x07};
+    public final static byte[] House_03_Nozzle_5_port = {0x08,0x09};
+    public final static byte[] House_03_Nozzle_6_port = {0x0A,0x0B};
+    public final static byte[] House_03_Nozzle_7_port = {0x0C,0x0D};
+    public final static byte[] House_03_Nozzle_8_port = {0x0E,0x0F};
+
+    public final static byte[] House_04_Nozzle_1_port = {0x01,0x02};
+    public final static byte[] House_04_Nozzle_2_port = {0x03};
+    public final static byte[] House_04_Nozzle_3_port = {0x04,0x05};
+    public final static byte[] House_04_Nozzle_4_port = {0x06,0x07};
+    public final static byte[] House_04_Nozzle_5_port = {0x08,0x09};
+    public final static byte[] House_04_Nozzle_6_port = {0x0A,0x0B};
+    public final static byte[] House_04_Nozzle_7_port = {0x0C,0x0D};
+    public final static byte[] House_04_Nozzle_8_port = {0x0E,0x0F};
+
 }
